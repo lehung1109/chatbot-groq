@@ -2,6 +2,7 @@
 
 import {
   Attachment,
+  AttachmentData,
   AttachmentPreview,
   AttachmentRemove,
   Attachments,
@@ -345,7 +346,7 @@ const AttachmentItem = ({
   attachment,
   onRemove,
 }: {
-  attachment: { id: string; name: string; type: string; url: string };
+  attachment: AttachmentData;
   onRemove: (id: string) => void;
 }) => {
   const handleRemove = useCallback(() => {
@@ -510,6 +511,16 @@ const Example = () => {
         const assistantMessage: MessageType = {
           from: "assistant",
           key: `assistant-${Date.now()}`,
+          reasoning: {
+            content: `The user is asking for a detailed explanation of useCallback and useMemo. I should provide a clear and concise explanation of each hook's purpose and how they differ.
+      
+      The useCallback hook is used to memoize functions to prevent unnecessary re-renders of child components that receive functions as props.
+      
+      The useMemo hook is used to memoize values to avoid expensive recalculations on every render.
+      
+      Both hooks help with performance optimization, but they serve different purposes.`,
+            duration: 10,
+          },
           versions: [
             {
               content: "",
