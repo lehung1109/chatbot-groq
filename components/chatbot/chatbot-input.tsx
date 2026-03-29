@@ -35,6 +35,7 @@ import { ChatStatus } from "ai";
 import { MessageType } from "./chatbot-conversation";
 import { delay } from "../delay";
 import { toast } from "sonner";
+import { ChatbotActionType, useChatbot } from "@/providers/chatbot-provider";
 
 export interface ChatbotInputProps {
   suggestions: string[];
@@ -55,8 +56,10 @@ const ChatbotInput = ({
   chefs,
   models,
 }: ChatbotInputProps) => {
-  const [status, setStatus] = useState<ChatStatus>("ready");
-  const [messages, setMessages] = useState<Map<string, MessageType>>(new Map());
+  const { state, dispatch } = useChatbot();
+  const { messages, status } = state || {};
+
+  // local state
   const [text, setText] = useState<string>("");
   const [useWebSearch, setUseWebSearch] = useState<boolean>(false);
   const [model, setModel] = useState<string>(models[0].id);
@@ -67,20 +70,26 @@ const ChatbotInput = ({
   const isSubmitDisabled = !(text.trim() || status) || status === "streaming";
 
   const updateMessageContent = (messageId: string, newContent: string) => {
-    setMessages((prev) =>
-      new Map(prev).set(messageId, {
-        ...prev.get(messageId)!,
-        versions: prev
-          .get(messageId)!
-          .versions.map((v) =>
-            v.id === messageId ? { ...v, content: newContent } : v,
-          ),
-      }),
-    );
+    dispatch?.({
+      type: ChatbotActionType.SET_MESSAGES,
+      payload: messages
+        ? new Map(messages).set(messageId, {
+            ...messages.get(messageId)!,
+            versions: messages
+              .get(messageId)!
+              .versions.map((v) =>
+                v.id === messageId ? { ...v, content: newContent } : v,
+              ),
+          })
+        : new Map(),
+    });
   };
 
   const streamResponse = async (messageId: string, content: string) => {
-    setStatus("streaming");
+    dispatch?.({
+      type: ChatbotActionType.SET_STATUS,
+      payload: "streaming",
+    });
 
     const words = content.split(" ");
     let currentContent = "";
@@ -93,11 +102,17 @@ const ChatbotInput = ({
       await delay(Math.random() * 100 + 50);
     }
 
-    setStatus("ready");
+    dispatch?.({
+      type: ChatbotActionType.SET_STATUS,
+      payload: "ready",
+    });
   };
 
   const handleSuggestionClick = (suggestion: string) => {
-    setStatus("submitted");
+    dispatch?.({
+      type: ChatbotActionType.SET_STATUS,
+      payload: "submitted",
+    });
     addUserMessage(suggestion);
   };
 
@@ -115,7 +130,10 @@ const ChatbotInput = ({
       ],
     };
 
-    setMessages((prev) => new Map(prev).set(userMessage.key, userMessage));
+    dispatch?.({
+      type: ChatbotActionType.SET_MESSAGES,
+      payload: new Map(messages).set(userMessage.key, userMessage),
+    });
 
     setTimeout(() => {
       const assistantMessageId = `assistant-${timestamp}`;
@@ -135,9 +153,10 @@ const ChatbotInput = ({
         ],
       };
 
-      setMessages((prev) =>
-        new Map(prev).set(assistantMessage.key, assistantMessage),
-      );
+      dispatch?.({
+        type: ChatbotActionType.SET_MESSAGES,
+        payload: new Map(messages).set(assistantMessage.key, assistantMessage),
+      });
       streamResponse(assistantMessageId, randomResponse);
     }, 500);
   };
@@ -150,7 +169,10 @@ const ChatbotInput = ({
       return;
     }
 
-    setStatus("submitted");
+    dispatch?.({
+      type: ChatbotActionType.SET_STATUS,
+      payload: "submitted",
+    });
 
     if (message.files?.length) {
       toast.success("Files attached", {

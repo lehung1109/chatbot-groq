@@ -28,7 +28,7 @@ import {
 } from "../ai-elements/reasoning";
 
 export interface ChatbotConversationProps {
-  messages: MessageType[];
+  messages?: Map<string, MessageType>;
 }
 
 export interface MessageType {
@@ -54,10 +54,12 @@ export interface MessageType {
 }
 
 const ChatbotConversation = ({ messages }: ChatbotConversationProps) => {
+  const messagesArray = Array.from(messages?.values() || []);
+
   return (
     <Conversation>
       <ConversationContent>
-        {messages.map(({ versions, ...message }) => (
+        {messagesArray.map(({ versions, ...message }) => (
           <MessageBranch defaultBranch={0} key={message.key}>
             <MessageBranchContent>
               {versions.map((version) => (
