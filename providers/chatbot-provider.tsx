@@ -32,6 +32,7 @@ export enum ChatbotActionType {
   SET_TEXT = "SET_TEXT",
   SET_WEB_SEARCH = "SET_WEB_SEARCH",
   SET_SELECTED_MODEL = "SET_SELECTED_MODEL",
+  SET_ASSISTANT_MESSAGE_STREAMING = "SET_ASSISTANT_MESSAGE_STREAMING",
 }
 
 export type ChatbotMessagesAction = {
@@ -59,12 +60,21 @@ export type ChatbotSelectedModelAction = {
   payload: ModelProps;
 };
 
+export type ChatbotAssistantMessageStreamingAction = {
+  type: ChatbotActionType.SET_ASSISTANT_MESSAGE_STREAMING;
+  payload: {
+    messageId: string;
+    content: string;
+  };
+};
+
 export type ChatbotAction =
   | ChatbotMessagesAction
   | ChatbotStatusAction
   | ChatbotTextAction
   | ChatbotWebSearchAction
-  | ChatbotSelectedModelAction;
+  | ChatbotSelectedModelAction
+  | ChatbotAssistantMessageStreamingAction;
 
 export const chatbotReducer = (state: ChatbotState, action: ChatbotAction) => {
   switch (action.type) {
@@ -78,6 +88,20 @@ export const chatbotReducer = (state: ChatbotState, action: ChatbotAction) => {
       return { ...state, webSearch: action.payload };
     case ChatbotActionType.SET_SELECTED_MODEL:
       return { ...state, selectedModel: action.payload };
+    case ChatbotActionType.SET_ASSISTANT_MESSAGE_STREAMING: {
+      const { messageId, content } = action.payload;
+      const messages = state.messages || new Map<string, MessageType>();
+      const message = messages.get(messageId);
+      if (message) {
+        messages.set(messageId, {
+          ...message,
+          versions: message.versions.map((v) =>
+            v.id === messageId ? { ...v, content } : v,
+          ),
+        });
+      }
+      return { ...state, assistantMessageStreaming: action.payload };
+    }
   }
 };
 
