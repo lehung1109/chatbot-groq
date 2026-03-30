@@ -1,3 +1,5 @@
+"use client";
+
 import { MessageType } from "@/components/chatbot/chatbot-conversation";
 import { ModelProps } from "@/components/chatbot/chatbot-model-selector";
 import { ChatStatus } from "ai";

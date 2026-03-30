@@ -26,6 +26,32 @@ const Chatbot = () => {
       return;
     }
 
+    // mock assistant response for use message
+    const timestamp = Date.now();
+    const assistantMessageId = `assistant-${timestamp}`;
+
+    // empty assistant message
+    const assistantMessage: MessageType = {
+      from: "assistant",
+      key: `assistant-${timestamp}`,
+      versions: [
+        {
+          content: "",
+          id: assistantMessageId,
+        },
+      ],
+    };
+
+    dispatch?.({
+      type: ChatbotActionType.SET_MESSAGES,
+      payload: new Map(messages).set(assistantMessage.key, assistantMessage),
+    });
+
+    // stream response for full content
+  }, [messages, dispatch]);
+
+  // stream response for assistant message
+  useEffect(() => {
     /**
      * Stream response for assistant message
      * @param messageId - The id of the assistant message
@@ -75,31 +101,23 @@ const Chatbot = () => {
       });
     };
 
+    if (!messages) return;
+
+    // make sure last message is from assistant
+    const lastMessage = Array.from(messages.values() || []).at(-1);
+
+    if (lastMessage?.from !== "assistant") {
+      return;
+    }
+
     // mock assistant response for use message
-    const timestamp = Date.now();
+    const assistantMessageId = lastMessage.key;
+    const randomResponse =
+      chatbotMockResponses[
+        Math.floor(Math.random() * chatbotMockResponses.length)
+      ];
 
     setTimeout(() => {
-      const assistantMessageId = `assistant-${timestamp}`;
-      const randomResponse =
-        chatbotMockResponses[
-          Math.floor(Math.random() * chatbotMockResponses.length)
-        ];
-
-      const assistantMessage: MessageType = {
-        from: "assistant",
-        key: `assistant-${timestamp}`,
-        versions: [
-          {
-            content: "",
-            id: assistantMessageId,
-          },
-        ],
-      };
-
-      dispatch?.({
-        type: ChatbotActionType.SET_MESSAGES,
-        payload: new Map(messages).set(assistantMessage.key, assistantMessage),
-      });
       streamResponse(assistantMessageId, randomResponse);
     }, 500);
   }, [messages, dispatch]);
