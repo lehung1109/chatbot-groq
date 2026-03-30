@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ai-sdk/groq": "^3.0.31",
+    "@ai-sdk/react": "^3.0.143",
     "@radix-ui/react-use-controllable-state": "^1.2.2",
     "@rive-app/react-webgl2": "^4.27.3",
     "@streamdown/cjk": "^1.0.3",
