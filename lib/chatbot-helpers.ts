@@ -33,7 +33,7 @@ export const streamResponse = async (
       },
     });
 
-    await delay(2000);
+    await delay(100);
   }
 
   dispatch?.({
