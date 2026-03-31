@@ -39,7 +39,7 @@ const ChatbotModelSelector = ({ models }: ChatbotModelSelectorProps) => {
   return (
     <ModelSelector onOpenChange={setModelSelectorOpen} open={modelSelectorOpen}>
       <ModelSelectorTrigger asChild>
-        <PromptInputButton>
+        <PromptInputButton className="w-24">
           {selectedModel && (
             <ModelSelectorName>{selectedModel}</ModelSelectorName>
           )}
