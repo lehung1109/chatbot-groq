@@ -18,8 +18,6 @@ const ChatbotConversation = () => {
   const { chat } = useChatbot();
   const { messages } = chat ?? {};
 
-  console.log(messages);
-
   return (
     <Conversation>
       <ConversationContent>
