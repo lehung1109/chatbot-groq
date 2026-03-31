@@ -1,7 +1,5 @@
 "use client";
 
-import { ModelProps } from "@/components/chatbot/chatbot-model-selector";
-import { ChatStatus } from "ai";
 import {
   Dispatch,
   createContext,
@@ -10,6 +8,7 @@ import {
   useReducer,
 } from "react";
 import { useChat } from "@ai-sdk/react";
+import { GroqChatModelId } from "@/types/groq";
 
 export interface ChatbotContextType {
   state?: ChatbotState;
@@ -20,7 +19,7 @@ export interface ChatbotContextType {
 export interface ChatbotState {
   text?: string;
   webSearch?: boolean;
-  selectedModel?: ModelProps;
+  selectedModel?: GroqChatModelId;
 }
 
 export const ChatbotContext = createContext<ChatbotContextType>({});
@@ -43,7 +42,7 @@ export type ChatbotWebSearchAction = {
 
 export type ChatbotSelectedModelAction = {
   type: ChatbotActionType.SET_SELECTED_MODEL;
-  payload: ModelProps;
+  payload: GroqChatModelId;
 };
 
 export type ChatbotAction =

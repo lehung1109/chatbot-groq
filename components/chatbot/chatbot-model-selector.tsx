@@ -6,34 +6,25 @@ import {
   ModelSelectorGroup,
   ModelSelectorInput,
   ModelSelectorList,
-  ModelSelectorLogo,
   ModelSelectorName,
   ModelSelectorTrigger,
 } from "../ai-elements/model-selector";
 import { PromptInputButton } from "../ai-elements/prompt-input";
 import ModelItem from "./model-item";
 import { ChatbotActionType, useChatbot } from "@/providers/chatbot-provider";
+import { GroqChatModelId } from "@/types/groq";
 
 export interface ChatbotModelSelectorProps {
-  chefs: string[];
-  models: ModelProps[];
+  models: GroqChatModelId[];
 }
 
-export interface ModelProps {
-  chef: string;
-  chefSlug: string;
-  id: string;
-  name: string;
-  providers: string[];
-}
-
-const ChatbotModelSelector = ({ chefs, models }: ChatbotModelSelectorProps) => {
+const ChatbotModelSelector = ({ models }: ChatbotModelSelectorProps) => {
   const [modelSelectorOpen, setModelSelectorOpen] = useState(false);
   const { dispatch, state } = useChatbot();
   const { selectedModel } = state || {};
 
   const handleModelSelect = (modelId: string) => {
-    const selected = models.find((m) => m.id === modelId);
+    const selected = models.find((m) => m === modelId);
 
     if (selected) {
       dispatch?.({
@@ -49,11 +40,8 @@ const ChatbotModelSelector = ({ chefs, models }: ChatbotModelSelectorProps) => {
     <ModelSelector onOpenChange={setModelSelectorOpen} open={modelSelectorOpen}>
       <ModelSelectorTrigger asChild>
         <PromptInputButton>
-          {selectedModel?.chefSlug && (
-            <ModelSelectorLogo provider={selectedModel.chefSlug} />
-          )}
-          {selectedModel?.name && (
-            <ModelSelectorName>{selectedModel.name}</ModelSelectorName>
+          {selectedModel && (
+            <ModelSelectorName>{selectedModel}</ModelSelectorName>
           )}
         </PromptInputButton>
       </ModelSelectorTrigger>
@@ -64,20 +52,22 @@ const ChatbotModelSelector = ({ chefs, models }: ChatbotModelSelectorProps) => {
         <ModelSelectorList>
           <ModelSelectorEmpty>No models found.</ModelSelectorEmpty>
 
-          {chefs.map((chef) => (
-            <ModelSelectorGroup heading={chef} key={chef}>
-              {models
-                .filter((m) => m.chef === chef)
-                .map((m) => (
-                  <ModelItem
-                    isSelected={selectedModel?.id === m.id}
-                    key={m.id}
-                    m={m}
-                    onSelect={handleModelSelect}
-                  />
-                ))}
-            </ModelSelectorGroup>
-          ))}
+          <ModelSelectorGroup heading={"AI model"} key={"AI model"}>
+            {Object.values(GroqChatModelId).map((model) => (
+              <ModelItem
+                isSelected={selectedModel === model}
+                key={model}
+                m={{
+                  chef: "OpenAI",
+                  chefSlug: "openai",
+                  id: model,
+                  name: model,
+                  providers: ["openai"],
+                }}
+                onSelect={handleModelSelect}
+              />
+            ))}
+          </ModelSelectorGroup>
         </ModelSelectorList>
       </ModelSelectorContent>
     </ModelSelector>

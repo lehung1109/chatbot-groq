@@ -18,7 +18,7 @@ const ChatbotSuggestion = ({ suggestions }: ChatbotSuggestionProps) => {
       },
       {
         body: {
-          model: selectedModel?.id,
+          model: selectedModel,
           webSearch: webSearch,
         },
       },

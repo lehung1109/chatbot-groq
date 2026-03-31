@@ -16,15 +16,15 @@ import { ChatbotActionType, useChatbot } from "@/providers/chatbot-provider";
 import { toast } from "sonner";
 import ChatbotSpeech from "./chatbot-speech";
 import ChatbotInputSearch from "./chatbot-input-search";
-import ChatbotModelSelector, { ModelProps } from "./chatbot-model-selector";
+import ChatbotModelSelector from "./chatbot-model-selector";
 import ChatbotSubmitButton from "./chatbot-submit-button";
+import { GroqChatModelId } from "@/types/groq";
 
 export interface ChatbotInputProps {
-  chefs: string[];
-  models: ModelProps[];
+  models: GroqChatModelId[];
 }
 
-const ChatbotInput = ({ chefs, models }: ChatbotInputProps) => {
+const ChatbotInput = ({ models }: ChatbotInputProps) => {
   const { dispatch, state, chat } = useChatbot();
   const { sendMessage } = chat ?? {};
   const { text, webSearch, selectedModel } = state || {};
@@ -51,7 +51,7 @@ const ChatbotInput = ({ chefs, models }: ChatbotInputProps) => {
       },
       {
         body: {
-          model: selectedModel?.id,
+          model: selectedModel,
           webSearch: webSearch,
         },
       },
@@ -95,7 +95,7 @@ const ChatbotInput = ({ chefs, models }: ChatbotInputProps) => {
 
           <ChatbotInputSearch />
 
-          <ChatbotModelSelector chefs={chefs} models={models} />
+          <ChatbotModelSelector models={models} />
         </PromptInputTools>
 
         <ChatbotSubmitButton />
