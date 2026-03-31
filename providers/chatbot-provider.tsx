@@ -67,7 +67,9 @@ export const ChatbotProvider = ({
   children: React.ReactNode;
 }) => {
   const chat = useChat();
-  const [state, dispatch] = useReducer(chatbotReducer, {});
+  const [state, dispatch] = useReducer(chatbotReducer, {
+    selectedModel: GroqChatModelId.GPT_OSS_20B,
+  });
 
   const value = useMemo(
     () => ({ state, dispatch, chat }),

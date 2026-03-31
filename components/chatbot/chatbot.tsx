@@ -1,8 +1,9 @@
 "use client";
 
-import { chatbotSuggestions, chefs, models } from "@/data/chatbot";
+import { chatbotSuggestions } from "@/data/chatbot";
 import ChatbotConversation from "./chatbot-conversation";
 import ChatbotMessagePanel from "./chatbot-message-panel";
+import { GroqChatModelId } from "@/types/groq";
 
 const Chatbot = () => {
   return (
@@ -11,8 +12,7 @@ const Chatbot = () => {
 
       <ChatbotMessagePanel
         suggestions={chatbotSuggestions}
-        chefs={chefs}
-        models={models}
+        models={Object.values(GroqChatModelId)}
       />
     </div>
   );
