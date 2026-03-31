@@ -1,4 +1,3 @@
-import { ToolUIPart } from "ai";
 import {
   Conversation,
   ConversationContent,
@@ -8,108 +7,40 @@ import {
   Message,
   MessageBranch,
   MessageBranchContent,
-  MessageBranchNext,
-  MessageBranchPage,
-  MessageBranchPrevious,
-  MessageBranchSelector,
-  MessageContent,
-  MessageResponse,
 } from "../ai-elements/message";
-import {
-  Source,
-  Sources,
-  SourcesContent,
-  SourcesTrigger,
-} from "../ai-elements/sources";
-import {
-  Reasoning,
-  ReasoningContent,
-  ReasoningTrigger,
-} from "../ai-elements/reasoning";
+import { useChatbot } from "@/providers/chatbot-provider";
+import ChatbotSource from "./chatbot-source";
+import ChatbotReasoning from "./chatbot-reasoning";
+import ChatbotText from "./chatbot-text";
 
-export interface ChatbotConversationProps {
-  messages?: Map<string, MessageType>;
-}
-
-export interface MessageType {
-  key: string;
-  from: "user" | "assistant";
-  sources?: { href: string; title: string }[];
-  versions: {
-    id: string;
-    content: string;
-  }[];
-  reasoning?: {
-    content: string;
-    duration: number;
-  };
-  tools?: {
-    name: string;
-    description: string;
-    status: ToolUIPart["state"];
-    parameters: Record<string, unknown>;
-    result: string | undefined;
-    error: string | undefined;
-  }[];
-}
-
-const ChatbotConversation = ({ messages }: ChatbotConversationProps) => {
-  const messagesArray = Array.from(messages?.values() || []);
+const ChatbotConversation = () => {
+  const { chat } = useChatbot();
+  const { messages } = chat ?? {};
 
   return (
     <Conversation>
       <ConversationContent>
-        {messagesArray.map(({ versions, ...message }) => (
-          <MessageBranch defaultBranch={0} key={message.key}>
+        {messages?.map(({ id, role, parts }) => (
+          <MessageBranch defaultBranch={0} key={id}>
             <MessageBranchContent>
-              {versions.map((version) => (
-                <Message
-                  from={message.from}
-                  key={`${message.key}-${version.id}`}
-                >
-                  <div>
-                    {!!message.sources?.length && (
-                      <Sources>
-                        <SourcesTrigger count={message.sources.length} />
+              {parts.map((part, partIndex) => {
+                return (
+                  <Message from={role} key={`${id}-${partIndex}`}>
+                    <div>
+                      {part.type === "source-url" && (
+                        <ChatbotSource sources={[part]} />
+                      )}
 
-                        <SourcesContent>
-                          {message.sources.map((source) => (
-                            <Source
-                              href={source.href}
-                              key={source.href}
-                              title={source.title}
-                            />
-                          ))}
-                        </SourcesContent>
-                      </Sources>
-                    )}
-                    {message.reasoning && (
-                      <Reasoning duration={message.reasoning.duration}>
-                        <ReasoningTrigger />
+                      {part.type === "reasoning" && (
+                        <ChatbotReasoning reasoning={part} />
+                      )}
 
-                        <ReasoningContent>
-                          {message.reasoning.content}
-                        </ReasoningContent>
-                      </Reasoning>
-                    )}
-
-                    <MessageContent>
-                      <MessageResponse>{version.content}</MessageResponse>
-                    </MessageContent>
-                  </div>
-                </Message>
-              ))}
+                      {part.type === "text" && <ChatbotText text={part} />}
+                    </div>
+                  </Message>
+                );
+              })}
             </MessageBranchContent>
-
-            {versions.length > 1 && (
-              <MessageBranchSelector>
-                <MessageBranchPrevious />
-
-                <MessageBranchPage />
-
-                <MessageBranchNext />
-              </MessageBranchSelector>
-            )}
           </MessageBranch>
         ))}
       </ConversationContent>

@@ -1,6 +1,5 @@
 "use client";
 
-import { MessageType } from "@/components/chatbot/chatbot-conversation";
 import { ModelProps } from "@/components/chatbot/chatbot-model-selector";
 import { ChatStatus } from "ai";
 import {
@@ -19,7 +18,6 @@ export interface ChatbotContextType {
 }
 
 export interface ChatbotState {
-  status?: ChatStatus;
   text?: string;
   webSearch?: boolean;
   selectedModel?: ModelProps;
@@ -28,16 +26,10 @@ export interface ChatbotState {
 export const ChatbotContext = createContext<ChatbotContextType>({});
 
 export enum ChatbotActionType {
-  SET_STATUS = "SET_STATUS",
   SET_TEXT = "SET_TEXT",
   SET_WEB_SEARCH = "SET_WEB_SEARCH",
   SET_SELECTED_MODEL = "SET_SELECTED_MODEL",
 }
-
-export type ChatbotStatusAction = {
-  type: ChatbotActionType.SET_STATUS;
-  payload: ChatStatus;
-};
 
 export type ChatbotTextAction = {
   type: ChatbotActionType.SET_TEXT;
@@ -55,15 +47,12 @@ export type ChatbotSelectedModelAction = {
 };
 
 export type ChatbotAction =
-  | ChatbotStatusAction
   | ChatbotTextAction
   | ChatbotWebSearchAction
   | ChatbotSelectedModelAction;
 
 export const chatbotReducer = (state: ChatbotState, action: ChatbotAction) => {
   switch (action.type) {
-    case ChatbotActionType.SET_STATUS:
-      return { ...state, status: action.payload };
     case ChatbotActionType.SET_TEXT:
       return { ...state, text: action.payload };
     case ChatbotActionType.SET_WEB_SEARCH:

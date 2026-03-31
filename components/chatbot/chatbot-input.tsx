@@ -14,7 +14,6 @@ import {
 import PromptInputAttachmentsDisplay from "./attachment-display";
 import { ChatbotActionType, useChatbot } from "@/providers/chatbot-provider";
 import { toast } from "sonner";
-import { MessageType } from "./chatbot-conversation";
 import ChatbotSpeech from "./chatbot-speech";
 import ChatbotInputSearch from "./chatbot-input-search";
 import ChatbotModelSelector, { ModelProps } from "./chatbot-model-selector";
@@ -26,8 +25,9 @@ export interface ChatbotInputProps {
 }
 
 const ChatbotInput = ({ chefs, models }: ChatbotInputProps) => {
-  const { dispatch, state } = useChatbot();
-  const { messages, text } = state || {};
+  const { dispatch, state, chat } = useChatbot();
+  const { sendMessage } = chat ?? {};
+  const { text, webSearch, selectedModel } = state || {};
 
   const handleSubmit = (message: PromptInputMessage) => {
     const hasText = Boolean(message.text);
@@ -37,35 +37,25 @@ const ChatbotInput = ({ chefs, models }: ChatbotInputProps) => {
       return;
     }
 
-    dispatch?.({
-      type: ChatbotActionType.SET_STATUS,
-      payload: "submitted",
-    });
-
     if (message.files?.length) {
       toast.success("Files attached", {
         description: `${message.files.length} file(s) attached to message`,
       });
     }
 
-    // add user message
-    const timestamp = Date.now();
-
-    const userMessage: MessageType = {
-      from: "user",
-      key: `user-${timestamp}`,
-      versions: [
-        {
-          content: message.text || "Sent with attachments",
-          id: `user-${timestamp}`,
+    // send user message
+    sendMessage?.(
+      {
+        text: message.text || "Sent with attachments",
+        files: message.files,
+      },
+      {
+        body: {
+          model: selectedModel?.id,
+          webSearch: webSearch,
         },
-      ],
-    };
-
-    dispatch?.({
-      type: ChatbotActionType.SET_MESSAGES,
-      payload: new Map(messages).set(userMessage.key, userMessage),
-    });
+      },
+    );
 
     // reset text
     dispatch?.({

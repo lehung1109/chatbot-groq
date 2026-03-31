@@ -1,40 +1,28 @@
-import { ChatbotActionType, useChatbot } from "@/providers/chatbot-provider";
+import { useChatbot } from "@/providers/chatbot-provider";
 import { Suggestions } from "../ai-elements/suggestion";
 import SuggestionItem from "./suggestion-item";
-import { MessageType } from "./chatbot-conversation";
 
 export interface ChatbotSuggestionProps {
   suggestions: string[];
 }
 
 const ChatbotSuggestion = ({ suggestions }: ChatbotSuggestionProps) => {
-  const { state, dispatch } = useChatbot();
-  const { messages } = state || {};
+  const { state, chat } = useChatbot();
+  const { selectedModel, webSearch } = state || {};
+  const { sendMessage } = chat ?? {};
 
   const handleSuggestionClick = (suggestion: string) => {
-    dispatch?.({
-      type: ChatbotActionType.SET_STATUS,
-      payload: "submitted",
-    });
-
-    // add user message
-    const timestamp = Date.now();
-
-    const userMessage: MessageType = {
-      from: "user",
-      key: `user-${timestamp}`,
-      versions: [
-        {
-          content: suggestion,
-          id: `user-${timestamp}`,
+    sendMessage?.(
+      {
+        text: suggestion,
+      },
+      {
+        body: {
+          model: selectedModel?.id,
+          webSearch: webSearch,
         },
-      ],
-    };
-
-    dispatch?.({
-      type: ChatbotActionType.SET_MESSAGES,
-      payload: new Map(messages).set(userMessage.key, userMessage),
-    });
+      },
+    );
   };
 
   return (
