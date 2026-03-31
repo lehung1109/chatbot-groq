@@ -9,14 +9,13 @@ import {
   MessageBranchContent,
   MessageContent,
 } from "../ai-elements/message";
-import { useChatbot } from "@/providers/chatbot-provider";
 import ChatbotSource from "./chatbot-source";
 import ChatbotReasoning from "./chatbot-reasoning";
 import ChatbotText from "./chatbot-text";
+import { useAI } from "@/providers/ai-provider";
 
 const ChatbotConversation = () => {
-  const { chat } = useChatbot();
-  const { messages } = chat ?? {};
+  const { messages } = useAI();
 
   return (
     <Conversation>

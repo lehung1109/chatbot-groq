@@ -19,14 +19,15 @@ import ChatbotInputSearch from "./chatbot-input-search";
 import ChatbotModelSelector from "./chatbot-model-selector";
 import ChatbotSubmitButton from "./chatbot-submit-button";
 import { GroqChatModelId } from "@/types/groq";
+import { useAI } from "@/providers/ai-provider";
 
 export interface ChatbotInputProps {
   models: GroqChatModelId[];
 }
 
 const ChatbotInput = ({ models }: ChatbotInputProps) => {
-  const { dispatch, state, chat } = useChatbot();
-  const { sendMessage } = chat ?? {};
+  const { dispatch, state } = useChatbot();
+  const { sendMessage } = useAI();
   const { text, webSearch, selectedModel } = state || {};
 
   const handleSubmit = (message: PromptInputMessage) => {

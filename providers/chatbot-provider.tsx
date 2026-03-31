@@ -7,13 +7,11 @@ import {
   useMemo,
   useReducer,
 } from "react";
-import { useChat } from "@ai-sdk/react";
 import { GroqChatModelId } from "@/types/groq";
 
 export interface ChatbotContextType {
   state?: ChatbotState;
   dispatch?: Dispatch<ChatbotAction>;
-  chat?: ReturnType<typeof useChat>;
 }
 
 export interface ChatbotState {
@@ -66,15 +64,11 @@ export const ChatbotProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const chat = useChat();
   const [state, dispatch] = useReducer(chatbotReducer, {
     selectedModel: GroqChatModelId.GPT_OSS_20B,
   });
 
-  const value = useMemo(
-    () => ({ state, dispatch, chat }),
-    [state, dispatch, chat],
-  );
+  const value = useMemo(() => ({ state, dispatch }), [state, dispatch]);
 
   return <ChatbotContext value={value}>{children}</ChatbotContext>;
 };

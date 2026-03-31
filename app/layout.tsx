@@ -3,6 +3,7 @@ import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { ChatbotProvider } from "@/providers/chatbot-provider";
+import { AIProvider } from "@/providers/ai-provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,7 +25,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <TooltipProvider>
-            <ChatbotProvider>{children}</ChatbotProvider>
+            <AIProvider>
+              <ChatbotProvider>{children}</ChatbotProvider>
+            </AIProvider>
           </TooltipProvider>
         </ThemeProvider>
       </body>
