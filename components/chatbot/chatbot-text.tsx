@@ -1,16 +1,12 @@
 import { TextUIPart } from "ai";
-import { MessageContent, MessageResponse } from "../ai-elements/message";
+import { MessageResponse } from "../ai-elements/message";
 
 interface ChatbotTextProps {
   text: TextUIPart;
 }
 
 const ChatbotText = ({ text }: ChatbotTextProps) => {
-  return (
-    <MessageContent>
-      <MessageResponse>{text.text}</MessageResponse>
-    </MessageContent>
-  );
+  return <MessageResponse>{text.text}</MessageResponse>;
 };
 
 export default ChatbotText;

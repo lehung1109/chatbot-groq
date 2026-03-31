@@ -7,6 +7,8 @@ import {
   Message,
   MessageBranch,
   MessageBranchContent,
+  MessageContent,
+  MessageResponse,
 } from "../ai-elements/message";
 import { useChatbot } from "@/providers/chatbot-provider";
 import ChatbotSource from "./chatbot-source";
@@ -17,31 +19,35 @@ const ChatbotConversation = () => {
   const { chat } = useChatbot();
   const { messages } = chat ?? {};
 
+  console.log(messages);
+
   return (
     <Conversation>
       <ConversationContent>
         {messages?.map(({ id, role, parts }) => (
-          <MessageBranch defaultBranch={0} key={id}>
-            <MessageBranchContent>
-              {parts.map((part, partIndex) => {
-                return (
-                  <Message from={role} key={`${id}-${partIndex}`}>
-                    <div>
-                      {part.type === "source-url" && (
-                        <ChatbotSource sources={[part]} />
-                      )}
+          <Message from={role} key={`${id}`}>
+            <MessageBranch defaultBranch={0} key={id}>
+              <MessageBranchContent>
+                <MessageContent>
+                  {parts.map((part, partIndex) => {
+                    return (
+                      <div key={`${id}-${partIndex}`}>
+                        {part.type === "source-url" && (
+                          <ChatbotSource sources={[part]} />
+                        )}
 
-                      {part.type === "reasoning" && (
-                        <ChatbotReasoning reasoning={part} />
-                      )}
+                        {part.type === "reasoning" && (
+                          <ChatbotReasoning reasoning={part} />
+                        )}
 
-                      {part.type === "text" && <ChatbotText text={part} />}
-                    </div>
-                  </Message>
-                );
-              })}
-            </MessageBranchContent>
-          </MessageBranch>
+                        {part.type === "text" && <ChatbotText text={part} />}
+                      </div>
+                    );
+                  })}
+                </MessageContent>
+              </MessageBranchContent>
+            </MessageBranch>
+          </Message>
         ))}
       </ConversationContent>
 
