@@ -70,7 +70,9 @@ export const ChatbotProvider = ({
 
   const value = useMemo(() => ({ state, dispatch }), [state, dispatch]);
 
-  return <ChatbotContext value={value}>{children}</ChatbotContext>;
+  return (
+    <ChatbotContext.Provider value={value}>{children}</ChatbotContext.Provider>
+  );
 };
 
 export const useChatbot = () => {

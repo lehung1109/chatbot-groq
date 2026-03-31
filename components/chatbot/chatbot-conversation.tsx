@@ -12,10 +12,10 @@ import {
 import ChatbotSource from "./chatbot-source";
 import ChatbotReasoning from "./chatbot-reasoning";
 import ChatbotText from "./chatbot-text";
-import { useAI } from "@/providers/ai-provider";
+import { useAIState } from "@/providers/ai-provider";
 
 const ChatbotConversation = () => {
-  const { messages } = useAI();
+  const { messages } = useAIState();
 
   return (
     <Conversation>
