@@ -7,7 +7,7 @@ import ChatbotConversationMessage from "./ChatbotConversationMessage";
 import { getErrorMessage } from "@/lib/utils";
 
 const ChatbotConversationMessages = () => {
-  const { messages, error } = useAIState();
+  const { messages, error, status } = useAIState();
   const errorMessage = getErrorMessage(error);
 
   return (
@@ -15,6 +15,13 @@ const ChatbotConversationMessages = () => {
       {messages?.map((message) => (
         <ChatbotConversationMessage key={`${message.id}`} {...message} />
       ))}
+
+      {status === "submitted" && messages?.at(-1)?.role === "user" && (
+        <div className="animate-pulse space-y-2">
+          <div className="h-4 bg-gray-200 rounded w-3/4" />
+          <div className="h-4 bg-gray-200 rounded w-1/2" />
+        </div>
+      )}
 
       {errorMessage ? (
         <Alert className="mb-4" variant="destructive">
