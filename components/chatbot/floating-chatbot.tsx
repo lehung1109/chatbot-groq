@@ -12,7 +12,7 @@ const FloatingChatbot = () => {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex h-14 w-14 items-center justify-center rounded-full bg-black text-white shadow-lg transition hover:scale-105 active:scale-95 dark:bg-white dark:text-black"
+        className="flex h-14 w-14 items-center justify-center rounded-full bg-black text-white shadow-lg transition hover:scale-105 active:scale-95 dark:bg-white dark:text-black cursor-pointer"
         aria-label={open ? "Close chatbot" : "Open chatbot"}
       >
         {open ? (
