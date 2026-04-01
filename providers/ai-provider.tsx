@@ -1,3 +1,5 @@
+"use client";
+
 import { useChat } from "@ai-sdk/react";
 import { createContext, useContext, useMemo } from "react";
 
