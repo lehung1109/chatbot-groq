@@ -3,48 +3,13 @@ import {
   ConversationContent,
   ConversationScrollButton,
 } from "../ai-elements/conversation";
-import {
-  Message,
-  MessageBranch,
-  MessageBranchContent,
-  MessageContent,
-} from "../ai-elements/message";
-import ChatbotSource from "./chatbot-source";
-import ChatbotReasoning from "./chatbot-reasoning";
-import ChatbotText from "./chatbot-text";
-import { useAIState } from "@/providers/ai-provider";
+import ChatbotConversationMessages from "./ChatbotConversationMessages";
 
 const ChatbotConversation = () => {
-  const { messages } = useAIState();
-
   return (
     <Conversation>
       <ConversationContent>
-        {messages?.map(({ id, role, parts }) => (
-          <Message from={role} key={`${id}`}>
-            <MessageBranch defaultBranch={0} key={id}>
-              <MessageBranchContent>
-                <MessageContent>
-                  {parts.map((part, partIndex) => {
-                    return (
-                      <div key={`${id}-${partIndex}`}>
-                        {part.type === "source-url" && (
-                          <ChatbotSource sources={[part]} />
-                        )}
-
-                        {part.type === "reasoning" && (
-                          <ChatbotReasoning reasoning={part} />
-                        )}
-
-                        {part.type === "text" && <ChatbotText text={part} />}
-                      </div>
-                    );
-                  })}
-                </MessageContent>
-              </MessageBranchContent>
-            </MessageBranch>
-          </Message>
-        ))}
+        <ChatbotConversationMessages />
       </ConversationContent>
 
       <ConversationScrollButton />
