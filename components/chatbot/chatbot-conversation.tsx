@@ -5,9 +5,9 @@ import {
 } from "../ai-elements/conversation";
 import ChatbotConversationMessages from "./ChatbotConversationMessages";
 
-const ChatbotConversation = () => {
+const ChatbotConversation = ({ className }: { className?: string }) => {
   return (
-    <Conversation>
+    <Conversation className={className}>
       <ConversationContent>
         <ChatbotConversationMessages />
       </ConversationContent>
