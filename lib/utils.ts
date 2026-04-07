@@ -21,3 +21,5 @@ export const getErrorMessage = (error: unknown) => {
     return "Unknown error";
   }
 };
+
+export const MCP_SESSION_ID_HEADER = "mcp-session-id";
