@@ -4,6 +4,8 @@ import { registerResources } from "./register-resources";
 import { registerPrompts } from "./register-prompts";
 
 export const createServerInstance = () => {
+  console.log("Creating mcp server instance...");
+
   const server = new McpServer(
     {
       name: "chatbot-groq-mcp-server",
@@ -29,6 +31,8 @@ export const createServerInstance = () => {
   registerTools(server);
   registerResources(server);
   registerPrompts(server);
+
+  console.log("Mcp server instance created successfully");
 
   return server;
 };
