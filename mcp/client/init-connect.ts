@@ -8,7 +8,7 @@ export const initConnectClientToServer = async (sessionId?: string) => {
   let client = sessionId ? clientInstances[sessionId] : undefined;
 
   if (client) {
-    console.log(`Transport for session ${sessionId} already exists`);
+    console.log(`Client for session ${sessionId} already exists`);
 
     return client;
   }
@@ -28,6 +28,8 @@ export const initConnectClientToServer = async (sessionId?: string) => {
   }
 
   clientInstances[transport.sessionId] = client;
+
+  console.log(`Client connected to server for session ${transport.sessionId}`);
 
   return client;
 };

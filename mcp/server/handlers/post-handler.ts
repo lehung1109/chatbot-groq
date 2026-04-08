@@ -16,15 +16,16 @@ export const postHandler = async (req: NextRequest) => {
   const sessionId = headersList.get(MCP_SESSION_ID_HEADER);
   let transport: WebStandardStreamableHTTPServerTransport | undefined =
     sessionId ? transports[sessionId] : undefined;
+  const json = await req.json();
 
   if (sessionId) {
     console.log(`Received MCP request for session: ${sessionId}`);
   } else {
-    console.log("Request body:", req.body);
+    console.log("Request body:", json);
   }
 
   if (sessionId && !transports[sessionId]) {
-    console.log(`Session ${sessionId} not found, initializing new session`);
+    console.log(`Session ${sessionId} not found`);
 
     return Response.json(
       {
@@ -41,7 +42,7 @@ export const postHandler = async (req: NextRequest) => {
     );
   }
 
-  if (!isInitializeRequest(req.body)) {
+  if (!isInitializeRequest(json) && !sessionId) {
     console.log("Received non-initialize request and missing session ID");
 
     return Response.json(
@@ -60,12 +61,18 @@ export const postHandler = async (req: NextRequest) => {
   }
 
   try {
-    console.log("Initializing new transport");
+    if (transport) {
+      console.log("Transport server already exists");
+
+      return await transport.handleRequest(req, { parsedBody: json });
+    }
+
+    console.log("Initializing new transport server");
 
     transport ??= new WebStandardStreamableHTTPServerTransport({
       sessionIdGenerator: () => randomUUID(),
       onsessioninitialized: (sessionId) => {
-        console.log(`Session initialized: ${sessionId}`);
+        console.log(`Server Session initialized: ${sessionId}`);
 
         if (transport) {
           transports[sessionId] = transport;
@@ -78,9 +85,14 @@ export const postHandler = async (req: NextRequest) => {
       eventStore: new InMemoryEventStore(),
     });
 
-    await mcpServerInstance.connect(transport);
+    console.log("Transport Server initialized");
 
-    return await transport.handleRequest(req);
+    console.log("Connecting transport server to mcp server instance");
+
+    await mcpServerInstance.connect(transport);
+    console.log("Connected transport server to mcp server instance");
+
+    return await transport.handleRequest(req, { parsedBody: json });
   } catch (error) {
     console.error("Error handling MCP request:", error);
     return Response.json(
