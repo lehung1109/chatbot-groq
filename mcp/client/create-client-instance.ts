@@ -29,5 +29,3 @@ export const createClientInstance = () => {
 
   return client;
 };
-
-export const mcpClientInstance = createClientInstance();

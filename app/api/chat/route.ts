@@ -1,6 +1,7 @@
 import { streamText, UIMessage, convertToModelMessages } from "ai";
 import { groq } from "@ai-sdk/groq";
 import { GroqChatModelId } from "@/types/groq";
+import { initConnectClientToServer } from "@/mcp/client/init-connect";
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
@@ -10,11 +11,15 @@ export async function POST(req: Request) {
     messages,
     model,
     webSearch,
+    sessionId,
   }: {
     messages: UIMessage[];
     model: GroqChatModelId;
     webSearch: boolean;
+    sessionId: string;
   } = await req.json();
+
+  const mcpClientInstance = await initConnectClientToServer(sessionId);
 
   const result = streamText({
     model: groq(model),
