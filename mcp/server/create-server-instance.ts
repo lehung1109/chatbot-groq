@@ -32,3 +32,5 @@ export const createServerInstance = () => {
 
   return server;
 };
+
+export const mcpServerInstance = createServerInstance();

@@ -7,8 +7,8 @@ import {
   WebStandardStreamableHTTPServerTransport,
 } from "@modelcontextprotocol/server";
 import { randomUUID } from "node:crypto";
-import { createServerInstance } from "../create-server-instance";
-import { InMemoryEventStore } from "../event-stores/in-memory-event-store";
+import { mcpServerInstance } from "../create-server-instance";
+import { InMemoryEventStore } from "../../event-stores/in-memory-event-store";
 import { transports } from "../transports";
 
 export const postHandler = async (req: NextRequest) => {
@@ -78,9 +78,7 @@ export const postHandler = async (req: NextRequest) => {
       eventStore: new InMemoryEventStore(),
     });
 
-    const server = createServerInstance();
-
-    await server.connect(transport);
+    await mcpServerInstance.connect(transport);
 
     return await transport.handleRequest(req);
   } catch (error) {
