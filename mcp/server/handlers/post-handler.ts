@@ -8,11 +8,8 @@ import {
 } from "@modelcontextprotocol/server";
 import { randomUUID } from "node:crypto";
 import { createServerInstance } from "../create-server-instance";
-
-// Map to store transports by session ID
-const transports: {
-  [sessionId: string]: WebStandardStreamableHTTPServerTransport;
-} = {};
+import { InMemoryEventStore } from "../event-stores/in-memory-event-store";
+import { transports } from "../transports";
 
 export const postHandler = async (req: NextRequest) => {
   const headersList = await headers();
@@ -78,6 +75,7 @@ export const postHandler = async (req: NextRequest) => {
         console.log(`Session closed: ${sessionId}`);
         delete transports[sessionId];
       },
+      eventStore: new InMemoryEventStore(),
     });
 
     const server = createServerInstance();

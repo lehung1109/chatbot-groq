@@ -11,6 +11,8 @@
   "dependencies": {
     "@ai-sdk/groq": "^3.0.31",
     "@ai-sdk/react": "^3.0.143",
+    "@cfworker/json-schema": "^4.1.1",
+    "@modelcontextprotocol/client": "^2.0.0-alpha.2",
     "@modelcontextprotocol/node": "^2.0.0-alpha.2",
     "@modelcontextprotocol/server": "^2.0.0-alpha.2",
     "@radix-ui/react-use-controllable-state": "^1.2.2",
