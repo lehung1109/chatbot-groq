@@ -14,6 +14,9 @@ const AIActionsContext = createContext<AIActions | null>(null);
 export const AIProvider = ({ children }: { children: React.ReactNode }) => {
   const chat = useChat({
     experimental_throttle: 100,
+    onData: (data) => {
+      console.log("data", data);
+    },
   });
 
   const state = useMemo<AIState>(

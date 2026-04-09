@@ -7,6 +7,7 @@ export const registerClientElicitationHandlers = (
 ) => {
   console.log("Registering client elicitation handlers...");
   client.setRequestHandler("elicitation/create", async (request, extra) => {
+    console.log("Processing form elicitation...");
     const mode = request.params.mode;
 
     if (mode !== "form") {
@@ -18,6 +19,7 @@ export const registerClientElicitationHandlers = (
       transformStream,
     );
 
+    console.log("Form elicitation processed");
     return result;
   });
   console.log("Client elicitation handlers registered");

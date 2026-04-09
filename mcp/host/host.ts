@@ -22,6 +22,8 @@ class MCPHost {
 
     registerClientElicitationHandlers(mcpClientInstance, transformStream);
 
+    console.log("calling server tool");
+
     const toolResult = await mcpClientInstance.callTool({
       name: "great",
       arguments: {
@@ -29,7 +31,7 @@ class MCPHost {
       },
     });
 
-    console.log("call server tool", toolResult);
+    console.log("server tool called", toolResult);
 
     // const tools = await mcpClientInstance.listTools();
 

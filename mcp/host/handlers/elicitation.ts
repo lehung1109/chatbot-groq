@@ -12,6 +12,7 @@ export const processFormElicitation = async (
   transformStream: TransformStream,
 ): Promise<ElicitResult> => {
   const userMessage = new Promise<ElicitResult>((resolve, reject) => {
+    console.log("Processing form elicitation in host...");
     const id = crypto.randomUUID();
     // write data to transform stream, so transform stream can be used as a pipe
     const writableStream = transformStream.writable.getWriter();
@@ -24,6 +25,7 @@ export const processFormElicitation = async (
       }),
     );
 
+    console.log("Adding elicitation to store...");
     // add elicitation to store
     addElicitation(
       id,
@@ -34,7 +36,7 @@ export const processFormElicitation = async (
 
     setTimeout(() => {
       rejectElicitation(id, new Error("Elicitation timed out"));
-    }, 20000);
+    }, 60000);
   });
 
   return await userMessage;
