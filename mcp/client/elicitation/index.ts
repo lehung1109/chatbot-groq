@@ -1,7 +1,7 @@
 import { processFormElicitation } from "@/mcp/ai-application/handlers/elicitation";
 import { Client } from "@modelcontextprotocol/client";
 
-export const elicitationHandler = (client: Client) => {
+export const registerElicitationHandlers = (client: Client) => {
   client.setRequestHandler("elicitation/create", async (request, extra) => {
     const mode = request.params.mode;
 
