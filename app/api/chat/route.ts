@@ -1,8 +1,7 @@
-import { streamText, UIMessage, convertToModelMessages, ToolSet } from "ai";
+import { streamText, UIMessage, convertToModelMessages } from "ai";
 import { groq } from "@ai-sdk/groq";
 import { GroqChatModelId } from "@/types/groq";
 import { initConnectClientToServer } from "@/mcp/client/init-connect";
-import { title } from "process";
 import z from "zod";
 
 // Allow streaming responses up to 30 seconds
