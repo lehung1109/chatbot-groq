@@ -1,4 +1,4 @@
-import { processFormElicitation } from "@/mcp/ai-application/handlers/elicitation";
+import { processFormElicitation } from "@/mcp/host/handlers/elicitation";
 import { Client } from "@modelcontextprotocol/client";
 
 export const registerElicitationHandlers = (client: Client) => {

@@ -12,7 +12,7 @@ export const processFormElicitation = async (
   return {
     action: "accept",
     content: {
-      propertyName: "form",
+      comment: "form",
     },
   };
 };
