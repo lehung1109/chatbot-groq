@@ -60,6 +60,8 @@ class MCPHost {
     return new Response(transformStream.readable, {
       headers: {
         "Content-Type": "application/json",
+        "Cache-Control": "no-cache",
+        Connection: "keep-alive",
       },
     });
   }
