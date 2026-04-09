@@ -1,28 +1,33 @@
+import type { WritableStreamDefaultWriter } from "node:stream/web";
+
 const elicitationMap = new Map<
   string,
-  { resolve: (value: unknown) => void; reject: (reason?: unknown) => void }
+  {
+    resolve: (value: unknown) => void;
+    reject: (reason?: unknown) => void;
+    writableStream: WritableStreamDefaultWriter;
+  }
 >();
 
 export function addElicitation(
-  toolCallId: string,
+  id: string,
   resolve: (value: unknown) => void,
   reject: (reason?: unknown) => void,
+  writableStream: WritableStreamDefaultWriter,
 ) {
-  elicitationMap.set(toolCallId, { resolve, reject });
+  elicitationMap.set(id, { resolve, reject, writableStream });
 }
 
-export function resolveElicitation(toolCallId: string, value: unknown) {
-  const entry = elicitationMap.get(toolCallId);
+export function resolveElicitation(id: string, value: unknown) {
+  const entry = elicitationMap.get(id);
   entry?.resolve(value);
-  elicitationMap.delete(toolCallId);
+  elicitationMap.delete(id);
+  entry?.writableStream.close();
 }
 
-export function rejectElicitation(toolCallId: string, reason?: unknown) {
-  const entry = elicitationMap.get(toolCallId);
+export function rejectElicitation(id: string, reason?: unknown) {
+  const entry = elicitationMap.get(id);
   entry?.reject(reason);
-  elicitationMap.delete(toolCallId);
-}
-
-export function getElicitation(toolCallId: string) {
-  return elicitationMap.get(toolCallId);
+  elicitationMap.delete(id);
+  entry?.writableStream.close();
 }

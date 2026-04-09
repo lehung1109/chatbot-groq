@@ -1,6 +1,8 @@
 import { GroqChatModelId } from "@/types/groq";
 import { UIMessage } from "ai";
 import { initConnectClientToServer } from "../client/init-connect";
+import { registerClientElicitationHandlers } from "../client/elicitation";
+import { TransformStream } from "node:stream/web";
 
 class MCPHost {
   async handleRequest(req: Request) {
@@ -16,7 +18,10 @@ class MCPHost {
       sessionId: string;
     } = await req.json();
 
+    const transformStream = new TransformStream();
     const mcpClientInstance = await initConnectClientToServer(sessionId);
+
+    registerClientElicitationHandlers(mcpClientInstance, transformStream);
 
     const toolResult = await mcpClientInstance.callTool({
       name: "great",

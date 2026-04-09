@@ -1,7 +1,12 @@
 import { processFormElicitation } from "@/mcp/host/handlers/elicitation";
 import { Client } from "@modelcontextprotocol/client";
+import { TransformStream } from "node:stream/web";
 
-export const registerElicitationHandlers = (client: Client) => {
+export const registerClientElicitationHandlers = (
+  client: Client,
+  transformStream: TransformStream,
+) => {
+  console.log("Registering client elicitation handlers...");
   client.setRequestHandler("elicitation/create", async (request, extra) => {
     const mode = request.params.mode;
 
@@ -9,8 +14,12 @@ export const registerElicitationHandlers = (client: Client) => {
       throw new Error(`Unsupported elicitation mode: ${mode}`);
     }
 
-    const result = await processFormElicitation(request.params);
+    const result = await processFormElicitation(
+      request.params,
+      transformStream,
+    );
 
     return result;
   });
+  console.log("Client elicitation handlers registered");
 };

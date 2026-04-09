@@ -1,5 +1,4 @@
 import { Client } from "@modelcontextprotocol/client";
-import { registerElicitationHandlers } from "./elicitation";
 
 export const createClientInstance = () => {
   console.log("Creating mcp client instance...");
@@ -25,8 +24,6 @@ export const createClientInstance = () => {
   client.onerror = (error) => {
     console.error("\u001B[31mClient error:", error, "\u001B[0m");
   };
-
-  registerElicitationHandlers(client);
 
   console.log("Mcp client instance created successfully");
 
