@@ -2,7 +2,6 @@ import { GroqChatModelId } from "@/types/groq";
 import { UIMessage } from "ai";
 import { initConnectClientToServer } from "../client/init-connect";
 import { registerClientElicitationHandlers } from "../client/elicitation";
-import { TransformStream } from "node:stream/web";
 
 class MCPHost {
   async handleRequest(req: Request) {
@@ -58,8 +57,10 @@ class MCPHost {
     //   sendSources: true,
     //   sendReasoning: true,
     // });
-    return Response.json({
-      message: "test data",
+    return new Response(transformStream.readable, {
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
   }
 }

@@ -6,7 +6,6 @@ import {
   ElicitRequestFormParams,
   ElicitResult,
 } from "@modelcontextprotocol/client";
-import { TransformStream } from "node:stream/web";
 
 export const processFormElicitation = async (
   requestParams: ElicitRequestFormParams,
@@ -21,6 +20,7 @@ export const processFormElicitation = async (
       JSON.stringify({
         ...requestParams,
         id,
+        type: "elicitation/create",
       }),
     );
 

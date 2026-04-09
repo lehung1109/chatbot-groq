@@ -1,6 +1,5 @@
 import { processFormElicitation } from "@/mcp/host/handlers/elicitation";
 import { Client } from "@modelcontextprotocol/client";
-import { TransformStream } from "node:stream/web";
 
 export const registerClientElicitationHandlers = (
   client: Client,
