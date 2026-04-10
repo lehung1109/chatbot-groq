@@ -34,7 +34,7 @@ export const processFormElicitation = async (
 
     setTimeout(() => {
       rejectElicitation(id, new Error("Elicitation timed out"));
-    }, 60000);
+    }, 6000000);
   });
 
   console.log("Wait for user response");
