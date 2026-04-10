@@ -4,6 +4,7 @@ import {
   convertToModelMessages,
   createUIMessageStream,
   createUIMessageStreamResponse,
+  stepCountIs,
   streamText,
   UIMessage,
 } from "ai";
@@ -44,6 +45,7 @@ class MCPHost {
           const result = streamText({
             model: groq(model),
             messages: await convertToModelMessages(messages),
+            stopWhen: stepCountIs(5),
             tools: Object.fromEntries(
               tools.tools.map((tool) => {
                 return [
