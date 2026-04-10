@@ -35,7 +35,7 @@ export const registerGreatTool = (server: McpServer) => {
           content: [
             {
               type: "text",
-              text: `Thanks ${name}! ${JSON.stringify(result.content)}`,
+              text: `${result.content?.comment}`,
             },
           ],
         };

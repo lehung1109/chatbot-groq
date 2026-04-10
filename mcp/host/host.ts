@@ -54,20 +54,22 @@ class MCPHost {
                     inputSchema: z.object({
                       name: z.string().describe("Name to greet"),
                     }),
+                    execute: async () => {
+                      const result = await mcpClientInstance.callTool({
+                        name: tool.name,
+                        arguments: {
+                          name: "Test Name",
+                        },
+                      });
+
+                      console.log(result);
+
+                      return result.content;
+                    },
                   },
                 ];
               }),
             ),
-            onChunk: async ({ chunk }) => {
-              if (chunk.type === "tool-call") {
-                await mcpClientInstance.callTool({
-                  name: chunk.toolName,
-                  arguments: {
-                    name: "Test Name",
-                  },
-                });
-              }
-            },
             system:
               "You are a helpful assistant that can answer questions and help with tasks, call tools when you need to get information from the user",
           });
