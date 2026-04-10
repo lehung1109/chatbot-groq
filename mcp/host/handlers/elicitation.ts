@@ -12,6 +12,7 @@ export const processFormElicitation = async (
   requestParams: ElicitRequestFormParams,
   writer: UIMessageStreamWriter,
 ): Promise<ElicitResult> => {
+  const id = crypto.randomUUID();
   console.log("Processing form elicitation in host...");
 
   console.log("Writing elicitation to writer");
@@ -19,14 +20,13 @@ export const processFormElicitation = async (
     type: "data-elicitation",
     data: {
       ...requestParams,
+      id,
     },
   });
   console.log("Elicitation written to writer");
 
   console.log("Create request elicitation promise to user");
   const requestElicitation = new Promise<ElicitResult>((resolve, reject) => {
-    const id = crypto.randomUUID();
-
     // add elicitation to store
     console.log("Adding elicitation to store...");
     addElicitation(id, resolve, reject);

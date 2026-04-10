@@ -18,6 +18,9 @@ export function addElicitation(
 
 export function resolveElicitation(id: string, value: ElicitResult) {
   const entry = elicitationMap.get(id);
+
+  console.log("Resolving elicitation", entry);
+
   entry?.resolve(value);
   elicitationMap.delete(id);
 }

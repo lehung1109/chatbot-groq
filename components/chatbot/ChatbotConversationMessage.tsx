@@ -9,6 +9,9 @@ import {
 import ChatbotSource from "./chatbot-source";
 import ChatbotReasoning from "./chatbot-reasoning";
 import ChatbotText from "./chatbot-text";
+import ChatbotElicitation, {
+  ChatbotElicitationProps,
+} from "./chatbot-elicitation";
 
 const ChatbotConversationMessage = memo(function ChatbotConversationMessage({
   id,
@@ -21,6 +24,7 @@ const ChatbotConversationMessage = memo(function ChatbotConversationMessage({
         <MessageBranchContent>
           <MessageContent>
             {parts.map((part, partIndex) => {
+              console.log("part", part);
               return (
                 <div key={`${id}-${partIndex}`}>
                   {part.type === "source-url" && (
@@ -29,6 +33,12 @@ const ChatbotConversationMessage = memo(function ChatbotConversationMessage({
 
                   {part.type === "reasoning" && (
                     <ChatbotReasoning reasoning={part} />
+                  )}
+
+                  {part.type === "data-elicitation" && (
+                    <ChatbotElicitation
+                      data={part.data as ChatbotElicitationProps["data"]}
+                    />
                   )}
 
                   {part.type === "text" && <ChatbotText text={part} />}
