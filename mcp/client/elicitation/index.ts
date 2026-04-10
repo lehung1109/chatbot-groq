@@ -1,9 +1,10 @@
 import { processFormElicitation } from "@/mcp/host/handlers/elicitation";
 import { Client } from "@modelcontextprotocol/client";
+import { UIMessageStreamWriter } from "ai";
 
 export const registerClientElicitationHandlers = (
   client: Client,
-  transformStream: TransformStream,
+  writer: UIMessageStreamWriter,
 ) => {
   console.log("Registering client elicitation handlers...");
   client.setRequestHandler("elicitation/create", async (request, extra) => {
@@ -14,10 +15,7 @@ export const registerClientElicitationHandlers = (
       throw new Error(`Unsupported elicitation mode: ${mode}`);
     }
 
-    const result = await processFormElicitation(
-      request.params,
-      transformStream,
-    );
+    const result = await processFormElicitation(request.params, writer);
 
     console.log("Form elicitation processed");
     return result;

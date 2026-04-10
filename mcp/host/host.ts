@@ -1,5 +1,9 @@
 import { GroqChatModelId } from "@/types/groq";
-import { UIMessage } from "ai";
+import {
+  createUIMessageStream,
+  createUIMessageStreamResponse,
+  UIMessage,
+} from "ai";
 import { initConnectClientToServer } from "../client/init-connect";
 import { registerClientElicitationHandlers } from "../client/elicitation";
 
@@ -17,21 +21,35 @@ class MCPHost {
       sessionId: string;
     } = await req.json();
 
-    const transformStream = new TransformStream();
-    const mcpClientInstance = await initConnectClientToServer(sessionId);
+    return createUIMessageStreamResponse({
+      status: 200,
+      statusText: "OK",
+      stream: createUIMessageStream({
+        async execute({ writer }) {
+          console.log("executing in ui message stream");
 
-    registerClientElicitationHandlers(mcpClientInstance, transformStream);
+          writer.write({
+            type: "data-message",
+            data: { content: "Hello" },
+          });
 
-    console.log("calling server tool");
+          const mcpClientInstance = await initConnectClientToServer(sessionId);
 
-    const toolResult = await mcpClientInstance.callTool({
-      name: "great",
-      arguments: {
-        name: "John",
-      },
+          registerClientElicitationHandlers(mcpClientInstance, writer);
+
+          console.log("calling server tool");
+
+          const toolResult = await mcpClientInstance.callTool({
+            name: "great",
+            arguments: {
+              name: "John",
+            },
+          });
+
+          console.log("server tool called", toolResult);
+        },
+      }),
     });
-
-    console.log("server tool called", toolResult);
 
     // const tools = await mcpClientInstance.listTools();
 
@@ -59,13 +77,6 @@ class MCPHost {
     //   sendSources: true,
     //   sendReasoning: true,
     // });
-    return new Response(transformStream.readable, {
-      headers: {
-        "Content-Type": "application/json",
-        "Cache-Control": "no-cache",
-        Connection: "keep-alive",
-      },
-    });
   }
 }
 
