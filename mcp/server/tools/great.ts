@@ -6,7 +6,8 @@ export const registerGreatTool = (server: McpServer) => {
     "great",
     {
       title: "Greeting Tool", // Display name for UI
-      description: "A simple greeting tool",
+      description:
+        "a tool to get information from the user when user say hello",
       inputSchema: z.object({
         name: z.string().describe("Name to greet"),
       }),

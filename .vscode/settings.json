@@ -1,3 +1,5 @@
 {
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "workbench.activityBar.orientation": "horizontal",
+  "workbench.editor.wrapTabs": true
 }
