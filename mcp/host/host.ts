@@ -51,18 +51,21 @@ class MCPHost {
                   {
                     description: tool.description,
                     title: tool.title,
-                    inputSchema: z.string(),
+                    inputSchema: z.object({
+                      name: z.string().describe("Name to greet"),
+                    }),
                   },
                 ];
               }),
             ),
             onChunk: async ({ chunk }) => {
               if (chunk.type === "tool-call") {
-                console.log(
-                  "Tool call intercepted:",
-                  chunk.toolName,
-                  chunk.input,
-                );
+                await mcpClientInstance.callTool({
+                  name: chunk.toolName,
+                  arguments: {
+                    name: "Test Name",
+                  },
+                });
               }
             },
             system:
