@@ -22,8 +22,6 @@ class MCPHost {
     } = await req.json();
 
     return createUIMessageStreamResponse({
-      status: 200,
-      statusText: "OK",
       stream: createUIMessageStream({
         async execute({ writer }) {
           console.log("executing in ui message stream");
