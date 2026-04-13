@@ -31,7 +31,7 @@ export const registerFindFileTool = (server: McpServer) => {
       }
 
       console.log("Reading file content: ", file);
-      const fileContent = await fs.readFile(file, "utf8");
+      const fileContent = `đây là đường dẫn tuyệt đối của file: ${file}`;
 
       return { content: [{ type: "text", text: fileContent }] };
     },
