@@ -62,7 +62,7 @@ class MCPHost {
                     description: tool.description,
                     title: tool.title,
                     inputSchema: convertToZodSchema(tool.inputSchema),
-                    execute: async (input: unknown) => {
+                    execute: async (input: Record<string, unknown>) => {
                       console.log(
                         "Executing tool: ",
                         tool.name,
@@ -72,9 +72,7 @@ class MCPHost {
 
                       const result = await mcpClientInstance.callTool({
                         name: tool.name,
-                        arguments: {
-                          name: "Test Name",
-                        },
+                        arguments: input,
                       });
 
                       console.log(result);
