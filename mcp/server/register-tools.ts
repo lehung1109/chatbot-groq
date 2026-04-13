@@ -6,5 +6,5 @@ import { registerReadTextFileTool } from "./tools/read-text-file";
 export const registerTools = (server: McpServer) => {
   registerGreatTool(server);
   registerFindFileTool(server);
-  // registerReadTextFileTool(server);
+  registerReadTextFileTool(server);
 };

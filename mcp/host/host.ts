@@ -4,6 +4,7 @@ import {
   convertToModelMessages,
   createUIMessageStream,
   createUIMessageStreamResponse,
+  FlexibleSchema,
   stepCountIs,
   streamText,
   UIMessage,
@@ -52,15 +53,22 @@ class MCPHost {
             stopWhen: stepCountIs(5),
             tools: Object.fromEntries(
               tools.tools.map((tool) => {
+                console.log("Tool: ", tool.inputSchema);
                 return [
                   tool.name,
                   {
                     description: tool.description,
                     title: tool.title,
-                    inputSchema: z.object({
-                      name: z.string().describe("Name to greet"),
-                    }),
-                    execute: async () => {
+                    inputSchema:
+                      tool.inputSchema as unknown as FlexibleSchema<unknown>,
+                    execute: async (input: unknown) => {
+                      console.log(
+                        "Executing tool: ",
+                        tool.name,
+                        " with input: ",
+                        input,
+                      );
+
                       const result = await mcpClientInstance.callTool({
                         name: tool.name,
                         arguments: {

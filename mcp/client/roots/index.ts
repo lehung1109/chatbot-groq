@@ -7,6 +7,7 @@ export const registerClientRootsHandlers = (
 ) => {
   console.log("Registering client roots handlers...");
   client.setRequestHandler("roots/list", async (request, extra) => {
+    console.log("listen roots list request on client");
     return {
       roots: [
         {

@@ -10,24 +10,24 @@ export const registerFindFileTool = (server: McpServer) => {
       title: "Find File Tool",
       description: "a tool to find a file in the file system",
       inputSchema: z.object({
-        name: z.string().describe("Name of the file to find"),
+        fileName: z.string().describe("Name of the file to find"),
       }),
     },
-    async ({ name }, ctx): Promise<CallToolResult> => {
-      console.log("Find file tool called with name: ", name);
+    async ({ fileName }, ctx): Promise<CallToolResult> => {
+      console.log("Find file tool called with name: ", fileName);
       await server.sendLoggingMessage({
         level: "info",
-        data: `Find file tool called with name: ${name}`,
+        data: `Find file tool called with name: ${fileName}`,
       });
 
       // logic to find the file by name in the file system recursively
       console.log("Getting root folder");
       const rootFolder = await getRootFolder(server);
       console.log("Root folder: ", rootFolder);
-      const file = await findFileByName(rootFolder, name);
+      const file = await findFileByName(rootFolder, fileName);
 
       if (!file) {
-        throw new Error(`File ${name} not found`);
+        throw new Error(`File ${fileName} not found`);
       }
 
       console.log("Reading file content: ", file);
