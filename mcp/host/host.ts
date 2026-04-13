@@ -11,6 +11,7 @@ import {
 import { initConnectClientToServer } from "../client/init-connect";
 import { registerClientElicitationHandlers } from "../client/elicitation";
 import { z } from "zod";
+import { registerClientRootsHandlers } from "../client/roots";
 
 class MCPHost {
   async handleRequest(req: Request) {
@@ -39,8 +40,11 @@ class MCPHost {
           const mcpClientInstance = await initConnectClientToServer(sessionId);
 
           registerClientElicitationHandlers(mcpClientInstance, writer);
+          registerClientRootsHandlers(mcpClientInstance, writer);
 
           const tools = await mcpClientInstance.listTools();
+
+          console.log("Tools: ", tools);
 
           const result = streamText({
             model: groq(model),
