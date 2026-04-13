@@ -11,7 +11,7 @@ export const registerClientRootsHandlers = (
     return {
       roots: [
         {
-          uri: "file:///Users/HuLK/projects/chatbot-groq/mcp",
+          uri: "file://Users/HuLK/projects/chatbot-groq",
           name: "My Application",
         },
       ],

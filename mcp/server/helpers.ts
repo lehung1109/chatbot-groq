@@ -13,7 +13,7 @@ export async function getAllowedFileRoots(serverInstance: McpServer) {
     .filter((root) => root.uri.startsWith("file://"))
     .map((root) => ({
       name: root.name,
-      dir: path.resolve(fileURLToPath(root.uri)),
+      dir: path.resolve(root.uri.replace("file://", "/")),
     }));
 }
 
@@ -23,6 +23,8 @@ export async function assertPathInRoots(
 ) {
   const resolvedTarget = path.resolve(targetPath);
   const allowedRoots = await getAllowedFileRoots(serverInstance);
+
+  console.log("Allowed roots: ", allowedRoots);
 
   const allowed = allowedRoots.some((root) => {
     const relative = path.relative(root.dir, resolvedTarget);
@@ -41,7 +43,7 @@ export const getRootFolder = async (serverInstance: McpServer) => {
   console.log("Getting allowed roots");
   const allowedRoots = await getAllowedFileRoots(serverInstance);
 
-  console.log("finding root folder");
+  console.log("Allowed roots: ", allowedRoots);
   const rootFolder = allowedRoots.find(
     (root) => root.name === "My Application",
   );
@@ -50,7 +52,7 @@ export const getRootFolder = async (serverInstance: McpServer) => {
     throw new Error("My Application root folder not found");
   }
 
-  return fileURLToPath(rootFolder.dir);
+  return rootFolder.dir;
 };
 
 export async function findFileByName(
