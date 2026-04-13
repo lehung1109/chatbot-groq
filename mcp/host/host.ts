@@ -9,10 +9,12 @@ import {
   streamText,
   UIMessage,
 } from "ai";
+import { JsonSchemaObject, jsonSchemaToZod } from "json-schema-to-zod";
 import { initConnectClientToServer } from "../client/init-connect";
 import { registerClientElicitationHandlers } from "../client/elicitation";
 import { z } from "zod";
 import { registerClientRootsHandlers } from "../client/roots";
+import { convertToZodSchema } from "@/lib/utils";
 
 class MCPHost {
   async handleRequest(req: Request) {
@@ -59,8 +61,7 @@ class MCPHost {
                   {
                     description: tool.description,
                     title: tool.title,
-                    inputSchema:
-                      tool.inputSchema as unknown as FlexibleSchema<unknown>,
+                    inputSchema: convertToZodSchema(tool.inputSchema),
                     execute: async (input: unknown) => {
                       console.log(
                         "Executing tool: ",
