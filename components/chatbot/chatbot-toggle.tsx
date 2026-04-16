@@ -11,7 +11,7 @@ const ChatbotToggle = () => {
 
   return (
     <>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 mb-8">
         <Switch
           id="chatbot-toggle"
           checked={showFloatingChatbot}
