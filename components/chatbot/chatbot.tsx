@@ -8,7 +8,7 @@ import { GroqChatModelId } from "@/types/groq";
 const Chatbot = () => {
   return (
     <div className="relative flex size-full flex-col divide-y overflow-hidden">
-      <ChatbotConversation className="max-h-[50vh] overflow-y-auto no-scrollbar" />
+      <ChatbotConversation className="h-[50vh] flex-auto" />
 
       <ChatbotMessagePanel
         suggestions={chatbotSuggestions}
