@@ -3,7 +3,7 @@
 import { useAIState } from "@/providers/ai-provider";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertTriangleIcon } from "lucide-react";
-import ChatbotConversationMessage from "./ChatbotConversationMessage";
+import ChatbotConversationMessage from "./chatbot-conversation-message";
 import { getErrorMessage } from "@/lib/utils";
 
 const ChatbotConversationMessages = () => {

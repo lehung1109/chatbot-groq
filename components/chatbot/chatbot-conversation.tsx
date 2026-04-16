@@ -3,7 +3,7 @@ import {
   ConversationContent,
   ConversationScrollButton,
 } from "../ai-elements/conversation";
-import ChatbotConversationMessages from "./ChatbotConversationMessages";
+import ChatbotConversationMessages from "./chatbot-conversation-messages";
 
 const ChatbotConversation = ({ className }: { className?: string }) => {
   return (
