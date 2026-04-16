@@ -12,12 +12,29 @@ import ChatbotText from "./chatbot-text";
 import ChatbotElicitation, {
   ChatbotElicitationProps,
 } from "./chatbot-elicitation";
+import { UIDataTypes } from "ai";
+
+interface DataTypes extends UIDataTypes {
+  elicitation: {
+    id: string;
+    error?: string;
+  };
+}
 
 const ChatbotConversationMessage = memo(function ChatbotConversationMessage({
   id,
   role,
   parts,
-}: UIMessage) {
+}: UIMessage<unknown, DataTypes>) {
+  const elicitationErrorData = new Map<string, string>();
+
+  parts.forEach((part) => {
+    if (part.type === "data-elicitation") {
+      const data = part.data as DataTypes["elicitation"];
+      elicitationErrorData.set(data.id, data.error ?? "");
+    }
+  });
+
   return (
     <Message from={role} key={`${id}`}>
       <MessageBranch defaultBranch={0} key={id}>
@@ -38,6 +55,12 @@ const ChatbotConversationMessage = memo(function ChatbotConversationMessage({
                   {part.type === "data-elicitation" && (
                     <ChatbotElicitation
                       data={part.data as ChatbotElicitationProps["data"]}
+                      error={
+                        (part.data as DataTypes["elicitation"]).id &&
+                        elicitationErrorData.get(
+                          (part.data as DataTypes["elicitation"]).id,
+                        )
+                      }
                     />
                   )}
 

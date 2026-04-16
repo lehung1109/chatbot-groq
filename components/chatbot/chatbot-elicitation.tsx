@@ -3,14 +3,15 @@ import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
 
 export interface ChatbotElicitationProps {
-  data: ElicitRequestFormParams & { id: string };
+  data?: ElicitRequestFormParams & { id: string };
+  error?: string;
 }
 
-const ChatbotElicitation = ({ data }: ChatbotElicitationProps) => {
-  const { message, id, requestedSchema } = data;
+const ChatbotElicitation = ({ data, error }: ChatbotElicitationProps) => {
+  const { message, id, requestedSchema } = data ?? {};
   const [value, setValue] = useState("");
   const [submitted, setSubmitted] = useState(false);
-  const show = !requestedSchema.properties.htmlPage;
+  const ignoreHtmlData = !requestedSchema?.properties.htmlPage;
 
   const handleSubmit = () => {
     setSubmitted(true);
@@ -24,6 +25,10 @@ const ChatbotElicitation = ({ data }: ChatbotElicitationProps) => {
   };
 
   useEffect(() => {
+    if (ignoreHtmlData) {
+      return;
+    }
+
     fetch(`/api/elicitation`, {
       method: "POST",
       body: JSON.stringify({
@@ -31,9 +36,9 @@ const ChatbotElicitation = ({ data }: ChatbotElicitationProps) => {
         value: document.documentElement.outerHTML,
       }),
     });
-  }, [id]);
+  }, [id, ignoreHtmlData]);
 
-  return show ? (
+  return ignoreHtmlData && requestedSchema ? (
     <div>
       <p className="text-sm text-gray-500 mb-2">{message}</p>
 
@@ -43,9 +48,9 @@ const ChatbotElicitation = ({ data }: ChatbotElicitationProps) => {
           className="w-full border border-gray-300 rounded-md p-2 mb-2 disabled:opacity-50 disabled:cursor-not-allowed"
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          disabled={submitted}
+          disabled={submitted || !!error}
         />
-        {!submitted && (
+        {!submitted && !error && (
           <Button
             className="cursor-pointer"
             type="submit"
@@ -54,6 +59,8 @@ const ChatbotElicitation = ({ data }: ChatbotElicitationProps) => {
             Submit
           </Button>
         )}
+
+        {error && <p className="text-sm text-red-500 mb-2">{error}</p>}
       </form>
     </div>
   ) : (

@@ -33,8 +33,16 @@ export const processFormElicitation = async (
     console.log("Elicitation added to store");
 
     setTimeout(() => {
+      writer.write({
+        type: "data-elicitation",
+        data: {
+          id,
+          error: "Elicitation timed out",
+        },
+      });
+
       rejectElicitation(id, new Error("Elicitation timed out"));
-    }, 6000000);
+    }, 6000);
   });
 
   console.log("Wait for user response");
