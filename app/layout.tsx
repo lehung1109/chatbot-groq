@@ -11,9 +11,9 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Groq Chatbot",
+  title: "Incident Copilot",
   description:
-    "A Next.js chat app powered by Groq and the Vercel AI SDK, with streaming responses and model selection.",
+    "An AI-powered incident management tool for incident response teams.",
 };
 
 export default function RootLayout({
