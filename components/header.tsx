@@ -10,7 +10,7 @@ import { NavMenu } from "./nav-menu";
 
 const Header = () => {
   return (
-    <div className="h-16 border-b bg-background px-6">
+    <div className="h-16 border-b bg-background px-6 sticky top-0 left-0 w-full z-50">
       <nav className="mx-auto flex h-full max-w-7xl items-center justify-between">
         <div className="flex items-center gap-4">
           {/* Logo */}
@@ -27,7 +27,7 @@ const Header = () => {
 
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
-            <Button className="inline-flex">Sign In</Button>
+            <Button className="inline-flex cursor-pointer">Sign In</Button>
           </div>
 
           {/* Mobile navigation menu */}

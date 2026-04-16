@@ -1,6 +1,5 @@
 import { JSONValue } from "ai";
 import { clsx, type ClassValue } from "clsx";
-import jsonSchemaToZod, { JsonSchema } from "json-schema-to-zod";
 import { twMerge } from "tailwind-merge";
 import z from "zod";
 

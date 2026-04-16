@@ -4,12 +4,10 @@ import {
   convertToModelMessages,
   createUIMessageStream,
   createUIMessageStreamResponse,
-  FlexibleSchema,
   stepCountIs,
   streamText,
   UIMessage,
 } from "ai";
-import { JsonSchemaObject, jsonSchemaToZod } from "json-schema-to-zod";
 import { initConnectClientToServer } from "../client/init-connect";
 import { registerClientElicitationHandlers } from "../client/elicitation";
 import { z } from "zod";
