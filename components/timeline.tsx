@@ -23,7 +23,7 @@ const steps = [
 
 const Timeline = () => {
   return (
-    <div className="mx-auto max-w-(--breakpoint-sm) px-6">
+    <div className="mx-auto max-w-(--breakpoint-sm) px-6 mb-24">
       <div className="relative ml-6">
         {/* Timeline line */}
         <div className="absolute inset-y-0 left-0 border-l" />
