@@ -1,7 +1,7 @@
 import { AiWithEvidenceSection } from "@/components/ai-with-evidence";
 import Header from "@/components/header";
 import Hero from "@/components/hero";
-import InvestigationFlow from "@/components/Investigation-flow";
+import InvestigationFlow from "@/components/investigation-flow";
 import { UnifiedSignalsSection } from "@/components/unified-signals";
 
 export default function Home() {
