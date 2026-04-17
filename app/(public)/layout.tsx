@@ -1,5 +1,5 @@
 const PublicLayout = ({ children }: { children: React.ReactNode }) => {
-  return { children };
+  return <>{children}</>;
 };
 
 export default PublicLayout;
