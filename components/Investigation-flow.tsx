@@ -24,7 +24,7 @@ const steps = [
     step: "01",
     title: "Open the incident",
     description:
-      "Start from an alert, a failing service, or a sudden latency spike. Incident Copilot loads impact, related services, recent deploys, and the active investigation window.",
+      "Start from an alert, a failing service, or a sudden latency spike. Incident Copilot loads impact, related services, recent deploys, and the active investigation window",
     icon: AlertTriangle,
     tone: "border-amber-400/25 bg-amber-400/10 text-amber-200",
   },
