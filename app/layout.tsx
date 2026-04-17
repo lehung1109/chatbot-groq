@@ -5,6 +5,8 @@ import { ThemeProvider } from "@/providers/theme-provider";
 import { ChatbotProvider } from "@/providers/chatbot-provider";
 import { AIProvider } from "@/providers/ai-provider";
 import { Geist } from "next/font/google";
+import { SiteFooter } from "@/components/footer";
+import Header from "@/components/header";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -32,7 +34,12 @@ export default function RootLayout({
         >
           <TooltipProvider>
             <AIProvider>
-              <ChatbotProvider>{children}</ChatbotProvider>
+              <ChatbotProvider>
+                <Header />
+
+                <main className="flex-1">{children}</main>
+                <SiteFooter />
+              </ChatbotProvider>
             </AIProvider>
           </TooltipProvider>
         </ThemeProvider>
