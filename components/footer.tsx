@@ -133,6 +133,12 @@ export function SiteFooter() {
 
           <div className="flex flex-wrap items-center gap-4">
             <Link
+              href="/terms-of-service"
+              className="text-sm text-slate-400 transition-colors hover:text-white"
+            >
+              Terms of Service
+            </Link>
+            <Link
               href="/privacy-policy"
               className="text-sm text-slate-400 transition-colors hover:text-white"
             >
