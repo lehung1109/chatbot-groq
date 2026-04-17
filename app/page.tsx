@@ -1,3 +1,4 @@
+import { AiWithEvidenceSection } from "@/components/ai-with-evidence";
 import Header from "@/components/header";
 import Hero from "@/components/hero";
 import InvestigationFlow from "@/components/Investigation-flow";
@@ -12,6 +13,7 @@ export default function Home() {
         <Hero />
         <InvestigationFlow />
         <UnifiedSignalsSection />
+        <AiWithEvidenceSection />
       </main>
     </>
   );
