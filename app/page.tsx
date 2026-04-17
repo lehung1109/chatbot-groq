@@ -1,4 +1,5 @@
 import { AiWithEvidenceSection } from "@/components/ai-with-evidence";
+import { BuiltForOnCallSection } from "@/components/built-for-on-call";
 import Header from "@/components/header";
 import Hero from "@/components/hero";
 import InvestigationFlow from "@/components/investigation-flow";
@@ -14,6 +15,7 @@ export default function Home() {
         <InvestigationFlow />
         <UnifiedSignalsSection />
         <AiWithEvidenceSection />
+        <BuiltForOnCallSection />
       </main>
     </>
   );
