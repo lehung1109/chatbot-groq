@@ -100,7 +100,7 @@ const dependencies = [
   "gateway-edge",
 ];
 
-function MiniBars({ bars }: { bars: number[] }) {
+function MiniBars({ bars }: Readonly<{ bars: number[] }>) {
   return (
     <div className="flex h-10 items-end gap-1">
       {bars.map((bar, index) => (
@@ -228,7 +228,7 @@ export function UnifiedSignalsSection() {
               ))}
             </div>
 
-            <Card className="border-white/10 bg-white/[0.04]">
+            <Card className="border-white/10 bg-white/4">
               <CardHeader className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                   <CardTitle className="text-white">
@@ -267,11 +267,11 @@ export function UnifiedSignalsSection() {
                   <div className="mb-4 flex items-center justify-between text-xs text-slate-400">
                     <div className="flex items-center gap-4">
                       <div className="flex items-center gap-2">
-                        <span className="h-2 w-2 rounded-full bg-cyan-400" />
+                        <span className="h-2 w-2 rounded-full bg-cyan-400" />{" "}
                         Latency
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="h-2 w-2 rounded-full bg-rose-400" />
+                        <span className="h-2 w-2 rounded-full bg-rose-400" />{" "}
                         Error rate
                       </div>
                     </div>
@@ -280,7 +280,7 @@ export function UnifiedSignalsSection() {
                     </div>
                   </div>
 
-                  <div className="relative h-72 overflow-hidden rounded-lg border border-white/5 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(to_right,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:100%_48px,48px_100%]">
+                  <div className="relative h-72 overflow-hidden rounded-lg border border-white/5 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(to_right,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-size-[100%_48px,48px_100%]">
                     <svg
                       viewBox="0 0 800 280"
                       className="absolute inset-0 h-full w-full"
@@ -341,7 +341,7 @@ export function UnifiedSignalsSection() {
             </Card>
 
             <div className="grid gap-6 xl:grid-cols-2">
-              <Card className="border-white/10 bg-white/[0.04]">
+              <Card className="border-white/10 bg-white/4">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-white">
                     <ReceiptText className="h-4 w-4 text-rose-300" />
@@ -387,7 +387,7 @@ export function UnifiedSignalsSection() {
                 </CardContent>
               </Card>
 
-              <Card className="border-white/10 bg-white/[0.04]">
+              <Card className="border-white/10 bg-white/4">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-white">
                     <Waves className="h-4 w-4 text-cyan-300" />
@@ -428,7 +428,7 @@ export function UnifiedSignalsSection() {
           </div>
 
           <div className="space-y-6 lg:col-span-4">
-            <Card className="border-white/10 bg-white/[0.04]">
+            <Card className="border-white/10 bg-white/4">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-white">
                   <GitCommitHorizontal className="h-4 w-4 text-amber-300" />
@@ -450,7 +450,7 @@ export function UnifiedSignalsSection() {
               </CardContent>
             </Card>
 
-            <Card className="border-white/10 bg-white/[0.04]">
+            <Card className="border-white/10 bg-white/4">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-white">
                   <Network className="h-4 w-4 text-emerald-300" />
@@ -482,7 +482,7 @@ export function UnifiedSignalsSection() {
               </CardContent>
             </Card>
 
-            <Card className="border-cyan-400/20 bg-cyan-400/[0.06]">
+            <Card className="border-cyan-400/20 bg-cyan-400/6">
               <CardHeader>
                 <CardTitle className="text-white">AI summary</CardTitle>
                 <CardDescription className="text-slate-300">
