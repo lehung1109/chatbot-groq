@@ -7,6 +7,7 @@ import { AIProvider } from "@/providers/ai-provider";
 import { Geist } from "next/font/google";
 import { SiteFooter } from "@/components/footer";
 import Header from "@/components/header";
+import { Toaster } from "@/components/ui/sonner";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -43,6 +44,8 @@ export default function RootLayout({
             </AIProvider>
           </TooltipProvider>
         </ThemeProvider>
+
+        <Toaster />
       </body>
     </html>
   );
