@@ -9,6 +9,7 @@ declare const google: { accounts: accounts };
 
 const OneTapGoogleSignIn = () => {
   const supabase = createClient();
+  console.log("re-render");
   const router = useRouter();
 
   const initializeGoogleOneTap = async () => {
