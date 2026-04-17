@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { ArrowRight, Menu, ShieldAlert } from "lucide-react";
+import { ArrowRight, Menu, Wheat } from "lucide-react";
 import { Github } from "./github-icon";
 
 const navItems = [
@@ -30,7 +30,7 @@ export default function Header() {
             aria-label="Incident Copilot home"
           >
             <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-cyan-400/20 bg-cyan-400/10 text-cyan-200">
-              <ShieldAlert className="h-4 w-4" />
+              <Wheat className="h-4 w-4" />
             </div>
 
             <div className="flex items-center gap-2">
@@ -101,7 +101,7 @@ export default function Header() {
             >
               <div className="mt-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-400/20 bg-cyan-400/10 text-cyan-200">
-                  <ShieldAlert className="h-4 w-4" />
+                  <Wheat className="h-4 w-4" />
                 </div>
 
                 <div>
