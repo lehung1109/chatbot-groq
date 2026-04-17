@@ -3,6 +3,7 @@
 import { createClient } from "@/lib/supabase/client";
 import { generateNonce } from "@/lib/utils";
 import { CredentialResponse } from "google-one-tap";
+import { useRouter } from "next/router";
 import Script from "next/script";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -10,6 +11,7 @@ import { toast } from "sonner";
 const GoogleSignInButton = () => {
   const [nonce, setNonce] = useState<string>("");
   const [hashedNonce, setHashedNonce] = useState<string>("");
+  const router = useRouter();
 
   useEffect(() => {
     const getNonce = async () => {
@@ -34,8 +36,13 @@ const GoogleSignInButton = () => {
       if (error) {
         toast.error(error.message);
       }
+
+      console.log("Session data: ", data);
+      console.log("Successfully logged in with Google");
+
+      router.push("/dashboard");
     };
-  }, [hashedNonce]);
+  }, [hashedNonce, router]);
 
   return (
     <>
