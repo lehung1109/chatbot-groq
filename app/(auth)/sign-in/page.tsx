@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function LoginPage() {
   return (
     <div className="grid lg:grid-cols-2 min-h-full">
-      <section className="bg-slate-900 p-10 text-white lg:flex lg:flex-col lg:justify-center">
+      <section className="bg-slate-900 p-10 lg:px-20 text-white lg:flex lg:flex-col lg:justify-center">
         <div className="max-w-md">
           <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-sky-300">
             Welcome back
