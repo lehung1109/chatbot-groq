@@ -25,7 +25,7 @@ export default function LoginPage() {
         </div>
       </section>
 
-      <section className="flex items-center justify-center p-30 lg:p-6">
+      <section className="flex items-center justify-center px-6 py-30 lg:p-6">
         <div className="w-full max-w-md">
           <GoogleSignInButton />
         </div>
