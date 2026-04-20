@@ -35,12 +35,7 @@ export default function RootLayout({
         >
           <TooltipProvider>
             <AIProvider>
-              <ChatbotProvider>
-                <Header />
-
-                <main className="flex-1">{children}</main>
-                <SiteFooter />
-              </ChatbotProvider>
+              <ChatbotProvider>{children}</ChatbotProvider>
             </AIProvider>
           </TooltipProvider>
         </ThemeProvider>

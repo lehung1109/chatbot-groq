@@ -1,17 +1,12 @@
 import { SiteFooter } from "@/components/footer";
 import Header from "@/components/header";
-import OneTapGoogleSignIn from "@/components/one-tap-google-sign-in";
 
 const PublicLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Header />
 
-      <main className="flex-1">
-        <OneTapGoogleSignIn />
-
-        {children}
-      </main>
+      <main className="flex-1">{children}</main>
 
       <SiteFooter />
     </>
