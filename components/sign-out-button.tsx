@@ -3,18 +3,15 @@
 import { Button } from "@/components/ui/button";
 
 import { createClient } from "@/lib/supabase/client";
-import { useRouter } from "next/navigation";
 
 const SignOut = () => {
-  const router = useRouter();
-
   return (
     <Button
       variant="outline"
-      onClick={() => {
+      onClick={async () => {
         const supabase = createClient();
-        supabase.auth.signOut();
-        router.push("/");
+        await supabase.auth.signOut();
+        window.location.replace("/");
       }}
     >
       Sign Out

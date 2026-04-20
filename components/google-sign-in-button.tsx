@@ -3,7 +3,6 @@
 import { createClient } from "@/lib/supabase/client";
 import { generateNonce } from "@/lib/utils";
 import { CredentialResponse } from "google-one-tap";
-import { useRouter } from "next/navigation";
 import Script from "next/script";
 import { memo, useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -11,7 +10,6 @@ import { toast } from "sonner";
 const GoogleSignInButton = memo(function GoogleSignInButton() {
   const [nonce, setNonce] = useState<string>("");
   const [hashedNonce, setHashedNonce] = useState<string>("");
-  const router = useRouter();
   console.log(
     "re-render with nonce: ",
     nonce,
@@ -32,7 +30,7 @@ const GoogleSignInButton = memo(function GoogleSignInButton() {
   }, []);
 
   useEffect(() => {
-    if (!hashedNonce) {
+    if (!nonce) {
       return;
     }
 
@@ -42,23 +40,25 @@ const GoogleSignInButton = memo(function GoogleSignInButton() {
       const { data, error } = await supabase.auth.signInWithIdToken({
         provider: "google",
         token: response.credential,
-        nonce: hashedNonce,
+        nonce: nonce,
       });
 
       if (error) {
         toast.error(error.message);
+
+        return;
       }
 
       console.log("Session data: ", data);
       console.log("Successfully logged in with Google");
 
-      router.push("/dashboard");
+      window.location.replace("/dashboard");
     };
 
     return () => {
       window.handleSignInWithGoogle = null;
     };
-  }, [hashedNonce, router]);
+  }, [nonce]);
 
   return (
     <>
@@ -70,7 +70,7 @@ const GoogleSignInButton = memo(function GoogleSignInButton() {
             data-context="signin"
             data-ux_mode="popup"
             data-callback="handleSignInWithGoogle"
-            data-nonce={nonce}
+            data-nonce={hashedNonce}
             data-auto_prompt="false"
           ></div>
 

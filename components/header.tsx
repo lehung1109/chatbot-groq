@@ -75,10 +75,10 @@ export default function Header() {
             asChild
             className="bg-cyan-500 text-slate-950 hover:bg-cyan-400"
           >
-            <Link href="/sign-in">
+            <a href="/sign-in">
               Sign in
               <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
+            </a>
           </Button>
         </div>
 
