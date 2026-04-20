@@ -6,7 +6,7 @@ const PublicLayout = ({ children }: { children: React.ReactNode }) => {
     <>
       <Header />
 
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 grid w-full">{children}</main>
 
       <SiteFooter />
     </>

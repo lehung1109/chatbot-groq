@@ -82,7 +82,7 @@ const GoogleSignInButton = memo(function GoogleSignInButton() {
             data-text="signin_with"
             data-size="large"
             data-logo_alignment="left"
-            data-width="400"
+            data-width="300"
           ></div>
 
           <Script src="https://accounts.google.com/gsi/client" />

@@ -1,25 +1,15 @@
-// app/login/page.tsx
-import Link from "next/link";
-import { Eye } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
-import { Github } from "@/components/github-icon";
 import GoogleSignInButton from "@/components/google-sign-in-button";
+import { Metadata } from "next";
+
+// metadata
+export const metadata: Metadata = {
+  title: "Sign in",
+  description: "Sign in to your account",
+};
 
 export default function LoginPage() {
   return (
-    <div className="grid lg:grid-cols-2">
+    <div className="grid lg:grid-cols-2 min-h-full">
       <section className="bg-slate-900 p-10 text-white lg:flex lg:flex-col lg:justify-center">
         <div className="max-w-md">
           <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-sky-300">
@@ -35,7 +25,7 @@ export default function LoginPage() {
         </div>
       </section>
 
-      <section className="flex items-center justify-center p-6 sm:p-8 lg:p-10">
+      <section className="flex items-center justify-center p-30 lg:p-6">
         <div className="w-full max-w-md">
           <GoogleSignInButton />
         </div>
