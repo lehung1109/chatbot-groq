@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Globe, HeartHandshake, TerminalSquare, Wheat } from "lucide-react";
-import { Github } from "./github-icon";
+import { Github } from "../github-icon";
 
 const footerLinks = {
   Product: [
