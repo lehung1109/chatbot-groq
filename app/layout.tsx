@@ -5,8 +5,6 @@ import { ThemeProvider } from "@/providers/theme-provider";
 import { ChatbotProvider } from "@/providers/chatbot-provider";
 import { AIProvider } from "@/providers/ai-provider";
 import { Geist } from "next/font/google";
-import { SiteFooter } from "@/components/footer";
-import Header from "@/components/header";
 import { Toaster } from "@/components/ui/sonner";
 
 const geist = Geist({

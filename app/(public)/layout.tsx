@@ -1,5 +1,5 @@
-import { SiteFooter } from "@/components/footer";
-import Header from "@/components/header";
+import { SiteFooter } from "@/components/layout/footer";
+import Header from "@/components/layout/header";
 import OneTapGoogleSignIn from "@/components/one-tap-google-sign-in";
 
 const PublicLayout = ({ children }: { children: React.ReactNode }) => {
