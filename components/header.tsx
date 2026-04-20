@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ArrowRight, Menu, Wheat } from "lucide-react";
 import { Github } from "./github-icon";
+import SignInButton from "./sign-in-button";
 
 const navItems = [
   { label: "Product", href: "#product" },
@@ -71,15 +72,7 @@ export default function Header() {
             </Link>
           </Button>
 
-          <Button
-            asChild
-            className="bg-cyan-500 text-slate-950 hover:bg-cyan-400"
-          >
-            <a href="/sign-in">
-              Sign in
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </a>
-          </Button>
+          <SignInButton />
         </div>
 
         <div className="lg:hidden">
