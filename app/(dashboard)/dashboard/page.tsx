@@ -1,4 +1,4 @@
-import SignOut from "@/components/sign-out-button";
+import SignOut from "@/components/auth/sign-out-button";
 import { Metadata } from "next";
 
 // metadata

@@ -1,4 +1,4 @@
-import GoogleSignInButton from "@/components/google-sign-in-button";
+import GoogleSignInButton from "@/components/auth/google-sign-in-button";
 import { Metadata } from "next";
 
 // metadata
