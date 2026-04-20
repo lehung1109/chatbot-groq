@@ -63,21 +63,12 @@ export default function Hero() {
               <Button
                 asChild
                 size="lg"
-                className="bg-cyan-500 text-slate-950 hover:bg-cyan-400"
+                className=" text-primary-foreground text-3xl py-4 px-8 h-auto  bg-primary border-white/1 border"
               >
-                <Link href="#demo">
-                  View live demo
+                <a href="/sign-in">
+                  Get started
                   <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border-white/10 bg-white/5 text-slate-100 hover:bg-white/10"
-              >
-                <Link href="#architecture">Read the architecture</Link>
+                </a>
               </Button>
             </div>
 
