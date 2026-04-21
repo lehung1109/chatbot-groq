@@ -16,6 +16,7 @@ import { Badge } from "@/components/ui/badge";
 import { IncidentTable } from "@/components/dashboard/incident-table";
 import { Timeline } from "@/components/dashboard/timeline";
 import { WarRoom } from "@/components/dashboard/war-room";
+import AreaChart from "@/components/chart/area-chart";
 
 // metadata
 export const metadata: Metadata = {
@@ -61,6 +62,7 @@ const DashboardPage = () => {
 
           <div className="grid gap-4 2xl:grid-cols-[minmax(0,1.5fr)_380px]">
             <HealthChart />
+            <AreaChart />
 
             <Card className="border-border/70 bg-card/90 shadow-sm">
               <CardHeader className="flex flex-row items-start justify-between space-y-0">
