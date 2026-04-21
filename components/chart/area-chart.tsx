@@ -47,11 +47,56 @@ export default function AreaChart({
       .append("g")
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    const x = d3.scaleTime().domain([0, 500]).range([0, 500]);
+    const x = d3
+      .scaleTime()
+      .domain(d3.extent(parsedData, (d) => d.date) as [Date, Date])
+      .range([0, innerWidth]);
+
+    const y = d3
+      .scaleLinear()
+      .domain([0, d3.max(parsedData, (d) => d.value) as number])
+      .nice()
+      .range([innerHeight, 0]);
+
+    const areaGenerator = d3
+      .area<DataPoint>()
+      .x((d) => x(d.date))
+      .y0(innerHeight)
+      .y1((d) => y(d.value))
+      .curve(d3.curveMonotoneX);
+
+    const lineGenerator = d3
+      .line<DataPoint>()
+      .x((d) => x(d.date))
+      .y((d) => y(d.value))
+      .curve(d3.curveMonotoneX);
+
+    g.append("path")
+      .datum(parsedData)
+      .attr("fill", "rgba(59, 130, 246, 0.25)")
+      .attr("d", areaGenerator);
+
+    g.append("path")
+      .datum(parsedData)
+      .attr("fill", "none")
+      .attr("stroke", "#3b82f6")
+      .attr("stroke-width", 2)
+      .attr("d", lineGenerator);
 
     g.append("g")
       .attr("transform", `translate(0,${innerHeight})`)
-      .call(d3.axisBottom(x).ticks(10));
+      .call(d3.axisBottom(x).ticks(7));
+
+    g.append("g").call(d3.axisLeft(y));
+
+    g.selectAll(".dot")
+      .data(parsedData)
+      .enter()
+      .append("circle")
+      .attr("cx", (d) => x(d.date))
+      .attr("cy", (d) => y(d.value))
+      .attr("r", 4)
+      .attr("fill", "#3b82f6");
   }, [parsedData, width, height]);
 
   return <svg ref={svgRef}></svg>;
