@@ -3,7 +3,7 @@ import { Metadata } from "next";
 
 // metadata
 export const metadata: Metadata = {
-  title: "Sign in",
+  title: "Sign in - Incident Copilot",
   description: "Sign in to your account",
 };
 

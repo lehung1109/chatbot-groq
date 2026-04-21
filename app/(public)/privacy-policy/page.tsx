@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Incident Copilot",
+  title: "Privacy Policy - Incident Copilot",
   description:
     "Learn how Incident Copilot handles data collection, storage, and security.",
 };
@@ -40,7 +40,9 @@ export default function PrivacyPolicyPage() {
   return (
     <section className="bg-background text-foreground">
       <div className="container mx-auto max-w-3xl px-4 py-16 md:py-20">
-        <p className="text-sm text-muted-foreground">Last updated: {lastUpdated}</p>
+        <p className="text-sm text-muted-foreground">
+          Last updated: {lastUpdated}
+        </p>
         <h1 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
           Privacy Policy
         </h1>
@@ -63,7 +65,8 @@ export default function PrivacyPolicyPage() {
         <article className="mt-8 space-y-3">
           <h2 className="text-xl font-semibold tracking-tight">Contact Us</h2>
           <p className="leading-7 text-muted-foreground">
-            For privacy-related questions, email us at <a
+            For privacy-related questions, email us at{" "}
+            <a
               href="mailto:privacy@incidentcopilot.app"
               className="font-medium text-foreground underline underline-offset-4"
             >

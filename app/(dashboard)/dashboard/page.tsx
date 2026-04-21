@@ -19,7 +19,7 @@ import { WarRoom } from "@/components/dashboard/war-room";
 
 // metadata
 export const metadata: Metadata = {
-  title: "Dashboard",
+  title: "Dashboard - Incident Copilot",
   description: "Dashboard",
 };
 

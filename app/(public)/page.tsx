@@ -5,6 +5,14 @@ import { FinalCtaSection } from "@/components/final-cta";
 import Hero from "@/components/hero";
 import InvestigationFlow from "@/components/investigation-flow";
 import { UnifiedSignalsSection } from "@/components/unified-signals";
+import { Metadata } from "next";
+
+// metadata
+export const metadata: Metadata = {
+  title: "Home - Incident Copilot",
+  description:
+    "Incident Copilot is an AI-powered incident management tool for incident response teams.",
+};
 
 export default function Home() {
   return (

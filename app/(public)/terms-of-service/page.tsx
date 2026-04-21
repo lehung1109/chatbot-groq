@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | Incident Copilot",
+  title: "Terms of Service - Incident Copilot",
   description:
     "Review the terms and conditions for using Incident Copilot services.",
 };
@@ -40,7 +40,9 @@ export default function TermsOfServicePage() {
   return (
     <section className="bg-background text-foreground">
       <div className="container mx-auto max-w-3xl px-4 py-16 md:py-20">
-        <p className="text-sm text-muted-foreground">Last updated: {lastUpdated}</p>
+        <p className="text-sm text-muted-foreground">
+          Last updated: {lastUpdated}
+        </p>
         <h1 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
           Terms of Service
         </h1>
@@ -69,7 +71,8 @@ export default function TermsOfServicePage() {
               className="font-medium text-foreground underline underline-offset-4"
             >
               legal@incidentcopilot.app
-            </a>.
+            </a>
+            .
           </p>
         </article>
 
