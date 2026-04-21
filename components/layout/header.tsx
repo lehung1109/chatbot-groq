@@ -7,8 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ArrowRight, Menu, Wheat } from "lucide-react";
-import { Github } from "./github-icon";
-import SignInButton from "./sign-in-button";
+import { Github } from "@/components/github-icon";
+import SignInButton from "@/components/auth/sign-in-button";
 
 const navItems = [
   { label: "Product", href: "#product" },
