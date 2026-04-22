@@ -97,6 +97,43 @@ export default function AreaChart({
       .attr("cy", (d) => y(d.value))
       .attr("r", 4)
       .attr("fill", "#3b82f6");
+
+    // create overlay
+    const overlay = g
+      .append("rect")
+      .attr("width", innerWidth)
+      .attr("height", innerHeight)
+      .attr("opacity", 0);
+    const hoverLine = g
+      .append("line")
+      .attr("y1", 0)
+      .attr("y2", innerHeight)
+      .attr("stroke", "#3b82f6")
+      .attr("stroke-width", 1)
+      .attr("pointer-events", "none")
+      .attr("opacity", 0);
+
+    overlay.on("mouseenter", () => {
+      hoverLine.attr("opacity", 1);
+    });
+
+    overlay.on("mouseleave", () => {
+      hoverLine.attr("opacity", 0);
+    });
+
+    overlay.on("mousemove", (event) => {
+      const coors = d3.pointer(event);
+
+      const domainX = x.invert(coors[0]);
+
+      const indexData = d3
+        .bisector((d: DataPoint) => d.date)
+        .center(parsedData, domainX);
+
+      const cx = x(parsedData[indexData].date);
+
+      hoverLine.attr("x1", cx).attr("x2", cx);
+    });
   }, [parsedData, width, height]);
 
   return <svg ref={svgRef}></svg>;

@@ -61,7 +61,6 @@ const DashboardPage = () => {
           <IncidentSummary />
 
           <div className="grid gap-4 2xl:grid-cols-[minmax(0,1.5fr)_380px]">
-            <HealthChart />
             <AreaChart />
 
             <Card className="border-border/70 bg-card/90 shadow-sm">
