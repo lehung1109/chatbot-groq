@@ -44,7 +44,7 @@ export const incidents = [
     name: "SEV-1 payment latency spike",
     service: "checkout-api",
     impact: "18.2k users affected",
-    owner: "Linh Tran",
+    owner: "Hung Le",
     status: "Mitigating",
     started: "22m ago",
   },
@@ -94,7 +94,7 @@ export const timelineItems = [
 ] as const;
 
 export const warRoomMembers = [
-  { role: "Incident commander", name: "Linh Tran", state: "Owner" },
+  { role: "Incident commander", name: "Hung Le", state: "Owner" },
   { role: "Communications lead", name: "An Vo", state: "Assigned" },
   { role: "Database SME", name: "Quang Le", state: "Standby" },
 ] as const;

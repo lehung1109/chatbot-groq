@@ -48,7 +48,7 @@ export function Sidebar() {
               LT
             </div>
             <div>
-              <p className="text-sm font-medium">Linh Tran</p>
+              <p className="text-sm font-medium">Hung Le</p>
               <p className="text-xs text-muted-foreground">
                 Primary responder · UTC+7
               </p>
