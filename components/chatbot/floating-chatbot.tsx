@@ -23,7 +23,7 @@ const FloatingChatbot = () => {
       </button>
 
       {open && (
-        <div className="absolute bottom-15 right-0 border-2 border-gray-600 rounded-lg">
+        <div className="absolute bottom-15 right-0 border-2 border-gray-600 rounded-lg bg-background shadow-lg dark:border-gray-400 dark:bg-card">
           <Chatbot />
         </div>
       )}

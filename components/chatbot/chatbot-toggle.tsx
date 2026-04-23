@@ -6,8 +6,12 @@ import { useState } from "react";
 import FloatingChatbot from "./floating-chatbot";
 import Chatbot from "./chatbot";
 
-const ChatbotToggle = () => {
-  const [showFloatingChatbot, setShowFloatingChatbot] = useState(false);
+interface ChatbotToggleProps {
+  isFloat?: boolean;
+}
+
+const ChatbotToggle = ({ isFloat = false }: ChatbotToggleProps) => {
+  const [showFloatingChatbot, setShowFloatingChatbot] = useState(isFloat);
 
   return (
     <>
