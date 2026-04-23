@@ -1,5 +1,5 @@
 import SignOut from "@/components/auth/sign-out-button";
-import { HealthChart } from "@/components/dashboard/health-chart";
+import { HealthChart } from "@/components/chart/health-chart";
 import { IncidentSummary } from "@/components/dashboard/incident-summary";
 import { Sidebar } from "@/components/dashboard/sidebar";
 import { Button } from "@/components/ui/button";
@@ -52,7 +52,7 @@ const DashboardPage = () => {
                 <Bell className="h-4 w-4" />
               </Button>
 
-              <Button>Declare comms</Button>
+              <SignOut />
             </div>
           </div>
         </header>
@@ -61,7 +61,7 @@ const DashboardPage = () => {
           <IncidentSummary />
 
           <div className="grid gap-4 2xl:grid-cols-[minmax(0,1.5fr)_380px]">
-            <AreaChart />
+            <HealthChart />
 
             <Card className="border-border/70 bg-card/90 shadow-sm">
               <CardHeader className="flex flex-row items-start justify-between space-y-0">
