@@ -86,11 +86,15 @@ sequenceDiagram
         AI Application->>MCP Client:timeout
         MCP Client->>MCP Server:timeout
         MCP Server->>DB:Update context for timeout
+        AI Application->>User:Show message timeout
+        Note right of AI Application:Disconnect MCP Server
     else user reject
         User->>AI Application:Reject
         AI Application->>MCP Client:reject
         MCP Client->>MCP Server:reject
         MCP Server->>DB:Update context for reject
+        AI Application->>User:Show message reject
+        Note right of AI Application:Disconnect MCP Server
     else user action is valid
         User->>AI Application:/api/chat/approve
         AI Application->>MCP Client:User action data
