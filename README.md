@@ -108,6 +108,7 @@ sequenceDiagram
         Application->>LLM:Forward tools response
         LLM->>Application:LLM response
         Application->>User:Forward LLM response
+        Note right of Application:Disconnect MCP Server
     end
     Note over User,DB: Request - Response circle for /api/chat/approve
 ```
