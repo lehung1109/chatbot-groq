@@ -80,7 +80,7 @@ sequenceDiagram
         end
     end
     Note over User,DB: Request - Response circle for /api/chat/send
-    alt user action timeout
+    alt user action timeout 1h or 1day
         AI Application->>MCP Client:timeout
         MCP Client->>MCP Server:timeout
         MCP Server->>DB:Update context for timeout
