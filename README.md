@@ -76,7 +76,7 @@ sequenceDiagram
             MCP Server->>DB:Save current context
             MCP Server->>MCP Client:Needs User Action
             MCP Client->>AI Application:Forward request Action
-            AI Application->>User:UI request user action
+            AI Application->>User:Display UI for User
         end
     end
     Note over User,DB: Request - Response circle for /api/chat/send
