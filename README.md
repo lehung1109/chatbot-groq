@@ -102,7 +102,7 @@ sequenceDiagram
         Application->>MCP Client:User action data
         MCP Client->>MCP Server:Forward data
         MCP Server->>DB:Read context for the action
-        Note right of MCP Server:MCP Server continue processing context
+        MCP Server->>MCP Server:MCP Server continue processing context
         MCP Server->>MCP Client:MCP Server tools response
         MCP Client->>Application:Forward tools response
         Application->>LLM:Forward tools response
