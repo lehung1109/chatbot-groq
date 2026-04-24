@@ -39,18 +39,65 @@ A Next.js chat application that talks to [Groq](https://groq.com/) through the [
 
 ## Scripts
 
-| Command       | Description              |
-| ------------- | ------------------------ |
-| `npm run dev` | Start dev server         |
-| `npm run build` | Production build       |
-| `npm run start` | Run production server  |
-| `npm run lint`  | Run ESLint             |
+| Command         | Description           |
+| --------------- | --------------------- |
+| `npm run dev`   | Start dev server      |
+| `npm run build` | Production build      |
+| `npm run start` | Run production server |
+| `npm run lint`  | Run ESLint            |
 
 ## Project layout
 
 - `app/api/chat/route.ts` — Groq-backed streaming chat API.
 - `components/chatbot/` — Chat UI (conversation, input, model selector).
 - `types/groq.ts` — Allowed Groq model IDs for the app.
+
+## Mermaid: end-to-end flow
+
+```mermaid
+sequenceDiagram
+    participant User as User UI(Browser)
+    User->>AI Application:/api/chat/send
+    AI Application->>LLM:Forward message
+    alt LLM doesn't call tools
+        LLM->>AI Application:Response message
+        AI Application->>User:Forward message
+    else LLM call tools
+        LLM->>AI Application:Need call tools
+        AI Application->>MCP Client:call tools
+        MCP Client->>MCP Server: call tools
+        alt MCP Server doesn't need User Action
+            MCP Server->>MCP Client:MCP Server tools response
+            MCP Client->>AI Application:Forward tools response
+            AI Application->>LLM:Forward tools response
+            LLM->>AI Application:LLM response
+            AI Application->>User:Forward LLM response
+        else MCP Server needs User Action
+            MCP Server->>MCP Client:Needs User Action
+            MCP Client->>AI Application:Forward request Action
+            AI Application->>DB:Save current context
+            AI Application->>User:UI request user action
+        end
+    end
+    Note over User,DB: Request - Response circle for /api/chat/send
+    alt user action timeout
+        AI Application->>DB:Update context for timeout
+    else user reject
+        AI Application->>DB:Update context for reject
+    else user action is valid
+        User->>AI Application:/api/chat/approve
+        AI Application->>DB:Read context for the action
+        AI Application->>MCP Client:User action data and context
+        MCP Client->>MCP Server:Forward data
+        Note right of MCP Server:MCP Server continue processing context
+        MCP Server->>MCP Client:MCP Server tools response
+        MCP Client->>AI Application:Forward tools response
+        AI Application->>LLM:Forward tools response
+        LLM->>AI Application:LLM response
+        AI Application->>User:Forward LLM response
+    end
+    Note over User,DB: Request - Response circle for /api/chat/approve
+```
 
 ## Deployment
 
