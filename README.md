@@ -73,22 +73,26 @@ sequenceDiagram
             LLM->>AI Application:LLM response
             AI Application->>User:Forward LLM response
         else MCP Server needs User Action
+            MCP Server->>DB:Save current context
             MCP Server->>MCP Client:Needs User Action
             MCP Client->>AI Application:Forward request Action
-            AI Application->>DB:Save current context
             AI Application->>User:UI request user action
         end
     end
     Note over User,DB: Request - Response circle for /api/chat/send
     alt user action timeout
-        AI Application->>DB:Update context for timeout
+        AI Application->>MCP Client:timeout
+        MCP Client->>MCP Server:timeout
+        MCP Server->>DB:Update context for timeout
     else user reject
-        AI Application->>DB:Update context for reject
+        AI Application->>MCP Client:reject
+        MCP Client->>MCP Server:reject
+        MCP Server->>DB:Update context for reject
     else user action is valid
         User->>AI Application:/api/chat/approve
-        AI Application->>DB:Read context for the action
-        AI Application->>MCP Client:User action data and context
+        AI Application->>MCP Client:User action data
         MCP Client->>MCP Server:Forward data
+        MCP Server->>DB:Read context for the action
         Note right of MCP Server:MCP Server continue processing context
         MCP Server->>MCP Client:MCP Server tools response
         MCP Client->>AI Application:Forward tools response
