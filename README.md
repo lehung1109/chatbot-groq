@@ -57,6 +57,8 @@ A Next.js chat application that talks to [Groq](https://groq.com/) through the [
 ```mermaid
 sequenceDiagram
     participant User as User UI(Browser)
+    participant AI Application as AI Application(Nextjs)
+
     User->>AI Application:/api/chat/send
     AI Application->>LLM:Forward message
     alt LLM doesn't call tools
