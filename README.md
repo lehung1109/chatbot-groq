@@ -77,6 +77,7 @@ sequenceDiagram
             MCP Server->>MCP Client:Needs User Action
             MCP Client->>AI Application:Forward request Action
             AI Application->>User:Display UI for User
+            Note right of AI Application:Disconnect MCP Server
         end
     end
     Note over User,DB: Request - Response circle for /api/chat/send
