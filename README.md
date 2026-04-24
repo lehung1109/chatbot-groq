@@ -57,57 +57,57 @@ A Next.js chat application that talks to [Groq](https://groq.com/) through the [
 ```mermaid
 sequenceDiagram
     participant User as User UI(Browser)
-    participant AI Application as AI Application(Nextjs)
+    participant Application as AI Application(Nextjs)
 
-    User->>AI Application:/api/chat/send
-    AI Application->>LLM:Forward message
+    User->>Application:/api/chat/send
+    Application->>LLM:Forward message
     alt LLM doesn't call tools
-        LLM->>AI Application:Response message
-        AI Application->>User:Forward message
+        LLM->>Application:Response message
+        Application->>User:Forward message
     else LLM call tools
-        LLM->>AI Application:Need call tools
-        AI Application->>MCP Client:call tools
+        LLM->>Application:Need call tools
+        Application->>MCP Client:call tools
         MCP Client->>MCP Server: call tools
         alt MCP Server doesn't need User Action
             MCP Server->>MCP Client:MCP Server tools response
-            MCP Client->>AI Application:Forward tools response
-            AI Application->>LLM:Forward tools response
-            LLM->>AI Application:LLM response
-            AI Application->>User:Forward LLM response
+            MCP Client->>Application:Forward tools response
+            Application->>LLM:Forward tools response
+            LLM->>Application:LLM response
+            Application->>User:Forward LLM response
         else MCP Server needs User Action
             MCP Server->>DB:Save current context
             MCP Server->>MCP Client:Needs User Action
-            MCP Client->>AI Application:Forward request Action
-            AI Application->>User:Display UI for User
-            Note right of AI Application:Disconnect MCP Server
+            MCP Client->>Application:Forward request Action
+            Application->>User:Display UI for User
+            Note right of Application:Disconnect MCP Server
         end
     end
     Note over User,DB: Request - Response circle for /api/chat/send
     alt user action timeout 1h or 1day
-        User->>AI Application:timeout
-        AI Application->>MCP Client:timeout
+        User->>Application:timeout
+        Application->>MCP Client:timeout
         MCP Client->>MCP Server:timeout
         MCP Server->>DB:Update context for timeout
-        AI Application->>User:Show message timeout
-        Note right of AI Application:Disconnect MCP Server
+        Application->>User:Show message timeout
+        Note right of Application:Disconnect MCP Server
     else user reject
-        User->>AI Application:Reject
-        AI Application->>MCP Client:reject
+        User->>Application:Reject
+        Application->>MCP Client:reject
         MCP Client->>MCP Server:reject
         MCP Server->>DB:Update context for reject
-        AI Application->>User:Show message reject
-        Note right of AI Application:Disconnect MCP Server
+        Application->>User:Show message reject
+        Note right of Application:Disconnect MCP Server
     else user action is valid
-        User->>AI Application:/api/chat/approve
-        AI Application->>MCP Client:User action data
+        User->>Application:/api/chat/approve
+        Application->>MCP Client:User action data
         MCP Client->>MCP Server:Forward data
         MCP Server->>DB:Read context for the action
         Note right of MCP Server:MCP Server continue processing context
         MCP Server->>MCP Client:MCP Server tools response
-        MCP Client->>AI Application:Forward tools response
-        AI Application->>LLM:Forward tools response
-        LLM->>AI Application:LLM response
-        AI Application->>User:Forward LLM response
+        MCP Client->>Application:Forward tools response
+        Application->>LLM:Forward tools response
+        LLM->>Application:LLM response
+        Application->>User:Forward LLM response
     end
     Note over User,DB: Request - Response circle for /api/chat/approve
 ```
