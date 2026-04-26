@@ -113,6 +113,16 @@ sequenceDiagram
     Note over User,DB: Request - Response circle for /api/chat/approve
 ```
 
+## Mermaid: detail flow
+
+```mermaid
+sequenceDiagram
+    participant User as User UI(Browser)
+    participant Application as AI Application(Nextjs)
+
+    User->>Application:/api/chat/send
+```
+
 ## Deployment
 
 You can deploy on [Vercel](https://vercel.com/) or any host that supports Next.js. Set `GROQ_API_KEY` in the hosting provider’s environment variables; do not commit real keys to the repository.
