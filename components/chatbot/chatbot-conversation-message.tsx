@@ -13,11 +13,15 @@ import ChatbotElicitation, {
   ChatbotElicitationProps,
 } from "./chatbot-elicitation";
 import { UIDataTypes } from "ai";
+import ChatbotConversationId from "./chatbot-conversation-id";
 
 interface DataTypes extends UIDataTypes {
   elicitation: {
     id: string;
     error?: string;
+  };
+  conversationId: {
+    content: string;
   };
 }
 
@@ -41,7 +45,6 @@ const ChatbotConversationMessage = memo(function ChatbotConversationMessage({
         <MessageBranchContent>
           <MessageContent>
             {parts.map((part, partIndex) => {
-              console.log("part", part);
               return (
                 <div key={`${id}-${partIndex}`}>
                   {part.type === "source-url" && (
@@ -60,6 +63,14 @@ const ChatbotConversationMessage = memo(function ChatbotConversationMessage({
                         elicitationErrorData.get(
                           (part.data as DataTypes["elicitation"]).id,
                         )
+                      }
+                    />
+                  )}
+
+                  {part.type === "data-conversation-id" && (
+                    <ChatbotConversationId
+                      conversationId={
+                        (part.data as DataTypes["conversationId"]).content
                       }
                     />
                   )}

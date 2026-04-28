@@ -58,10 +58,13 @@ class MCPHost {
     return createUIMessageStreamResponse({
       stream: createUIMessageStream({
         async execute({ writer }) {
-          writer.write({
-            type: "data-conversation-id",
-            data: { content: conversationId },
-          });
+          // send conversation id to client if it is a new conversation
+          if (!cId) {
+            writer.write({
+              type: "data-conversation-id",
+              data: { content: conversationId },
+            });
+          }
 
           const mcpClientInstance = await initConnectClientToServer(sessionId);
 

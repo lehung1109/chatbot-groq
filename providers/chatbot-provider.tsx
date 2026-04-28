@@ -18,6 +18,7 @@ export interface ChatbotState {
   text?: string;
   webSearch?: boolean;
   selectedModel?: GroqChatModelId;
+  conversationId?: string;
 }
 
 export const ChatbotContext = createContext<ChatbotContextType>({});
@@ -26,6 +27,7 @@ export enum ChatbotActionType {
   SET_TEXT = "SET_TEXT",
   SET_WEB_SEARCH = "SET_WEB_SEARCH",
   SET_SELECTED_MODEL = "SET_SELECTED_MODEL",
+  SET_CONVERSATION_ID = "SET_CONVERSATION_ID",
 }
 
 export type ChatbotTextAction = {
@@ -43,10 +45,16 @@ export type ChatbotSelectedModelAction = {
   payload: GroqChatModelId;
 };
 
+export type ChatbotConversationIdAction = {
+  type: ChatbotActionType.SET_CONVERSATION_ID;
+  payload: string;
+};
+
 export type ChatbotAction =
   | ChatbotTextAction
   | ChatbotWebSearchAction
-  | ChatbotSelectedModelAction;
+  | ChatbotSelectedModelAction
+  | ChatbotConversationIdAction;
 
 export const chatbotReducer = (state: ChatbotState, action: ChatbotAction) => {
   switch (action.type) {
@@ -56,6 +64,8 @@ export const chatbotReducer = (state: ChatbotState, action: ChatbotAction) => {
       return { ...state, webSearch: action.payload };
     case ChatbotActionType.SET_SELECTED_MODEL:
       return { ...state, selectedModel: action.payload };
+    case ChatbotActionType.SET_CONVERSATION_ID:
+      return { ...state, conversationId: action.payload };
   }
 };
 
