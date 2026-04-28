@@ -36,7 +36,6 @@ class MCPHost {
     const { data: user } = await supabase.auth.getUser();
 
     let conversationId = cId;
-    let status = "completed";
 
     // save conversation to database if It is a new conversation
     if (!cId) {
@@ -67,7 +66,6 @@ class MCPHost {
         conversation_id: conversationId,
         role: "user",
         content: messages[messages.length - 1],
-        status,
       })
       .select()
       .single();
@@ -135,7 +133,6 @@ class MCPHost {
             conversation_id: conversationId,
             role: "assistant",
             content: responseMessage,
-            status,
             response_to: userMessageId,
           });
 
