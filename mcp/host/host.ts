@@ -14,6 +14,8 @@ import { convertToZodSchema } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/server";
 import { registerClientElicitationHandlers } from "../client/elicitation";
 
+const systemPrompt = `You are a helpful assistant that can answer questions and help with tasks, call tools when you need to get information from the user`;
+
 class MCPHost {
   async handleRequest(req: Request) {
     const {
@@ -45,6 +47,8 @@ class MCPHost {
           title: messages[0].parts
             .find((part) => part.type === "text")
             ?.text.slice(0, 100),
+          model,
+          system_prompt: systemPrompt,
         })
         .select()
         .single();
@@ -108,19 +112,10 @@ class MCPHost {
                     title: tool.title,
                     inputSchema: convertToZodSchema(tool.inputSchema),
                     execute: async (input: Record<string, unknown>) => {
-                      console.log(
-                        "Executing tool: ",
-                        tool.name,
-                        " with input: ",
-                        input,
-                      );
-
                       const result = await mcpClientInstance.callTool({
                         name: tool.name,
                         arguments: input,
                       });
-
-                      console.log(result);
 
                       return result.content;
                     },
@@ -128,8 +123,7 @@ class MCPHost {
                 ];
               }),
             ),
-            system:
-              "You are a helpful assistant that can answer questions and help with tasks, call tools when you need to get information from the user",
+            system: systemPrompt,
           });
 
           const messageStream = result.toUIMessageStream({
