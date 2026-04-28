@@ -93,6 +93,7 @@ class MCPHost {
             mcpClientInstance,
             writer,
             supabase,
+            userMessageId,
           );
           registerClientRootsHandlers(mcpClientInstance, writer);
 

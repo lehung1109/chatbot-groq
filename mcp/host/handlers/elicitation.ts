@@ -10,12 +10,14 @@ export const processFormElicitation = async (
   requestParams: ElicitRequestFormParams,
   writer: UIMessageStreamWriter,
   supabase: SupabaseClient,
+  userMessageId: string,
 ): Promise<ElicitResult> => {
   // save elicitation state to database
   const { data: elicitationData, error: saveElicitationError } = await supabase
     .from("elicitation_state")
     .insert({
       state: "waiting_approval",
+      message_id: userMessageId,
     })
     .select()
     .single();

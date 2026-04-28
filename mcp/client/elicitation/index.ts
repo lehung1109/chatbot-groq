@@ -7,6 +7,7 @@ export const registerClientElicitationHandlers = (
   client: Client,
   writer: UIMessageStreamWriter,
   supabase: SupabaseClient,
+  userMessageId: string,
 ) => {
   client.setRequestHandler("elicitation/create", async (request, extra) => {
     const mode = request.params.mode;
@@ -19,6 +20,7 @@ export const registerClientElicitationHandlers = (
       request.params,
       writer,
       supabase,
+      userMessageId,
     );
 
     return result;
