@@ -3,68 +3,57 @@ import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
 
 export interface ChatbotElicitationProps {
-  data?: ElicitRequestFormParams & { id: string };
-  error?: string;
+  elicitationId: string;
+  requestParams?: ElicitRequestFormParams;
 }
 
-const ChatbotElicitation = ({ data, error }: ChatbotElicitationProps) => {
-  const { message, id, requestedSchema } = data ?? {};
-  const [value, setValue] = useState("");
+const ChatbotElicitation = ({
+  elicitationId,
+  requestParams,
+}: ChatbotElicitationProps) => {
+  const [action, setAction] = useState<"accept" | "decline">("accept");
   const [submitted, setSubmitted] = useState(false);
-  const ignoreHtmlData = !requestedSchema?.properties.htmlPage;
 
   const handleSubmit = () => {
     setSubmitted(true);
+
     fetch(`/api/elicitation`, {
       method: "POST",
       body: JSON.stringify({
-        requestId: id,
-        value,
+        elicitationId,
+        action,
       }),
     });
   };
 
-  useEffect(() => {
-    if (ignoreHtmlData) {
-      return;
-    }
-
-    fetch(`/api/elicitation`, {
-      method: "POST",
-      body: JSON.stringify({
-        requestId: id,
-        value: document.documentElement.outerHTML,
-      }),
-    });
-  }, [id, ignoreHtmlData]);
-
-  return ignoreHtmlData && requestedSchema ? (
+  return (
     <div>
-      <p className="text-sm text-gray-500 mb-2">{message}</p>
+      {requestParams?.message && (
+        <p className="text-sm text-gray-500 mb-2">{requestParams?.message}</p>
+      )}
 
-      <form>
-        <input
-          type="text"
-          className="w-full border border-gray-300 rounded-md p-2 mb-2 disabled:opacity-50 disabled:cursor-not-allowed"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          disabled={submitted || !!error}
-        />
-        {!submitted && !error && (
-          <Button
-            className="cursor-pointer"
-            type="submit"
-            onClick={handleSubmit}
-          >
-            Submit
-          </Button>
-        )}
+      <div className="flex gap-2">
+        <Button
+          onClick={() => {
+            setAction("accept");
+            handleSubmit();
+          }}
+        >
+          Approve
+        </Button>
 
-        {error && <p className="text-sm text-red-500 mb-2">{error}</p>}
-      </form>
+        <Button
+          variant="destructive"
+          disabled={submitted}
+          onClick={() => {
+            setAction("decline");
+            handleSubmit();
+          }}
+        >
+          Reject
+        </Button>
+      </div>
     </div>
-  ) : (
-    ""
   );
 };
 

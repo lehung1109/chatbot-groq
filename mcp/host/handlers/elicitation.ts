@@ -29,7 +29,7 @@ export const processFormElicitation = async (
   writer.write({
     type: "data-elicitation",
     data: {
-      ...requestParams,
+      requestParams,
       elicitationId,
     },
   });

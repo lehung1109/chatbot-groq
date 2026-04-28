@@ -9,16 +9,15 @@ import {
 import ChatbotSource from "./chatbot-source";
 import ChatbotReasoning from "./chatbot-reasoning";
 import ChatbotText from "./chatbot-text";
-import ChatbotElicitation, {
-  ChatbotElicitationProps,
-} from "./chatbot-elicitation";
+import ChatbotElicitation from "./chatbot-elicitation";
 import { UIDataTypes } from "ai";
 import ChatbotConversationId from "./chatbot-conversation-id";
+import { ElicitRequestFormParams } from "@modelcontextprotocol/client";
 
 interface DataTypes extends UIDataTypes {
   elicitation: {
-    id: string;
-    error?: string;
+    elicitationId: string;
+    requestParams?: ElicitRequestFormParams;
   };
   conversationId: {
     content: string;
@@ -30,15 +29,6 @@ const ChatbotConversationMessage = memo(function ChatbotConversationMessage({
   role,
   parts,
 }: UIMessage<unknown, DataTypes>) {
-  const elicitationErrorData = new Map<string, string>();
-
-  parts.forEach((part) => {
-    if (part.type === "data-elicitation") {
-      const data = part.data as DataTypes["elicitation"];
-      elicitationErrorData.set(data.id, data.error ?? "");
-    }
-  });
-
   return (
     <Message from={role} key={`${id}`}>
       <MessageBranch defaultBranch={0} key={id}>
@@ -55,25 +45,21 @@ const ChatbotConversationMessage = memo(function ChatbotConversationMessage({
                     <ChatbotReasoning reasoning={part} />
                   )}
 
-                  {part.type === "data-elicitation" && (
-                    <ChatbotElicitation
-                      data={part.data as ChatbotElicitationProps["data"]}
-                      error={
-                        (part.data as DataTypes["elicitation"]).id &&
-                        elicitationErrorData.get(
-                          (part.data as DataTypes["elicitation"]).id,
-                        )
-                      }
-                    />
-                  )}
+                  {part.type === "data-elicitation" &&
+                    partIndex === parts.length - 1 && (
+                      <ChatbotElicitation
+                        {...(part.data as DataTypes["elicitation"])}
+                      />
+                    )}
 
-                  {part.type === "data-conversation-id" && (
-                    <ChatbotConversationId
-                      conversationId={
-                        (part.data as DataTypes["conversationId"]).content
-                      }
-                    />
-                  )}
+                  {part.type === "data-conversation-id" &&
+                    partIndex === parts.length - 1 && (
+                      <ChatbotConversationId
+                        conversationId={
+                          (part.data as DataTypes["conversationId"]).content
+                        }
+                      />
+                    )}
 
                   {part.type === "text" && <ChatbotText text={part} />}
                 </div>
