@@ -9,10 +9,10 @@ import {
   UIMessage,
 } from "ai";
 import { initConnectClientToServer } from "../client/init-connect";
-import { registerClientElicitationHandlers } from "../client/elicitation";
-import { z } from "zod";
 import { registerClientRootsHandlers } from "../client/roots";
 import { convertToZodSchema } from "@/lib/utils";
+import { createClient } from "@/lib/supabase/server";
+import { registerClientElicitationHandlers } from "../client/elicitation";
 
 class MCPHost {
   async handleRequest(req: Request) {
@@ -21,21 +21,46 @@ class MCPHost {
       model,
       webSearch,
       sessionId,
+      conversationId: cId,
     }: {
       messages: UIMessage[];
       model: GroqChatModelId;
       webSearch: boolean;
       sessionId: string;
+      conversationId?: string;
     } = await req.json();
+
+    const supabase = await createClient();
+    const { data: user } = await supabase.auth.getUser();
+
+    let conversationId = cId;
+
+    // save conversation to database if It is a new conversation
+    if (!cId) {
+      const { data, error } = await supabase
+        .from("conversations")
+        .insert({
+          user_id: user.user?.id,
+          title: messages[0].parts
+            .find((part) => part.type === "text")
+            ?.text.slice(0, 100),
+        })
+        .select()
+        .single();
+
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      conversationId = data.id;
+    }
 
     return createUIMessageStreamResponse({
       stream: createUIMessageStream({
         async execute({ writer }) {
-          console.log("executing in ui message stream");
-
           writer.write({
-            type: "data-message",
-            data: { content: "Hello" },
+            type: "data-conversation-id",
+            data: { content: conversationId },
           });
 
           const mcpClientInstance = await initConnectClientToServer(sessionId);
