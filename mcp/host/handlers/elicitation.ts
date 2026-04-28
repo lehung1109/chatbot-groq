@@ -11,12 +11,26 @@ export const processFormElicitation = async (
   writer: UIMessageStreamWriter,
   supabase: SupabaseClient,
 ): Promise<ElicitResult> => {
-  const id = crypto.randomUUID();
+  // save elicitation state to database
+  const { data: elicitationData, error: saveElicitationError } = await supabase
+    .from("elicitation_state")
+    .insert({
+      state: "waiting_approval",
+    })
+    .select()
+    .single();
+
+  if (saveElicitationError) {
+    throw new Error(saveElicitationError.message);
+  }
+
+  const elicitationId = elicitationData.id;
+
   writer.write({
     type: "data-elicitation",
     data: {
       ...requestParams,
-      id,
+      elicitationId,
     },
   });
 
@@ -25,7 +39,10 @@ export const processFormElicitation = async (
   let error: Error | undefined;
 
   try {
-    const data = await elicitationStore.waitElicitation(id, supabase);
+    const data = await elicitationStore.waitElicitation(
+      elicitationId,
+      supabase,
+    );
 
     action = data.action;
     channel = data.channel;
