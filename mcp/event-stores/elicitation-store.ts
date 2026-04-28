@@ -1,8 +1,11 @@
-import { SupabaseClient } from "@supabase/supabase-js";
+import { RealtimeChannel, SupabaseClient } from "@supabase/supabase-js";
 
 class ElicitationStore {
   async waitElicitation(elicitationId: string, supabase: SupabaseClient) {
-    return new Promise((resolve, reject) => {
+    return new Promise<{
+      action: "accept" | "decline";
+      channel: RealtimeChannel;
+    }>((resolve, reject) => {
       const timeout = setTimeout(() => {
         reject(new Error("Elicitation timed out after 60 seconds"));
       }, 60000);
@@ -17,11 +20,17 @@ class ElicitationStore {
         },
         (payload) => {
           if (payload.new.state === "approved") {
-            resolve(payload.new);
+            resolve({
+              action: "accept",
+              channel,
+            });
           } else if (payload.new.state === "rejected") {
-            reject("Elicitation rejected");
+            resolve({
+              action: "decline",
+              channel,
+            });
           } else {
-            reject("Elicitation state unknown");
+            reject(new Error("Elicitation state unknown"));
           }
 
           channel.unsubscribe();
@@ -33,4 +42,6 @@ class ElicitationStore {
   }
 }
 
-export default new ElicitationStore();
+const elicitationStore = new ElicitationStore();
+
+export default elicitationStore;

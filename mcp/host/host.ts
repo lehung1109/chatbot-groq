@@ -89,7 +89,11 @@ class MCPHost {
 
           const mcpClientInstance = await initConnectClientToServer(sessionId);
 
-          registerClientElicitationHandlers(mcpClientInstance, writer);
+          registerClientElicitationHandlers(
+            mcpClientInstance,
+            writer,
+            supabase,
+          );
           registerClientRootsHandlers(mcpClientInstance, writer);
 
           const tools = await mcpClientInstance.listTools();

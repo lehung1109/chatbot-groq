@@ -1,21 +1,17 @@
-import {
-  addElicitation,
-  rejectElicitation,
-} from "@/mcp/client/elicitation-store";
+import elicitationStore from "@/mcp/event-stores/elicitation-store";
 import {
   ElicitRequestFormParams,
   ElicitResult,
 } from "@modelcontextprotocol/client";
+import { SupabaseClient } from "@supabase/supabase-js";
 import { UIMessageStreamWriter } from "ai";
 
 export const processFormElicitation = async (
   requestParams: ElicitRequestFormParams,
   writer: UIMessageStreamWriter,
+  supabase: SupabaseClient,
 ): Promise<ElicitResult> => {
   const id = crypto.randomUUID();
-  console.log("Processing form elicitation in host...");
-
-  console.log("Writing elicitation to writer");
   writer.write({
     type: "data-elicitation",
     data: {
@@ -23,31 +19,16 @@ export const processFormElicitation = async (
       id,
     },
   });
-  console.log("Elicitation written to writer");
 
-  console.log("Create request elicitation promise to user");
-  const requestElicitation = new Promise<ElicitResult>((resolve, reject) => {
-    // add elicitation to store
-    console.log("Adding elicitation to store...");
-    addElicitation(id, resolve, reject);
-    console.log("Elicitation added to store");
+  const { action, channel } = await elicitationStore.waitElicitation(
+    id,
+    supabase,
+  );
 
-    setTimeout(() => {
-      writer.write({
-        type: "data-elicitation",
-        data: {
-          id,
-          error: "Elicitation timed out",
-        },
-      });
+  channel.unsubscribe();
+  supabase.removeChannel(channel);
 
-      rejectElicitation(id, new Error("Elicitation timed out"));
-    }, 6000);
-  });
-
-  console.log("Wait for user response");
-  const userResponse = await requestElicitation;
-  console.log("User response received ", userResponse);
-
-  return userResponse;
+  return {
+    action,
+  };
 };
