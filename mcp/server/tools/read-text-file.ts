@@ -14,16 +14,13 @@ export const registerReadTextFileTool = (server: McpServer) => {
       }),
     },
     async ({ filePath }, ctx): Promise<CallToolResult> => {
-      console.log("Read text file tool called with file: ", filePath);
       await server.sendLoggingMessage({
         level: "info",
         data: `Read text file tool called with file: ${filePath}`,
       });
 
-      console.log("Asserting path in roots: ", filePath);
       await assertPathInRoots(filePath, server);
 
-      console.log("Reading file content: ", filePath);
       const fileContent = await fs.readFile(filePath, "utf8");
 
       return { content: [{ type: "text", text: fileContent }] };

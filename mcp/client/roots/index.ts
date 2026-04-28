@@ -5,9 +5,7 @@ export const registerClientRootsHandlers = (
   client: Client,
   writer: UIMessageStreamWriter,
 ) => {
-  console.log("Registering client roots handlers...");
   client.setRequestHandler("roots/list", async (request, extra) => {
-    console.log("listen roots list request on client");
     return {
       roots: [
         {
@@ -17,5 +15,4 @@ export const registerClientRootsHandlers = (
       ],
     };
   });
-  console.log("Client roots handlers registered");
 };

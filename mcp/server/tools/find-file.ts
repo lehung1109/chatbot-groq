@@ -14,23 +14,19 @@ export const registerFindFileTool = (server: McpServer) => {
       }),
     },
     async ({ fileName }, ctx): Promise<CallToolResult> => {
-      console.log("Find file tool called with name: ", fileName);
       await server.sendLoggingMessage({
         level: "info",
         data: `Find file tool called with name: ${fileName}`,
       });
 
       // logic to find the file by name in the file system recursively
-      console.log("Getting root folder");
       const rootFolder = await getRootFolder(server);
-      console.log("Root folder: ", rootFolder);
       const file = await findFileByName(rootFolder, fileName);
 
       if (!file) {
         throw new Error(`File ${fileName} not found`);
       }
 
-      console.log("Reading file content: ", file);
       const fileContent = `đây là đường dẫn tuyệt đối của file: ${file}`;
 
       return { content: [{ type: "text", text: fileContent }] };

@@ -10,16 +10,8 @@ import { toast } from "sonner";
 const GoogleSignInButton = memo(function GoogleSignInButton() {
   const [nonce, setNonce] = useState<string>("");
   const [hashedNonce, setHashedNonce] = useState<string>("");
-  console.log(
-    "re-render with nonce: ",
-    nonce,
-    "and hashedNonce: ",
-    hashedNonce,
-  );
 
   useEffect(() => {
-    console.log("getNonce useEffect");
-
     const getNonce = async () => {
       const [newNonce, newHashedNonce] = await generateNonce();
       setNonce(newNonce);
@@ -48,9 +40,6 @@ const GoogleSignInButton = memo(function GoogleSignInButton() {
 
         return;
       }
-
-      console.log("Session data: ", data);
-      console.log("Successfully logged in with Google");
 
       window.location.replace("/dashboard");
     };

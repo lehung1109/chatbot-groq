@@ -18,15 +18,7 @@ export const postHandler = async (req: NextRequest) => {
     sessionId ? transports[sessionId] : undefined;
   const json = await req.json();
 
-  if (sessionId) {
-    console.log(`Received MCP request for session: ${sessionId}`);
-  } else {
-    console.log("Request body:", json);
-  }
-
   if (sessionId && !transports[sessionId]) {
-    console.log(`Session ${sessionId} not found`);
-
     return Response.json(
       {
         jsonrpc: "2.0",
@@ -43,8 +35,6 @@ export const postHandler = async (req: NextRequest) => {
   }
 
   if (!isInitializeRequest(json) && !sessionId) {
-    console.log("Received non-initialize request and missing session ID");
-
     return Response.json(
       {
         jsonrpc: "2.0",
@@ -67,8 +57,6 @@ export const postHandler = async (req: NextRequest) => {
       return await transport.handleRequest(req, { parsedBody: json });
     }
 
-    console.log("Initializing new transport server");
-
     transport ??= new WebStandardStreamableHTTPServerTransport({
       sessionIdGenerator: () => randomUUID(),
       onsessioninitialized: (sessionId) => {
@@ -85,12 +73,7 @@ export const postHandler = async (req: NextRequest) => {
       eventStore: new InMemoryEventStore(),
     });
 
-    console.log("Transport Server initialized");
-
-    console.log("Connecting transport server to mcp server instance");
-
     await mcpServerInstance.connect(transport);
-    console.log("Connected transport server to mcp server instance");
 
     return await transport.handleRequest(req, { parsedBody: json });
   } catch (error) {

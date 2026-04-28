@@ -3,8 +3,6 @@ import { StreamableHTTPClientTransport } from "@modelcontextprotocol/client";
 import { createClientInstance } from "./create-client-instance";
 
 export const initConnectClientToServer = async (sessionId?: string) => {
-  console.log("Initializing connection to mcp server...");
-
   let client = sessionId ? clientInstances[sessionId] : undefined;
 
   if (client) {
@@ -28,8 +26,6 @@ export const initConnectClientToServer = async (sessionId?: string) => {
   }
 
   clientInstances[transport.sessionId] = client;
-
-  console.log(`Client connected to server for session ${transport.sessionId}`);
 
   return client;
 };
