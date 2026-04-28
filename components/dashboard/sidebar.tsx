@@ -6,6 +6,7 @@ import {
   Layers3,
   Siren,
   ShieldAlert,
+  Clock,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -18,6 +19,7 @@ const navItems = [
   { label: "Alerts", icon: Siren },
   { label: "Runbooks", icon: BookOpenText },
   { label: "Postmortems", icon: FileText },
+  { label: "History", icon: Clock, href: "/history" },
 ];
 
 export function Sidebar() {
@@ -60,9 +62,10 @@ export function Sidebar() {
         </Card>
 
         <nav className="space-y-1">
-          {navItems.map(({ label, icon: Icon, active }) => (
-            <button
+          {navItems.map(({ label, icon: Icon, active, href }) => (
+            <a
               key={label}
+              href={href}
               className={
                 active
                   ? "flex w-full items-center gap-3 rounded-xl bg-primary px-3 py-2.5 text-sm font-medium text-primary-foreground"
@@ -71,7 +74,7 @@ export function Sidebar() {
             >
               <Icon className="h-4 w-4" />
               {label}
-            </button>
+            </a>
           ))}
         </nav>
       </div>
