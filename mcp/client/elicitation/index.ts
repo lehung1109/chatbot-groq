@@ -25,5 +25,4 @@ export const registerClientElicitationHandlers = (
 
     return result;
   });
-  console.log("Client elicitation handlers registered");
 };
