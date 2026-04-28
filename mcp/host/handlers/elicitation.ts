@@ -3,7 +3,7 @@ import {
   ElicitRequestFormParams,
   ElicitResult,
 } from "@modelcontextprotocol/client";
-import { SupabaseClient } from "@supabase/supabase-js";
+import { RealtimeChannel, SupabaseClient } from "@supabase/supabase-js";
 import { UIMessageStreamWriter } from "ai";
 
 export const processFormElicitation = async (
@@ -20,15 +20,27 @@ export const processFormElicitation = async (
     },
   });
 
-  const { action, channel } = await elicitationStore.waitElicitation(
-    id,
-    supabase,
-  );
+  let action: "accept" | "decline";
+  let channel: RealtimeChannel | undefined;
+  let error: Error | undefined;
 
-  channel.unsubscribe();
-  supabase.removeChannel(channel);
+  try {
+    const data = await elicitationStore.waitElicitation(id, supabase);
+
+    action = data.action;
+    channel = data.channel;
+  } catch (error) {
+    error = error as Error;
+    action = "decline";
+  }
+
+  if (channel) {
+    channel.unsubscribe();
+    supabase.removeChannel(channel);
+  }
 
   return {
     action,
+    error: error?.message,
   };
 };

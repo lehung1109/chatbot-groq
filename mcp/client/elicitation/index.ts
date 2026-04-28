@@ -8,9 +8,7 @@ export const registerClientElicitationHandlers = (
   writer: UIMessageStreamWriter,
   supabase: SupabaseClient,
 ) => {
-  console.log("Registering client elicitation handlers...");
   client.setRequestHandler("elicitation/create", async (request, extra) => {
-    console.log("Processing form elicitation...");
     const mode = request.params.mode;
 
     if (mode !== "form") {
@@ -23,7 +21,6 @@ export const registerClientElicitationHandlers = (
       supabase,
     );
 
-    console.log("Form elicitation processed");
     return result;
   });
   console.log("Client elicitation handlers registered");
