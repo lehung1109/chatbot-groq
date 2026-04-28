@@ -96,15 +96,12 @@ class MCPHost {
 
           const tools = await mcpClientInstance.listTools();
 
-          console.log("Tools: ", tools);
-
           const result = streamText({
             model: groq(model),
             messages: await convertToModelMessages(messages),
             stopWhen: stepCountIs(5),
             tools: Object.fromEntries(
               tools.tools.map((tool) => {
-                console.log("Tool: ", tool.inputSchema);
                 return [
                   tool.name,
                   {
