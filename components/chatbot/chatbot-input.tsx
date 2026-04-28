@@ -28,7 +28,7 @@ export interface ChatbotInputProps {
 const ChatbotInput = ({ models }: ChatbotInputProps) => {
   const { dispatch, state } = useChatbot();
   const { sendMessage } = useAIActions();
-  const { text, webSearch, selectedModel } = state || {};
+  const { text, webSearch, selectedModel, conversationId } = state || {};
 
   const handleSubmit = (message: PromptInputMessage) => {
     const hasText = Boolean(message.text);
@@ -54,6 +54,7 @@ const ChatbotInput = ({ models }: ChatbotInputProps) => {
         body: {
           model: selectedModel,
           webSearch: webSearch,
+          conversationId: conversationId,
         },
       },
     );
