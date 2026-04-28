@@ -56,6 +56,24 @@ class MCPHost {
       conversationId = data.id;
     }
 
+    // save message user
+    const { error: userMessageError, data: userMessageData } = await supabase
+      .from("messages")
+      .insert({
+        conversation_id: conversationId,
+        role: "user",
+        content: messages[messages.length - 1],
+        status,
+      })
+      .select()
+      .single();
+
+    if (userMessageError) {
+      throw new Error(userMessageError.message);
+    }
+
+    const userMessageId = userMessageData.id;
+
     return createUIMessageStreamResponse({
       stream: createUIMessageStream({
         async execute({ writer }) {
@@ -122,16 +140,13 @@ class MCPHost {
           writer.merge(messageStream);
         },
         onFinish: async ({ responseMessage }) => {
-          const { error } = await supabase
-            .from("messages")
-            .insert({
-              conversation_id: conversationId,
-              role: "assistant",
-              content: responseMessage,
-              status,
-            })
-            .select()
-            .single();
+          const { error } = await supabase.from("messages").insert({
+            conversation_id: conversationId,
+            role: "assistant",
+            content: responseMessage,
+            status,
+            response_to: userMessageId,
+          });
 
           if (error) {
             throw new Error(error.message);
