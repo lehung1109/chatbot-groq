@@ -34,6 +34,7 @@ class MCPHost {
     const { data: user } = await supabase.auth.getUser();
 
     let conversationId = cId;
+    let status = "completed";
 
     // save conversation to database if It is a new conversation
     if (!cId) {
@@ -119,6 +120,22 @@ class MCPHost {
           });
 
           writer.merge(messageStream);
+        },
+        onFinish: async ({ responseMessage }) => {
+          const { error } = await supabase
+            .from("messages")
+            .insert({
+              conversation_id: conversationId,
+              role: "assistant",
+              content: responseMessage,
+              status,
+            })
+            .select()
+            .single();
+
+          if (error) {
+            throw new Error(error.message);
+          }
         },
       }),
     });
