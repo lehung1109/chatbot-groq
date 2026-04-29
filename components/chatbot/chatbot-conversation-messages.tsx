@@ -14,7 +14,7 @@ const ChatbotConversationMessages = () => {
   const { error, status } = useChatStatusContext();
   const errorMessage = getErrorMessage(error);
 
-  console.log(messages?.at(-1)?.parts?.[0]);
+  console.log("ChatbotConversationMessages re-render");
 
   return (
     <>

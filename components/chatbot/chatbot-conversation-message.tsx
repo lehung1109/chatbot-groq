@@ -29,12 +29,18 @@ const ChatbotConversationMessage = memo(function ChatbotConversationMessage({
   role,
   parts,
 }: UIMessage<unknown, DataTypes>) {
+  console.log(`ChatbotConversationMessage with id ${id} re-render`);
+
   return (
     <Message from={role} key={`${id}`}>
       <MessageBranch defaultBranch={0} key={id}>
         <MessageBranchContent>
           <MessageContent>
             {parts.map((part, partIndex) => {
+              if (part.type === "reasoning") {
+                console.log(part.text);
+              }
+
               return (
                 <div key={`${id}-${partIndex}`}>
                   {part.type === "source-url" && (
