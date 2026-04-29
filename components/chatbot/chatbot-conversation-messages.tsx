@@ -1,13 +1,13 @@
 "use client";
 
-import { useAIState } from "@/providers/ai-provider";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertTriangleIcon } from "lucide-react";
 import ChatbotConversationMessage from "./chatbot-conversation-message";
 import { getErrorMessage } from "@/lib/utils";
+import { useChat } from "@ai-sdk/react";
 
 const ChatbotConversationMessages = () => {
-  const { messages, error, status } = useAIState();
+  const { messages, error, status } = useChat();
   const errorMessage = getErrorMessage(error);
 
   return (
