@@ -19,7 +19,7 @@ import ChatbotInputSearch from "./chatbot-input-search";
 import ChatbotModelSelector from "./chatbot-model-selector";
 import ChatbotSubmitButton from "./chatbot-submit-button";
 import { GroqChatModelId } from "@/types/groq";
-import { useChat } from "@ai-sdk/react";
+import { useChatActionsContext } from "@/providers/ai-provider";
 
 export interface ChatbotInputProps {
   models: GroqChatModelId[];
@@ -31,7 +31,7 @@ const ChatbotInput = ({ models }: ChatbotInputProps) => {
   const selectedModel = useChatbotStore((state) => state.selectedModel);
   const conversationId = useChatbotStore((state) => state.conversationId);
   const setText = useChatbotStore((state) => state.setText);
-  const { sendMessage } = useChat();
+  const { sendMessage } = useChatActionsContext();
 
   const handleSubmit = (message: PromptInputMessage) => {
     const hasText = Boolean(message.text);
@@ -48,7 +48,7 @@ const ChatbotInput = ({ models }: ChatbotInputProps) => {
     }
 
     // send user message
-    sendMessage?.(
+    sendMessage(
       {
         text: message.text || "Sent with attachments",
         files: message.files,

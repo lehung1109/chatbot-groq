@@ -4,11 +4,17 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertTriangleIcon } from "lucide-react";
 import ChatbotConversationMessage from "./chatbot-conversation-message";
 import { getErrorMessage } from "@/lib/utils";
-import { useChat } from "@ai-sdk/react";
+import {
+  useChatMessagesContext,
+  useChatStatusContext,
+} from "@/providers/ai-provider";
 
 const ChatbotConversationMessages = () => {
-  const { messages, error, status } = useChat();
+  const { messages } = useChatMessagesContext();
+  const { error, status } = useChatStatusContext();
   const errorMessage = getErrorMessage(error);
+
+  console.log(messages?.at(-1)?.parts?.[0]);
 
   return (
     <>

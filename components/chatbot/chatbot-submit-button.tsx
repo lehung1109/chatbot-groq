@@ -1,10 +1,10 @@
 import { useChatbotStore } from "@/providers/chatbot-provider";
 import { PromptInputSubmit } from "../ai-elements/prompt-input";
-import { useChat } from "@ai-sdk/react";
+import { useChatStatusContext } from "@/providers/ai-provider";
 
 const ChatbotSubmitButton = () => {
   const text = useChatbotStore((state) => state.text);
-  const { status } = useChat();
+  const { status } = useChatStatusContext();
 
   const isSubmitDisabled = !(text?.trim() || status) || status === "streaming";
 
