@@ -12,7 +12,7 @@ import {
   PromptInputTools,
 } from "../ai-elements/prompt-input";
 import PromptInputAttachmentsDisplay from "./attachment-display";
-import { ChatbotActionType, useChatbot } from "@/providers/chatbot-provider";
+import { useChatbotStore } from "@/providers/chatbot-provider";
 import { toast } from "sonner";
 import ChatbotSpeech from "./chatbot-speech";
 import ChatbotInputSearch from "./chatbot-input-search";
@@ -26,9 +26,15 @@ export interface ChatbotInputProps {
 }
 
 const ChatbotInput = ({ models }: ChatbotInputProps) => {
-  const { dispatch, state } = useChatbot();
+  const { text, webSearch, selectedModel, conversationId, setText } =
+    useChatbotStore((state) => ({
+      text: state.text,
+      webSearch: state.webSearch,
+      selectedModel: state.selectedModel,
+      conversationId: state.conversationId,
+      setText: state.setText,
+    }));
   const { sendMessage } = useChat();
-  const { text, webSearch, selectedModel, conversationId } = state || {};
 
   const handleSubmit = (message: PromptInputMessage) => {
     const hasText = Boolean(message.text);
@@ -60,17 +66,11 @@ const ChatbotInput = ({ models }: ChatbotInputProps) => {
     );
 
     // reset text
-    dispatch?.({
-      type: ChatbotActionType.SET_TEXT,
-      payload: "",
-    });
+    setText("");
   };
 
   const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    dispatch?.({
-      type: ChatbotActionType.SET_TEXT,
-      payload: event.target.value,
-    });
+    setText(event.target.value);
   };
 
   return (

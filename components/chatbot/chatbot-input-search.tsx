@@ -1,16 +1,15 @@
 import { GlobeIcon } from "lucide-react";
 import { PromptInputButton } from "../ai-elements/prompt-input";
-import { ChatbotActionType, useChatbot } from "@/providers/chatbot-provider";
+import { useChatbotStore } from "@/providers/chatbot-provider";
 
 const ChatbotInputSearch = () => {
-  const { dispatch, state } = useChatbot();
-  const { webSearch } = state || {};
+  const { setWebSearch, webSearch } = useChatbotStore((state) => ({
+    setWebSearch: state.setWebSearch,
+    webSearch: state.webSearch,
+  }));
 
   const toggleWebSearch = () => {
-    dispatch?.({
-      type: ChatbotActionType.SET_WEB_SEARCH,
-      payload: !webSearch,
-    });
+    setWebSearch(!webSearch);
   };
 
   return (

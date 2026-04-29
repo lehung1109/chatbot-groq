@@ -1,4 +1,4 @@
-import { ChatbotActionType, useChatbot } from "@/providers/chatbot-provider";
+import { useChatbotStore } from "@/providers/chatbot-provider";
 import { useEffect } from "react";
 
 const ChatbotConversationId = ({
@@ -6,13 +6,12 @@ const ChatbotConversationId = ({
 }: {
   conversationId: string;
 }) => {
-  const { dispatch } = useChatbot();
+  const { setConversationId } = useChatbotStore((state) => ({
+    setConversationId: state.setConversationId,
+  }));
 
   useEffect(() => {
-    dispatch?.({
-      type: ChatbotActionType.SET_CONVERSATION_ID,
-      payload: conversationId,
-    });
+    setConversationId(conversationId);
   }, [conversationId]);
 
   return <></>;

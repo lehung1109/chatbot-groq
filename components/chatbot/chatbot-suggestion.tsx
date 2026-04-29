@@ -1,4 +1,4 @@
-import { useChatbot } from "@/providers/chatbot-provider";
+import { useChatbotStore } from "@/providers/chatbot-provider";
 import { Suggestions } from "../ai-elements/suggestion";
 import SuggestionItem from "./suggestion-item";
 import { useChat } from "@ai-sdk/react";
@@ -8,8 +8,10 @@ export interface ChatbotSuggestionProps {
 }
 
 const ChatbotSuggestion = ({ suggestions }: ChatbotSuggestionProps) => {
-  const { state } = useChatbot();
-  const { selectedModel, webSearch } = state || {};
+  const { selectedModel, webSearch } = useChatbotStore((state) => ({
+    selectedModel: state.selectedModel,
+    webSearch: state.webSearch,
+  }));
   const { sendMessage } = useChat();
 
   const handleSuggestionClick = (suggestion: string) => {

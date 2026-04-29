@@ -1,15 +1,14 @@
-import { ChatbotActionType, useChatbot } from "@/providers/chatbot-provider";
+import { useChatbotStore } from "@/providers/chatbot-provider";
 import { SpeechInput } from "../ai-elements/speech-input";
 
 const ChatbotSpeech = () => {
-  const { dispatch, state } = useChatbot();
-  const { text } = state || {};
+  const { text, setText } = useChatbotStore((state) => ({
+    text: state.text,
+    setText: state.setText,
+  }));
 
   const handleTranscriptionChange = (transcript: string) => {
-    dispatch?.({
-      type: ChatbotActionType.SET_TEXT,
-      payload: text ? `${text} ${transcript}` : transcript,
-    });
+    setText(text ? `${text} ${transcript}` : transcript);
   };
 
   return (

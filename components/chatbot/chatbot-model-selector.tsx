@@ -11,7 +11,7 @@ import {
 } from "../ai-elements/model-selector";
 import { PromptInputButton } from "../ai-elements/prompt-input";
 import ModelItem from "./model-item";
-import { ChatbotActionType, useChatbot } from "@/providers/chatbot-provider";
+import { useChatbotStore } from "@/providers/chatbot-provider";
 import { GroqChatModelId } from "@/types/groq";
 
 export interface ChatbotModelSelectorProps {
@@ -20,17 +20,16 @@ export interface ChatbotModelSelectorProps {
 
 const ChatbotModelSelector = ({ models }: ChatbotModelSelectorProps) => {
   const [modelSelectorOpen, setModelSelectorOpen] = useState(false);
-  const { dispatch, state } = useChatbot();
-  const { selectedModel } = state || {};
+  const { selectedModel, setSelectedModel } = useChatbotStore((state) => ({
+    selectedModel: state.selectedModel,
+    setSelectedModel: state.setSelectedModel,
+  }));
 
   const handleModelSelect = (modelId: string) => {
     const selected = models.find((m) => m === modelId);
 
     if (selected) {
-      dispatch?.({
-        type: ChatbotActionType.SET_SELECTED_MODEL,
-        payload: selected,
-      });
+      setSelectedModel(selected);
     }
 
     setModelSelectorOpen(false);
