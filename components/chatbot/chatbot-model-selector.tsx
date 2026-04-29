@@ -20,10 +20,8 @@ export interface ChatbotModelSelectorProps {
 
 const ChatbotModelSelector = ({ models }: ChatbotModelSelectorProps) => {
   const [modelSelectorOpen, setModelSelectorOpen] = useState(false);
-  const { selectedModel, setSelectedModel } = useChatbotStore((state) => ({
-    selectedModel: state.selectedModel,
-    setSelectedModel: state.setSelectedModel,
-  }));
+  const selectedModel = useChatbotStore((state) => state.selectedModel);
+  const setSelectedModel = useChatbotStore((state) => state.setSelectedModel);
 
   const handleModelSelect = (modelId: string) => {
     const selected = models.find((m) => m === modelId);

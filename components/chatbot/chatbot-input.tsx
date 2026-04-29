@@ -26,14 +26,11 @@ export interface ChatbotInputProps {
 }
 
 const ChatbotInput = ({ models }: ChatbotInputProps) => {
-  const { text, webSearch, selectedModel, conversationId, setText } =
-    useChatbotStore((state) => ({
-      text: state.text,
-      webSearch: state.webSearch,
-      selectedModel: state.selectedModel,
-      conversationId: state.conversationId,
-      setText: state.setText,
-    }));
+  const text = useChatbotStore((state) => state.text);
+  const webSearch = useChatbotStore((state) => state.webSearch);
+  const selectedModel = useChatbotStore((state) => state.selectedModel);
+  const conversationId = useChatbotStore((state) => state.conversationId);
+  const setText = useChatbotStore((state) => state.setText);
   const { sendMessage } = useChat();
 
   const handleSubmit = (message: PromptInputMessage) => {

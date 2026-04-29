@@ -6,13 +6,11 @@ const ChatbotConversationId = ({
 }: {
   conversationId: string;
 }) => {
-  const { setConversationId } = useChatbotStore((state) => ({
-    setConversationId: state.setConversationId,
-  }));
+  const setConversationId = useChatbotStore((state) => state.setConversationId);
 
   useEffect(() => {
     setConversationId(conversationId);
-  }, [conversationId]);
+  }, [conversationId, setConversationId]);
 
   return <></>;
 };

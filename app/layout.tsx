@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/providers/theme-provider";
-import { ChatbotProvider } from "@/providers/chatbot-provider";
-import { AIProvider } from "@/providers/ai-provider";
+import { ChatbotStoreProvider } from "@/providers/chatbot-provider";
 import { Geist } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -32,9 +31,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <TooltipProvider>
-            <AIProvider>
-              <ChatbotProvider>{children}</ChatbotProvider>
-            </AIProvider>
+            <ChatbotStoreProvider>{children}</ChatbotStoreProvider>
           </TooltipProvider>
         </ThemeProvider>
 

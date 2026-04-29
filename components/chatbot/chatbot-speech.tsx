@@ -2,10 +2,8 @@ import { useChatbotStore } from "@/providers/chatbot-provider";
 import { SpeechInput } from "../ai-elements/speech-input";
 
 const ChatbotSpeech = () => {
-  const { text, setText } = useChatbotStore((state) => ({
-    text: state.text,
-    setText: state.setText,
-  }));
+  const text = useChatbotStore((state) => state.text);
+  const setText = useChatbotStore((state) => state.setText);
 
   const handleTranscriptionChange = (transcript: string) => {
     setText(text ? `${text} ${transcript}` : transcript);

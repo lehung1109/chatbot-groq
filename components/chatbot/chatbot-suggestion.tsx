@@ -8,10 +8,8 @@ export interface ChatbotSuggestionProps {
 }
 
 const ChatbotSuggestion = ({ suggestions }: ChatbotSuggestionProps) => {
-  const { selectedModel, webSearch } = useChatbotStore((state) => ({
-    selectedModel: state.selectedModel,
-    webSearch: state.webSearch,
-  }));
+  const selectedModel = useChatbotStore((state) => state.selectedModel);
+  const webSearch = useChatbotStore((state) => state.webSearch);
   const { sendMessage } = useChat();
 
   const handleSuggestionClick = (suggestion: string) => {

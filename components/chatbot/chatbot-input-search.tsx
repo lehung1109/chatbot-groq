@@ -3,10 +3,8 @@ import { PromptInputButton } from "../ai-elements/prompt-input";
 import { useChatbotStore } from "@/providers/chatbot-provider";
 
 const ChatbotInputSearch = () => {
-  const { setWebSearch, webSearch } = useChatbotStore((state) => ({
-    setWebSearch: state.setWebSearch,
-    webSearch: state.webSearch,
-  }));
+  const setWebSearch = useChatbotStore((state) => state.setWebSearch);
+  const webSearch = useChatbotStore((state) => state.webSearch);
 
   const toggleWebSearch = () => {
     setWebSearch(!webSearch);
