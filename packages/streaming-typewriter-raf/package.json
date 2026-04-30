@@ -1,0 +1,33 @@
+{
+  "name": "@heroitvn/streaming-typewriter-raf",
+  "version": "0.1.0",
+  "description": "React typewriter component optimized for streaming text with requestAnimationFrame",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "clean": "rimraf dist"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.14",
+    "rimraf": "^6.0.1",
+    "typescript": "^6.0.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

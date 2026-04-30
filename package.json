@@ -2,11 +2,15 @@
   "name": "chatbot-groq",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "build:packages": "npm run build --workspaces --if-present"
   },
   "dependencies": {
     "@ai-sdk/groq": "^3.0.35",
