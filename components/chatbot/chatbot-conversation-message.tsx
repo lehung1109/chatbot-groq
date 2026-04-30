@@ -67,7 +67,9 @@ const ChatbotConversationMessage = memo(function ChatbotConversationMessage({
                       />
                     )}
 
-                  {part.type === "text" && <ChatbotText text={part} />}
+                  {part.type === "text" && (
+                    <ChatbotText text={part} status={part.state ?? "done"} />
+                  )}
                 </div>
               );
             })}
