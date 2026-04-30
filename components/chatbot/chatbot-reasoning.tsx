@@ -4,7 +4,6 @@ import {
   ReasoningContent,
   ReasoningTrigger,
 } from "../ai-elements/reasoning";
-import { StreamingTypewriterRAF } from "@heroitvn/streaming-typewriter-raf";
 
 interface ChatbotReasoningProps {
   reasoning: ReasoningUIPart;
@@ -15,11 +14,8 @@ const ChatbotReasoning = ({ reasoning }: ChatbotReasoningProps) => {
     <Reasoning isStreaming={reasoning.state === "streaming"}>
       <ReasoningTrigger />
 
-      <ReasoningContent>
-        <StreamingTypewriterRAF
-          text={reasoning.text}
-          status={reasoning.state ?? "streaming"}
-        />
+      <ReasoningContent status={reasoning.state ?? "done"}>
+        {reasoning.text}
       </ReasoningContent>
     </Reasoning>
   );
