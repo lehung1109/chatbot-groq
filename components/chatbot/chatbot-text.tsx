@@ -8,10 +8,7 @@ interface ChatbotTextProps {
 
 const ChatbotText = ({ text, status }: ChatbotTextProps) => {
   return (
-    <MessageResponse
-      isAnimating={status === "streaming"}
-      animated={{ animation: "blurIn" }}
-    >
+    <MessageResponse isAnimating={status === "streaming"}>
       {text.text}
     </MessageResponse>
   );

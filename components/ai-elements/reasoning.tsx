@@ -220,7 +220,6 @@ export const ReasoningContent = memo(
       <Streamdown
         plugins={streamdownPlugins}
         isAnimating={status === "streaming"}
-        animated={{ animation: "blurIn" }}
       >
         {children}
       </Streamdown>

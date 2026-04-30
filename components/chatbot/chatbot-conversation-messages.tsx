@@ -14,8 +14,6 @@ const ChatbotConversationMessages = () => {
   const { error, status } = useChatStatusContext();
   const errorMessage = getErrorMessage(error);
 
-  console.log("ChatbotConversationMessages re-render");
-
   return (
     <>
       {messages?.map((message) => (
