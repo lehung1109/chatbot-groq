@@ -16,7 +16,7 @@ npm i @heroitvn/streaming-typewriter-raf
 ## Usage
 
 ```tsx
-import { StreamingTypewriterRAF } from '@heroitvn/streaming-typewriter-raf';
+import { StreamingTypewriterRAF } from "@heroitvn/streaming-typewriter-raf";
 
 export function Demo() {
   return (
@@ -25,7 +25,6 @@ export function Demo() {
       status="streaming"
       speed={20}
       showCursor
-      className="text-sm"
     />
   );
 }
@@ -36,7 +35,6 @@ export function Demo() {
 - `text`: full streamed text
 - `status`: `'streaming' | 'done'`
 - `speed`: milliseconds per animation step, default `20`
-- `className`: class for the wrapper `<span>`
 - `showCursor`: show the blinking cursor while typing, default `true`
 
 ## Notes

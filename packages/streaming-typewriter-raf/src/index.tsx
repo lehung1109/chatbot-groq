@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 export type StreamingTypewriterRAFProps = {
   text: string;
-  status: 'streaming' | 'done';
+  status: "streaming" | "done";
   speed?: number;
-  className?: string;
   showCursor?: boolean;
 };
 
@@ -12,10 +11,9 @@ export function StreamingTypewriterRAF({
   text,
   status,
   speed = 20,
-  className,
   showCursor = true,
 }: StreamingTypewriterRAFProps) {
-  const [displayedText, setDisplayedText] = useState('');
+  const [displayedText, setDisplayedText] = useState("");
 
   const frameRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number | null>(null);
@@ -44,7 +42,7 @@ export function StreamingTypewriterRAF({
         const charsToAdd = Math.max(1, Math.floor(delta / speed));
         visibleLengthRef.current = Math.min(
           visibleLengthRef.current + charsToAdd,
-          targetText.length
+          targetText.length,
         );
 
         setDisplayedText(targetText.slice(0, visibleLengthRef.current));
@@ -53,7 +51,7 @@ export function StreamingTypewriterRAF({
 
       const shouldKeepRunning =
         visibleLengthRef.current < textRef.current.length ||
-        statusRef.current !== 'done';
+        statusRef.current !== "done";
 
       if (shouldKeepRunning) {
         frameRef.current = requestAnimationFrame(loop);
@@ -67,13 +65,13 @@ export function StreamingTypewriterRAF({
     };
   }, [speed]);
 
-  const isDone = status === 'done' && displayedText.length >= text.length;
+  const isDone = status === "done" && displayedText.length >= text.length;
 
   return (
-    <span className={className}>
+    <>
       {displayedText}
       {showCursor && !isDone && <BlinkCursor />}
-    </span>
+    </>
   );
 }
 
