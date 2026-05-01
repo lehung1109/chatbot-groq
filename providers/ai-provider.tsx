@@ -1,15 +1,8 @@
 "use client";
 
-import {
-  createContext,
-  type ReactNode,
-  useContext,
-  useMemo,
-  useState,
-} from "react";
+import { createContext, type ReactNode, useContext, useMemo } from "react";
 import { useChat, type UseChatHelpers } from "@ai-sdk/react";
 import { type UIMessage } from "ai";
-import { convertProcessSignalToExitCode } from "node:util";
 
 type ChatMessage = UIMessage;
 
@@ -79,11 +72,8 @@ export const useChatActionsContext = () => {
 };
 
 export const AIProvider = ({ children }: AIProviderProps) => {
-  const [messages, setMessages] = useState<UIMessage[]>([]);
   const chat = useChat({
-    onFinish: ({ messages }) => {
-      setMessages(messages);
-    },
+    experimental_throttle: 50,
   });
 
   const actions = useMemo(
@@ -113,10 +103,17 @@ export const AIProvider = ({ children }: AIProviderProps) => {
     [chat.status, chat.error],
   );
 
+  const messages = useMemo(
+    () => ({
+      messages: chat.messages,
+    }),
+    [chat.messages],
+  );
+
   return (
     <ChatActionsContext.Provider value={actions}>
       <ChatStatusContext.Provider value={status}>
-        <ChatMessagesContext.Provider value={{ messages }}>
+        <ChatMessagesContext.Provider value={messages}>
           {children}
         </ChatMessagesContext.Provider>
       </ChatStatusContext.Provider>
