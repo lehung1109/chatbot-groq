@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/providers/theme-provider";
-import { ChatbotStoreProvider } from "@/providers/chatbot-provider";
+import { ChatbotStoreProvider } from "@heroitvn/chatbot-toggle";
 import { Geist } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 
