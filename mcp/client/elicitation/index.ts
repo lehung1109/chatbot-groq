@@ -23,6 +23,8 @@ export const registerClientElicitationHandlers = (
       userMessageId,
     );
 
+    await client.close();
+
     return result;
   });
 };
