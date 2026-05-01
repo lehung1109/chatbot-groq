@@ -5,7 +5,7 @@ import {
   MessageBranch,
   MessageBranchContent,
   MessageContent,
-} from "../ai-elements/message";
+} from "../../../../components/ai-elements/message";
 import ChatbotSource from "./chatbot-source";
 import ChatbotReasoning from "./chatbot-reasoning";
 import ChatbotText from "./chatbot-text";

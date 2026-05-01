@@ -49,8 +49,8 @@ A Next.js chat application that talks to [Groq](https://groq.com/) through the [
 ## Project layout
 
 - `app/api/chat/route.ts` — Groq-backed streaming chat API.
-- `components/chatbot/` — Chat UI (conversation, input, model selector).
-- `types/groq.ts` — Allowed Groq model IDs for the app.
+- `packages/chatbot-toggle/src/chatbot/` — Chat UI components (conversation, input, model selector).
+- `packages/chatbot-toggle/src/types/groq.ts` — Allowed Groq model IDs used by chatbot package.
 
 ## Mermaid: end-to-end flow
 

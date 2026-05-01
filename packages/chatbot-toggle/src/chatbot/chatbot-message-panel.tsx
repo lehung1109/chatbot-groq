@@ -1,6 +1,6 @@
 import ChatbotSuggestion from "./chatbot-suggestion";
 import ChatbotInput from "./chatbot-input";
-import { GroqChatModelId } from "@/types/groq";
+import { GroqChatModelId } from "../types/groq";
 
 export interface ChatbotMessagePanelProps {
   suggestions: string[];

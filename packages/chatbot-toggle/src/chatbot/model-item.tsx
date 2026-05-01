@@ -4,7 +4,7 @@ import {
   ModelSelectorLogo,
   ModelSelectorLogoGroup,
   ModelSelectorName,
-} from "../ai-elements/model-selector";
+} from "../../../../components/ai-elements/model-selector";
 import { CheckIcon } from "lucide-react";
 
 export interface ModelItemProps {

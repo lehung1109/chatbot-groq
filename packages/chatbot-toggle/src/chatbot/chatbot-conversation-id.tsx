@@ -1,4 +1,4 @@
-import { useChatbotStore } from "@/providers/chatbot-provider";
+import { useChatbotStore } from "../providers/chatbot-provider";
 import { useEffect } from "react";
 
 const ChatbotConversationId = ({

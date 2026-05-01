@@ -1,7 +1,7 @@
-import { useChatbotStore } from "@/providers/chatbot-provider";
-import { Suggestions } from "../ai-elements/suggestion";
+import { useChatbotStore } from "../providers/chatbot-provider";
+import { Suggestions } from "../../../../components/ai-elements/suggestion";
 import SuggestionItem from "./suggestion-item";
-import { useChatActionsContext } from "@/providers/ai-provider";
+import { useChatActionsContext } from "../providers/ai-provider";
 
 export interface ChatbotSuggestionProps {
   suggestions: string[];

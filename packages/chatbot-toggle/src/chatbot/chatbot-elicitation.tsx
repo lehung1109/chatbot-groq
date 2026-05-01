@@ -1,6 +1,6 @@
 import type { ElicitRequestFormParams } from "@modelcontextprotocol/client";
-import { Button } from "../ui/button";
-import { useEffect, useState } from "react";
+import { Button } from "../../../../components/ui/button";
+import { useState } from "react";
 
 export interface ChatbotElicitationProps {
   elicitationId: string;

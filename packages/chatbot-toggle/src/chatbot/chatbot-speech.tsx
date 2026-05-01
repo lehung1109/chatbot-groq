@@ -1,5 +1,5 @@
-import { useChatbotStore } from "@/providers/chatbot-provider";
-import { SpeechInput } from "../ai-elements/speech-input";
+import { useChatbotStore } from "../providers/chatbot-provider";
+import { SpeechInput } from "../../../../components/ai-elements/speech-input";
 
 const ChatbotSpeech = () => {
   const text = useChatbotStore((state) => state.text);

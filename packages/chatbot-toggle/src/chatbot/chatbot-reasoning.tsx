@@ -3,7 +3,7 @@ import {
   Reasoning,
   ReasoningContent,
   ReasoningTrigger,
-} from "../ai-elements/reasoning";
+} from "../../../../components/ai-elements/reasoning";
 
 interface ChatbotReasoningProps {
   reasoning: ReasoningUIPart;

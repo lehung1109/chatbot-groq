@@ -8,11 +8,11 @@ import {
   ModelSelectorList,
   ModelSelectorName,
   ModelSelectorTrigger,
-} from "../ai-elements/model-selector";
-import { PromptInputButton } from "../ai-elements/prompt-input";
+} from "../../../../components/ai-elements/model-selector";
+import { PromptInputButton } from "../../../../components/ai-elements/prompt-input";
 import ModelItem from "./model-item";
-import { useChatbotStore } from "@/providers/chatbot-provider";
-import { GroqChatModelId } from "@/types/groq";
+import { useChatbotStore } from "../providers/chatbot-provider";
+import { GroqChatModelId } from "../types/groq";
 
 export interface ChatbotModelSelectorProps {
   models: GroqChatModelId[];

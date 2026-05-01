@@ -1,12 +1,11 @@
 "use client";
 
-import { chatbotSuggestions } from "@/data/chatbot";
+import { chatbotSuggestions } from "../data/chatbot";
 import ChatbotConversation from "./chatbot-conversation";
 import ChatbotMessagePanel from "./chatbot-message-panel";
-import { GroqChatModelId } from "@/types/groq";
+import { GroqChatModelId } from "../types/groq";
 
 const Chatbot = () => {
-  console.log("Chatbot re-render");
   return (
     <div className="relative flex size-full flex-col divide-y overflow-hidden">
       <ChatbotConversation className="h-[50vh] flex-auto" />

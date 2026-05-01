@@ -1,5 +1,5 @@
 import SignOut from "@/components/auth/sign-out-button";
-import ChatbotToggle from "@/components/chatbot/chatbot-toggle";
+import { ChatbotToggle } from "@heroitvn/chatbot-toggle";
 import { Sidebar } from "@/components/dashboard/sidebar";
 import { Button } from "@/components/ui/button";
 import { Bell, Search } from "lucide-react";

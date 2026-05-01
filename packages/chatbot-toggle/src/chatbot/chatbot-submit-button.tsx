@@ -1,6 +1,6 @@
-import { useChatbotStore } from "@/providers/chatbot-provider";
-import { PromptInputSubmit } from "../ai-elements/prompt-input";
-import { useChatStatusContext } from "@/providers/ai-provider";
+import { useChatbotStore } from "../providers/chatbot-provider";
+import { PromptInputSubmit } from "../../../../components/ai-elements/prompt-input";
+import { useChatStatusContext } from "../providers/ai-provider";
 
 const ChatbotSubmitButton = () => {
   const text = useChatbotStore((state) => state.text);

@@ -1,5 +1,5 @@
 import { TextUIPart } from "ai";
-import { MessageResponse } from "../ai-elements/message";
+import { MessageResponse } from "../../../../components/ai-elements/message";
 
 interface ChatbotTextProps {
   text: TextUIPart;

@@ -10,16 +10,16 @@ import {
   PromptInputMessage,
   PromptInputTextarea,
   PromptInputTools,
-} from "../ai-elements/prompt-input";
+} from "../../../../components/ai-elements/prompt-input";
 import PromptInputAttachmentsDisplay from "./attachment-display";
-import { useChatbotStore } from "@/providers/chatbot-provider";
+import { useChatbotStore } from "../providers/chatbot-provider";
 import { toast } from "sonner";
 import ChatbotSpeech from "./chatbot-speech";
 import ChatbotInputSearch from "./chatbot-input-search";
 import ChatbotModelSelector from "./chatbot-model-selector";
 import ChatbotSubmitButton from "./chatbot-submit-button";
-import { GroqChatModelId } from "@/types/groq";
-import { useChatActionsContext } from "@/providers/ai-provider";
+import { GroqChatModelId } from "../types/groq";
+import { useChatActionsContext } from "../providers/ai-provider";
 
 export interface ChatbotInputProps {
   models: GroqChatModelId[];
@@ -47,7 +47,6 @@ const ChatbotInput = ({ models }: ChatbotInputProps) => {
       });
     }
 
-    // send user message
     sendMessage(
       {
         text: message.text || "Sent with attachments",
@@ -62,7 +61,6 @@ const ChatbotInput = ({ models }: ChatbotInputProps) => {
       },
     );
 
-    // reset text
     setText("");
   };
 

@@ -1,13 +1,13 @@
 "use client";
 
-import AIProvider from "@/providers/ai-provider";
-import { Switch } from "../ui/switch";
-import { Label } from "../ui/label";
+import AIProvider from "../providers/ai-provider";
+import { Switch } from "../../../../components/ui/switch";
+import { Label } from "../../../../components/ui/label";
 import { useState } from "react";
 import FloatingChatbot from "./floating-chatbot";
 import Chatbot from "./chatbot";
 
-interface ChatbotToggleProps {
+export interface ChatbotToggleProps {
   isFloat?: boolean;
 }
 
