@@ -8,7 +8,7 @@ class ElicitationStore {
     }>((resolve, reject) => {
       const timeout = setTimeout(() => {
         reject(new Error("Elicitation timed out after 60 seconds"));
-      }, 60000);
+      }, 600000);
 
       const channel = supabase.channel(`elicitation:${elicitationId}`).on(
         "postgres_changes",
