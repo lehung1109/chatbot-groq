@@ -4,6 +4,7 @@ import {
   convertToModelMessages,
   createUIMessageStream,
   createUIMessageStreamResponse,
+  smoothStream,
   stepCountIs,
   streamText,
   UIMessage,
@@ -99,6 +100,8 @@ class MCPHost {
 
           const tools = await mcpClientInstance.listTools();
 
+          const segmenter = new Intl.Segmenter("vi", { granularity: "word" });
+
           const result = streamText({
             model: groq(model),
             messages: await convertToModelMessages(messages),
@@ -124,6 +127,10 @@ class MCPHost {
               }),
             ),
             system: systemPrompt,
+            experimental_transform: smoothStream({
+              delayInMs: 50,
+              chunking: segmenter,
+            }),
           });
 
           const messageStream = result.toUIMessageStream({
