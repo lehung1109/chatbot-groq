@@ -57,7 +57,7 @@ export class InMemoryEventStore implements EventStore {
     let foundLastEvent = false;
 
     // Sort events by eventId for chronological ordering
-    const sortedEvents = [...this.events.entries()].toSorted((a, b) =>
+    const sortedEvents = [...this.events.entries()].sort((a, b) =>
       a[0].localeCompare(b[0]),
     );
 

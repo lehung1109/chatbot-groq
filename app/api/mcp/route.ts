@@ -1,6 +1,8 @@
-import { deleteHandler } from "@/mcp/server/handlers/delete-handler";
-import { getHandler } from "@/mcp/server/handlers/get-handler";
-import { postHandler } from "@/mcp/server/handlers/post-handler";
+import {
+  deleteHandler,
+  getHandler,
+  postHandler,
+} from "@heroitvn/mcp";
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {

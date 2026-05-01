@@ -6,13 +6,15 @@
     "packages/*"
   ],
   "scripts": {
+    "postinstall": "npm run build:packages",
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run build:packages && next build",
     "start": "next start",
     "lint": "eslint",
     "build:packages": "npm run build --workspaces --if-present"
   },
   "dependencies": {
+    "@heroitvn/mcp": "workspace:*",
     "@ai-sdk/groq": "^3.0.35",
     "@ai-sdk/react": "^3.0.170",
     "@cfworker/json-schema": "^4.1.1",

@@ -1,12 +1,9 @@
-import { MCP_SESSION_ID_HEADER } from "@/lib/utils";
-import { headers } from "next/headers";
-import { NextRequest } from "next/server";
+import { MCP_SESSION_ID_HEADER } from "../../constants";
 import { transports } from "../transports";
 import { JSONRPCErrorResponse } from "@modelcontextprotocol/server";
 
-export const deleteHandler = async (req: NextRequest) => {
-  const headersList = await headers();
-  const sessionId = headersList.get(MCP_SESSION_ID_HEADER);
+export const deleteHandler = async (req: Request) => {
+  const sessionId = req.headers.get(MCP_SESSION_ID_HEADER);
 
   if (!sessionId) {
     return Response.json(

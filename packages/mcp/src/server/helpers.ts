@@ -35,13 +35,10 @@ export async function assertPathInRoots(
 
 export const getRootFolder = async (serverInstance: McpServer) => {
   const allowedRoots = await getAllowedFileRoots(serverInstance);
-
-  const rootFolder = allowedRoots.find(
-    (root) => root.name === "My Application",
-  );
+  const rootFolder = allowedRoots[0];
 
   if (!rootFolder) {
-    throw new Error("My Application root folder not found");
+    throw new Error("No file roots registered on the MCP client");
   }
 
   return rootFolder.dir;

@@ -1,17 +1,21 @@
-import { GroqChatModelId } from "@/types/groq";
 import { groq } from "@ai-sdk/groq";
 import { Client } from "@modelcontextprotocol/client";
 import {
-  stepCountIs,
   generateText,
-  UIMessageStreamWriter,
-  ModelMessage,
+  type ModelMessage,
+  stepCountIs,
+  type UIMessageStreamWriter,
 } from "ai";
+
+const DEFAULT_SAMPLING_MODEL = "openai/gpt-oss-120b";
 
 export const registerClientSamplingHandlers = (
   client: Client,
-  writer: UIMessageStreamWriter,
+  _writer: UIMessageStreamWriter,
+  options?: { samplingModel?: string },
 ) => {
+  const samplingModel = options?.samplingModel ?? DEFAULT_SAMPLING_MODEL;
+
   client.setRequestHandler("sampling/createMessage", async (request) => {
     const messageFromServer = request.params.messages.at(-1);
 
@@ -19,7 +23,7 @@ export const registerClientSamplingHandlers = (
       throw new Error("No message from server");
     }
 
-    let content: string = "";
+    let content = "";
 
     if (Array.isArray(messageFromServer.content)) {
       messageFromServer.content.forEach((part) => {
@@ -41,17 +45,17 @@ export const registerClientSamplingHandlers = (
     };
 
     const result = await generateText({
-      model: groq(GroqChatModelId.GPT_OSS_120B),
+      model: groq(samplingModel),
       messages: [message],
       stopWhen: stepCountIs(5),
       system: "You are a helpful assistant that can answer questions",
     });
 
     return {
-      model: GroqChatModelId.GPT_OSS_120B,
-      role: "assistant",
+      model: samplingModel,
+      role: "assistant" as const,
       content: {
-        type: "text",
+        type: "text" as const,
         text: result.text,
       },
     };

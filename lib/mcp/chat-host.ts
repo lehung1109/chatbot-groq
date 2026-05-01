@@ -1,4 +1,3 @@
-import { GroqChatModelId } from "@/types/groq";
 import { groq } from "@ai-sdk/groq";
 import {
   convertToModelMessages,
@@ -7,13 +6,17 @@ import {
   smoothStream,
   stepCountIs,
   streamText,
-  UIMessage,
+  type UIMessage,
 } from "ai";
-import { initConnectClientToServer } from "../client/init-connect";
-import { registerClientRootsHandlers } from "../client/roots";
-import { convertToZodSchema } from "@/lib/utils";
+import { pathToFileURL } from "node:url";
+import {
+  convertToZodSchema,
+  initConnectClientToServer,
+  registerClientRootsHandlers,
+} from "@heroitvn/mcp";
 import { createClient } from "@/lib/supabase/server";
-import { registerClientElicitationHandlers } from "../client/elicitation";
+import type { GroqChatModelId } from "@/types/groq";
+import { registerAppElicitationHandlers } from "./register-app-elicitation";
 
 const systemPrompt = `You are a helpful assistant that can answer questions and help with tasks, call tools when you need to get information from the user`;
 
@@ -37,7 +40,6 @@ class MCPHost {
 
     let conversationId = cId;
 
-    // save conversation to database if It is a new conversation
     if (!cId) {
       const { data, error } = await supabase
         .from("conversations")
@@ -59,7 +61,6 @@ class MCPHost {
       conversationId = data.id;
     }
 
-    // save message user
     const { error: userMessageError, data: userMessageData } = await supabase
       .from("messages")
       .insert({
@@ -79,7 +80,6 @@ class MCPHost {
     return createUIMessageStreamResponse({
       stream: createUIMessageStream({
         async execute({ writer }) {
-          // send conversation id to client if it is a new conversation
           if (!cId) {
             writer.write({
               type: "data-conversation-id",
@@ -89,13 +89,15 @@ class MCPHost {
 
           const mcpClientInstance = await initConnectClientToServer();
 
-          registerClientElicitationHandlers(
+          registerAppElicitationHandlers(
             mcpClientInstance,
             writer,
             supabase,
             userMessageId,
           );
-          registerClientRootsHandlers(mcpClientInstance, writer);
+          registerClientRootsHandlers(mcpClientInstance, writer, [
+            { uri: pathToFileURL(process.cwd()).href, name: "Workspace" },
+          ]);
 
           const tools = await mcpClientInstance.listTools();
 
@@ -114,12 +116,12 @@ class MCPHost {
                     title: tool.title,
                     inputSchema: convertToZodSchema(tool.inputSchema),
                     execute: async (input: Record<string, unknown>) => {
-                      const result = await mcpClientInstance.callTool({
+                      const toolResult = await mcpClientInstance.callTool({
                         name: tool.name,
                         arguments: input,
                       });
 
-                      return result.content;
+                      return toolResult.content;
                     },
                   },
                 ];

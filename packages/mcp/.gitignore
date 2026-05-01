@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Build output (rebuilt via npm run build / prepublishOnly)
+dist/
+
+# TypeScript
+*.tsbuildinfo
+
+# Logs & debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local env (never publish secrets)
+.env
+.env.*
+
+# OS
+.DS_Store
+Thumbs.db

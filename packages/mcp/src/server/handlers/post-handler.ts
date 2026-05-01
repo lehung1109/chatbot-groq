@@ -1,6 +1,4 @@
-import { NextRequest } from "next/server";
-import { headers } from "next/headers";
-import { MCP_SESSION_ID_HEADER } from "@/lib/utils";
+import { MCP_SESSION_ID_HEADER } from "../../constants";
 import {
   isInitializeRequest,
   JSONRPCErrorResponse,
@@ -11,9 +9,8 @@ import { mcpServerInstance } from "../create-server-instance";
 import { InMemoryEventStore } from "../../event-stores/in-memory-event-store";
 import { transports } from "../transports";
 
-export const postHandler = async (req: NextRequest) => {
-  const headersList = await headers();
-  const sessionId = headersList.get(MCP_SESSION_ID_HEADER);
+export const postHandler = async (req: Request) => {
+  const sessionId = req.headers.get(MCP_SESSION_ID_HEADER);
   let transport: WebStandardStreamableHTTPServerTransport | undefined =
     sessionId ? transports[sessionId] : undefined;
   const json = await req.json();

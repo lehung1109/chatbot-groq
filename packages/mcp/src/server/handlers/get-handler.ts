@@ -1,12 +1,9 @@
-import { MCP_SESSION_ID_HEADER } from "@/lib/utils";
+import { MCP_SESSION_ID_HEADER } from "../../constants";
 import { JSONRPCErrorResponse } from "@modelcontextprotocol/server";
-import { headers } from "next/headers";
-import { NextRequest } from "next/server";
 import { transports } from "../transports";
 
-export const getHandler = async (req: NextRequest) => {
-  const headersList = await headers();
-  const sessionId = headersList.get(MCP_SESSION_ID_HEADER);
+export const getHandler = async (req: Request) => {
+  const sessionId = req.headers.get(MCP_SESSION_ID_HEADER);
 
   if (!sessionId) {
     return Response.json(
@@ -40,7 +37,7 @@ export const getHandler = async (req: NextRequest) => {
   }
 
   // Check for Last-Event-ID header for resumability
-  const lastEventId = headersList.get("last-event-id");
+  const lastEventId = req.headers.get("last-event-id");
 
   if (lastEventId) {
     console.log(`Client reconnecting with Last-Event-ID: ${lastEventId}`);

@@ -1,10 +1,13 @@
-import elicitationStore from "@/mcp/event-stores/elicitation-store";
-import {
+import type {
   ElicitRequestFormParams,
   ElicitResult,
 } from "@modelcontextprotocol/client";
-import { RealtimeChannel, SupabaseClient } from "@supabase/supabase-js";
-import { UIMessageStreamWriter } from "ai";
+import type {
+  RealtimeChannel,
+  SupabaseClient,
+} from "@supabase/supabase-js";
+import type { UIMessageStreamWriter } from "ai";
+import elicitationStore from "./elicitation-store";
 
 export const processFormElicitation = async (
   requestParams: ElicitRequestFormParams,
@@ -12,7 +15,6 @@ export const processFormElicitation = async (
   supabase: SupabaseClient,
   userMessageId: string,
 ): Promise<ElicitResult> => {
-  // save elicitation state to database
   const { data: elicitationData, error: saveElicitationError } = await supabase
     .from("elicitation_state")
     .insert({
@@ -48,8 +50,8 @@ export const processFormElicitation = async (
 
     action = data.action;
     channel = data.channel;
-  } catch (error) {
-    error = error as Error;
+  } catch (err) {
+    error = err as Error;
     action = "decline";
   }
 
