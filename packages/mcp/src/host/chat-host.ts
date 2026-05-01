@@ -14,14 +14,14 @@ import {
   initConnectClientToServer,
   registerClientRootsHandlers,
 } from "@heroitvn/mcp";
-import { createClient } from "@/lib/supabase/server";
-import type { GroqChatModelId } from "@/types/groq";
+import type { GroqChatModelId } from "@heroitvn/chatbot-toggle";
 import { registerAppElicitationHandlers } from "./register-app-elicitation";
+import { SupabaseClient } from "@supabase/supabase-js";
 
 const systemPrompt = `You are a helpful assistant that can answer questions and help with tasks, call tools when you need to get information from the user`;
 
 class MCPHost {
-  async handleRequest(req: Request) {
+  async handleRequest(req: Request, supabase: SupabaseClient) {
     const {
       messages,
       model,
@@ -35,7 +35,6 @@ class MCPHost {
       conversationId?: string;
     } = await req.json();
 
-    const supabase = await createClient();
     const { data: user } = await supabase.auth.getUser();
 
     let conversationId = cId;
@@ -158,4 +157,4 @@ class MCPHost {
   }
 }
 
-export default MCPHost;
+export { MCPHost };

@@ -12,11 +12,8 @@ export {
 
 export { createClientInstance } from "./client/create-client-instance";
 export { initConnectClientToServer } from "./client/init-connect";
-
-export {
-  registerClientRootsHandlers,
-  type ClientRoot,
-} from "./client/roots";
+export { MCPHost } from "./host/chat-host";
+export { registerClientRootsHandlers, type ClientRoot } from "./client/roots";
 
 export {
   registerClientElicitationHandlers,
