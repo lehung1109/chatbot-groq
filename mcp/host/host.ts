@@ -23,7 +23,6 @@ class MCPHost {
       messages,
       model,
       webSearch,
-      sessionId,
       conversationId: cId,
     }: {
       messages: UIMessage[];
@@ -88,7 +87,7 @@ class MCPHost {
             });
           }
 
-          const mcpClientInstance = await initConnectClientToServer(sessionId);
+          const mcpClientInstance = await initConnectClientToServer();
 
           registerClientElicitationHandlers(
             mcpClientInstance,
