@@ -10,7 +10,7 @@ import {
   PromptInputMessage,
   PromptInputTextarea,
   PromptInputTools,
-} from "../../../../components/ai-elements/prompt-input";
+} from "../ai-elements/prompt-input";
 import PromptInputAttachmentsDisplay from "./attachment-display";
 import { useChatbotStore } from "../providers/chatbot-provider";
 import { toast } from "sonner";

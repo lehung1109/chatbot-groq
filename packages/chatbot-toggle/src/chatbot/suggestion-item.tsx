@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { Suggestion } from "../../../../components/ai-elements/suggestion";
+import { Suggestion } from "../ai-elements/suggestion";
 
 const SuggestionItem = ({
   suggestion,

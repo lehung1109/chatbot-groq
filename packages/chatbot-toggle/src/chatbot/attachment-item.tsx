@@ -3,7 +3,7 @@ import {
   AttachmentPreview,
   AttachmentRemove,
   AttachmentData,
-} from "../../../../components/ai-elements/attachments";
+} from "../ai-elements/attachments";
 import { useCallback } from "react";
 
 const AttachmentItem = ({

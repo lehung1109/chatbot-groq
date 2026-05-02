@@ -1,5 +1,5 @@
 import { GlobeIcon } from "lucide-react";
-import { PromptInputButton } from "../../../../components/ai-elements/prompt-input";
+import { PromptInputButton } from "../ai-elements/prompt-input";
 import { useChatbotStore } from "../providers/chatbot-provider";
 
 const ChatbotInputSearch = () => {

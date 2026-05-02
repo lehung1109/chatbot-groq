@@ -2,7 +2,7 @@ import {
   Conversation,
   ConversationContent,
   ConversationScrollButton,
-} from "../../../../components/ai-elements/conversation";
+} from "../ai-elements/conversation";
 import ChatbotConversationMessages from "./chatbot-conversation-messages";
 
 const ChatbotConversation = ({ className }: { className?: string }) => {

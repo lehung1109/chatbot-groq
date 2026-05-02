@@ -1,7 +1,7 @@
 import { useCallback } from "react";
-import { Attachments } from "../../../../components/ai-elements/attachments";
+import { Attachments } from "../ai-elements/attachments";
 import AttachmentItem from "./attachment-item";
-import { usePromptInputAttachments } from "../../../../components/ai-elements/prompt-input";
+import { usePromptInputAttachments } from "../ai-elements/prompt-input";
 
 const PromptInputAttachmentsDisplay = () => {
   const attachments = usePromptInputAttachments();

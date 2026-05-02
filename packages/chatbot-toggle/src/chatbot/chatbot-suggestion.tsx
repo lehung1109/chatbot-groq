@@ -1,5 +1,5 @@
 import { useChatbotStore } from "../providers/chatbot-provider";
-import { Suggestions } from "../../../../components/ai-elements/suggestion";
+import { Suggestions } from "../ai-elements/suggestion";
 import SuggestionItem from "./suggestion-item";
 import { useChatActionsContext } from "../providers/ai-provider";
 

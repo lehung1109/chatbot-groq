@@ -4,7 +4,7 @@ import {
   Sources,
   SourcesContent,
   SourcesTrigger,
-} from "../../../../components/ai-elements/sources";
+} from "../ai-elements/sources";
 
 interface ChatbotSourceProps {
   sources: SourceUrlUIPart[];
