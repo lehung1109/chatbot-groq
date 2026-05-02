@@ -11,10 +11,9 @@ const ChatbotElicitation = ({
   elicitationId,
   requestParams,
 }: ChatbotElicitationProps) => {
-  const [action, setAction] = useState<"accept" | "decline">("accept");
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = () => {
+  const handleSubmit = (action: "accept" | "decline") => {
     setSubmitted(true);
 
     fetch(`/api/elicitation`, {
@@ -39,8 +38,7 @@ const ChatbotElicitation = ({
       <div className="flex gap-2">
         <Button
           onClick={() => {
-            setAction("accept");
-            handleSubmit();
+            handleSubmit("accept");
           }}
         >
           Approve
@@ -50,8 +48,7 @@ const ChatbotElicitation = ({
           variant="destructive"
           disabled={submitted}
           onClick={() => {
-            setAction("decline");
-            handleSubmit();
+            handleSubmit("decline");
           }}
         >
           Reject
