@@ -1,4 +1,6 @@
-﻿import {
+﻿"use client";
+
+import {
   Activity,
   AlertTriangle,
   BookOpenText,
@@ -8,12 +10,14 @@
   ShieldAlert,
   Clock,
 } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Badge } from "@heroitvn/shacnui/ui/badge";
 import { Button } from "@heroitvn/shacnui/ui/button";
 import { Card } from "@heroitvn/shacnui/ui/card";
 
 const navItems = [
-  { label: "Overview", icon: Activity, active: true, href: "/dashboard" },
+  { label: "Overview", icon: Activity, href: "/dashboard" },
   { label: "Incidents", icon: ShieldAlert },
   { label: "Services", icon: Layers3 },
   { label: "Alerts", icon: Siren },
@@ -23,6 +27,8 @@ const navItems = [
 ];
 
 export function Sidebar() {
+  const pathname = usePathname();
+
   return (
     <aside className="hidden h-screen flex-col border-r bg-card/70 backdrop-blur xl:flex">
       <div className="flex h-16 items-center gap-3 border-b px-6">
@@ -62,20 +68,26 @@ export function Sidebar() {
         </Card>
 
         <nav className="space-y-1">
-          {navItems.map(({ label, icon: Icon, active, href }) => (
-            <a
-              key={label}
-              href={href}
-              className={
-                active
-                  ? "flex w-full items-center gap-3 rounded-xl bg-primary px-3 py-2.5 text-sm font-medium text-primary-foreground"
-                  : "flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-              }
-            >
-              <Icon className="h-4 w-4" />
-              {label}
-            </a>
-          ))}
+          {navItems.map(({ label, icon: Icon, href }) => {
+            const isActive =
+              href != null &&
+              (pathname === href || pathname.startsWith(`${href}/`));
+
+            return (
+              <Link
+                key={label}
+                href={href ?? "#"}
+                className={
+                  isActive
+                    ? "flex w-full items-center gap-3 rounded-xl bg-primary px-3 py-2.5 text-sm font-medium text-primary-foreground"
+                    : "flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                }
+              >
+                <Icon className="h-4 w-4" />
+                {label}
+              </Link>
+            );
+          })}
         </nav>
       </div>
     </aside>
