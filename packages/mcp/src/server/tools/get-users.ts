@@ -17,7 +17,7 @@ export const registerGetUsersTool = (server: McpServer) => {
 
       await ctx.mcpReq.elicitInput({
         mode: "form",
-        message: "MCP Server need approve to get users information",
+        message: "MCP Server need connect to database to get users information",
         requestedSchema: {
           type: "object",
           properties: {
