@@ -128,7 +128,7 @@ class MCPHost {
             ),
             system: systemPrompt,
             experimental_transform: smoothStream({
-              delayInMs: 20,
+              delayInMs: 10,
               chunking: segmenter,
             }),
           });
