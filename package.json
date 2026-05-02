@@ -13,9 +13,9 @@
     "build:packages": "npm run build --workspaces --if-present"
   },
   "dependencies": {
-    "@heroitvn/chatbot-toggle": "workspace:*",
-    "@heroitvn/mcp": "workspace:*",
-    "@heroitvn/shacnui": "workspace:*",
+    "@heroitvn/chatbot-toggle": "^0.1.0",
+    "@heroitvn/mcp": "^0.1.0",
+    "@heroitvn/shacnui": "^0.1.0",
     "@ai-sdk/groq": "^3.0.35",
     "@ai-sdk/react": "^3.0.170",
     "@cfworker/json-schema": "^4.1.1",
