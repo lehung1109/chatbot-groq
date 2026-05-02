@@ -13,7 +13,7 @@ import { Button } from "@heroitvn/shacnui/ui/button";
 import { Card } from "@heroitvn/shacnui/ui/card";
 
 const navItems = [
-  { label: "Overview", icon: Activity, active: true },
+  { label: "Overview", icon: Activity, active: true, href: "/dashboard" },
   { label: "Incidents", icon: ShieldAlert },
   { label: "Services", icon: Layers3 },
   { label: "Alerts", icon: Siren },
@@ -81,4 +81,3 @@ export function Sidebar() {
     </aside>
   );
 }
-
