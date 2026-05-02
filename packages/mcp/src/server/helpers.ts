@@ -1,6 +1,7 @@
 import { McpServer } from "@modelcontextprotocol/server";
 import path from "node:path";
-import fs from "node:fs/promises";
+import { fileURLToPath } from "node:url";
+import { globby } from "globby";
 
 export async function getAllowedFileRoots(serverInstance: McpServer) {
   const { roots } = await serverInstance.server.listRoots();
@@ -9,7 +10,7 @@ export async function getAllowedFileRoots(serverInstance: McpServer) {
     .filter((root) => root.uri.startsWith("file://"))
     .map((root) => ({
       name: root.name,
-      dir: path.resolve(root.uri.replace("file://", "/")),
+      dir: fileURLToPath(root.uri),
     }));
 }
 
@@ -48,19 +49,17 @@ export async function findFileByName(
   dir: string,
   targetFileName: string,
 ): Promise<string | null> {
-  const entries = await fs.readdir(dir, { withFileTypes: true });
+  const filePaths = await globby(["**/*"], {
+    cwd: dir,
+    gitignore: true,
+    onlyFiles: true,
+  });
 
-  for (const entry of entries) {
-    const fullPath = path.join(dir, entry.name);
+  for (const filePath of filePaths) {
+    const fileName = path.basename(filePath);
 
-    if (entry.isFile() && entry.name === targetFileName) {
-      return fullPath;
-    }
-
-    if (entry.isDirectory()) {
-      const result = await findFileByName(fullPath, targetFileName);
-
-      if (result) return result;
+    if (fileName === targetFileName) {
+      return path.join(dir, filePath);
     }
   }
 

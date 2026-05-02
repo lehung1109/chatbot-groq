@@ -18,6 +18,9 @@ export const registerClientSamplingHandlers = (
 
   client.setRequestHandler("sampling/createMessage", async (request) => {
     const messageFromServer = request.params.messages.at(-1);
+    const systemPrompt = request.params.systemPrompt;
+    const modelPreferences =
+      request.params.modelPreferences?.hints?.at(0)?.name || samplingModel;
 
     if (!messageFromServer) {
       throw new Error("No message from server");
@@ -45,17 +48,17 @@ export const registerClientSamplingHandlers = (
     };
 
     const result = await generateText({
-      model: groq(samplingModel),
+      model: groq(modelPreferences),
       messages: [message],
       stopWhen: stepCountIs(5),
-      system: "You are a helpful assistant that can answer questions",
+      system: systemPrompt,
     });
 
     return {
-      model: samplingModel,
-      role: "assistant" as const,
+      model: modelPreferences,
+      role: "assistant",
       content: {
-        type: "text" as const,
+        type: "text",
         text: result.text,
       },
     };
