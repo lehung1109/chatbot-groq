@@ -18,7 +18,8 @@ export { registerClientRootsHandlers, type ClientRoot } from "./client/roots";
 export {
   registerClientElicitationHandlers,
   type FormElicitationHandler,
-} from "./client/elicitation";
+} from "./client/elicitation/register";
+export { updateElicitation } from "./client/elicitation/update";
 
 export { registerClientSamplingHandlers } from "./client/sampling";
 
