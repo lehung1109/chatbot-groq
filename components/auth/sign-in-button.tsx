@@ -2,7 +2,7 @@
 
 import { ArrowRight } from "lucide-react";
 import { Button } from "@heroitvn/shacnui/ui/button";
-import { createClient } from "@/lib/supabase/client";
+import { createClient } from "@/packages/supabase/src/client";
 import { useEffect, useState } from "react";
 import { JwtPayload } from "@supabase/supabase-js";
 

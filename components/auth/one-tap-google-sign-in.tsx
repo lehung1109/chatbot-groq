@@ -3,7 +3,7 @@
 import type { accounts, CredentialResponse } from "google-one-tap";
 import { useRouter } from "next/navigation";
 import Script from "next/script";
-import { createClient } from "@/lib/supabase/client";
+import { createClient } from "@/packages/supabase/src/client";
 import { generateNonce } from "@/lib/utils";
 declare const google: { accounts: accounts };
 
