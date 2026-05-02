@@ -1,4 +1,4 @@
-import { createClient } from "@heroitvn/supabase/client";
+import { createClient } from "@heroitvn/supabase/server";
 import { Badge } from "@heroitvn/shacnui/ui/badge";
 import {
   Card,
@@ -74,7 +74,7 @@ function formatMessageContent(content: unknown): string {
 }
 
 const HistoryPage = async () => {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data } = await supabase.auth.getClaims();
   const claims = data?.claims;
 
