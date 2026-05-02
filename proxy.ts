@@ -1,5 +1,5 @@
 import { type NextRequest } from "next/server";
-import { updateSession } from "@/packages/supabase/src/proxy";
+import { updateSession } from "@heroitvn/supabase/proxy";
 
 export async function proxy(request: NextRequest) {
   return await updateSession(request);

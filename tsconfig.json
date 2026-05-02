@@ -21,6 +21,7 @@
     "paths": {
       "@/*": ["./*"],
       "@heroitvn/shacnui/*": ["./packages/shacnui/src/*"],
+      "@heroitvn/supabase/*": ["./packages/supabase/src/*"],
       "@heroitvn/*": ["./packages/*"]
     }
   },

@@ -1,6 +1,6 @@
 "use client";
 
-import { createClient } from "@/packages/supabase/src/client";
+import { createClient } from "@heroitvn/supabase/client";
 import { generateNonce } from "@/lib/utils";
 import { CredentialResponse } from "google-one-tap";
 import Script from "next/script";

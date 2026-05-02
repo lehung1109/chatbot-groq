@@ -2,7 +2,7 @@
 
 import { Button } from "@heroitvn/shacnui/ui/button";
 
-import { createClient } from "@/packages/supabase/src/client";
+import { createClient } from "@heroitvn/supabase/client";
 
 const SignOut = () => {
   return (
