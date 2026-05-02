@@ -4,7 +4,7 @@ import type { accounts, CredentialResponse } from "google-one-tap";
 import { useRouter } from "next/navigation";
 import Script from "next/script";
 import { createClient } from "@heroitvn/supabase/client";
-import { generateNonce } from "@/lib/utils";
+import { generateNonce } from "./nonce";
 declare const google: { accounts: accounts };
 
 const OneTapGoogleSignIn = () => {

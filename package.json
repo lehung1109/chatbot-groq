@@ -13,6 +13,7 @@
     "build:packages": "npm run build --workspaces --if-present"
   },
   "dependencies": {
+    "@heroitvn/google": "^0.1.0",
     "@heroitvn/chatbot-toggle": "^0.1.0",
     "@heroitvn/mcp": "^0.1.0",
     "@heroitvn/shacnui": "^0.1.0",

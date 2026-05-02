@@ -1,4 +1,4 @@
-import GoogleSignInButton from "@/packages/google/src/google-sign-in-button";
+import GoogleSignInButton from "@heroitvn/google/google-sign-in-button";
 import { Metadata } from "next";
 
 // metadata

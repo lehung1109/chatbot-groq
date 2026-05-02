@@ -1,0 +1,46 @@
+{
+  "name": "@heroitvn/google",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Google Sign-In and One Tap UI for Next.js + Supabase",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    "./google-sign-in-button": {
+      "types": "./src/google-sign-in-button.tsx",
+      "import": "./src/google-sign-in-button.tsx"
+    },
+    "./one-tap-google-sign-in": {
+      "types": "./src/one-tap-google-sign-in.tsx",
+      "import": "./src/one-tap-google-sign-in.tsx"
+    },
+    "./nonce": {
+      "types": "./src/nonce.ts",
+      "import": "./src/nonce.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@heroitvn/supabase": "^0.1.0",
+    "google-one-tap": "^1.0.6",
+    "sonner": "^2.0.7"
+  },
+  "peerDependencies": {
+    "next": ">=14.0.0",
+    "react": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/google-one-tap": "^1.2.7",
+    "@types/node": "^25.6.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
