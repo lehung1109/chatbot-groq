@@ -25,8 +25,6 @@ export const registerClientElicitationHandlers = (
 
     const result = await onFormElicitation(request.params, writer);
 
-    await client.close();
-
     return result;
   });
 };

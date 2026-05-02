@@ -1,4 +1,5 @@
 import { CallToolResult, McpServer } from "@modelcontextprotocol/server";
+import { createClient } from "@supabase/supabase-js";
 
 export const registerGetUsersTool = (server: McpServer) => {
   server.registerTool(
@@ -29,9 +30,42 @@ export const registerGetUsersTool = (server: McpServer) => {
         },
       });
 
-      console.log(elicitationResult);
+      if (elicitationResult.action === "decline") {
+        return {
+          content: [
+            { type: "text", text: "User denied access to the database" },
+          ],
+        };
+      }
 
-      return { content: [{ type: "text", text: "OK" }] };
+      // connect to database
+      const supabase = createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.NEXT_PUBLIC_SUPABASE_ADMIN_KEY!,
+      );
+
+      // get users from database
+      const {
+        data: { users },
+        error,
+      } = await supabase.auth.admin.listUsers();
+
+      if (error) {
+        return {
+          content: [
+            { type: "text", text: "Error getting users from database" },
+          ],
+        };
+      }
+
+      return {
+        content: [
+          {
+            type: "text",
+            text: `All users information in datase in json format ${JSON.stringify(users)}`,
+          },
+        ],
+      };
     },
   );
 };
