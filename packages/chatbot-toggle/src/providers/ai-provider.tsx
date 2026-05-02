@@ -72,9 +72,7 @@ export const useChatActionsContext = () => {
 };
 
 export const AIProvider = ({ children }: AIProviderProps) => {
-  const chat = useChat({
-    experimental_throttle: 50,
-  });
+  const chat = useChat();
 
   const actions = useMemo(
     () => ({
