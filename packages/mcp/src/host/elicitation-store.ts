@@ -10,34 +10,41 @@ class ElicitationStore {
         reject(new Error("Elicitation timed out after 60 seconds"));
       }, 600000);
 
-      const channel = supabase.channel(`elicitation:${elicitationId}`).on(
-        "postgres_changes",
-        {
-          event: "UPDATE",
-          schema: "public",
-          table: "elicitation_state",
-          filter: `id = ${elicitationId}`,
-        },
-        (payload) => {
-          if (payload.new.state === "approved") {
-            resolve({
-              action: "accept",
-              channel,
-            });
-          } else if (payload.new.state === "rejected") {
-            resolve({
-              action: "decline",
-              channel,
-            });
-          } else {
-            reject(new Error("Elicitation state unknown"));
-          }
+      console.log("elicitationId waiting for approval", elicitationId);
 
-          channel.unsubscribe();
+      const channel = supabase
+        .channel(`elicitation:${elicitationId}`)
+        .on(
+          "postgres_changes",
+          {
+            event: "UPDATE",
+            schema: "public",
+            table: "elicitation_state",
+            filter: `id=eq.${elicitationId}`,
+          },
+          (payload) => {
+            if (payload.new.state === "approved") {
+              resolve({
+                action: "accept",
+                channel,
+              });
+            } else if (payload.new.state === "rejected") {
+              resolve({
+                action: "decline",
+                channel,
+              });
+            } else {
+              reject(new Error("Elicitation state unknown"));
+            }
 
-          clearTimeout(timeout);
-        },
-      );
+            channel.unsubscribe();
+
+            clearTimeout(timeout);
+          },
+        )
+        .subscribe((status) => {
+          console.log("realtime status", status);
+        });
     });
   }
 }

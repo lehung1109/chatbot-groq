@@ -4,6 +4,8 @@ export const updateElicitation = async (req: Request) => {
   const { elicitationId, action } = await req.json();
   const supabase = await createClient();
 
+  console.log("elicitationId updating", elicitationId);
+
   // update elicitation state
   const { error: updateElicitationError } = await supabase
     .from("elicitation_state")
