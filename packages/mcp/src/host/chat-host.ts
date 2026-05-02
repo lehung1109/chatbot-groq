@@ -13,6 +13,7 @@ import {
   convertToZodSchema,
   initConnectClientToServer,
   registerClientRootsHandlers,
+  registerClientSamplingHandlers,
 } from "@heroitvn/mcp";
 import type { GroqChatModelId } from "@heroitvn/chatbot-toggle";
 import { registerAppElicitationHandlers } from "./register-app-elicitation";
@@ -97,6 +98,7 @@ class MCPHost {
           registerClientRootsHandlers(mcpClientInstance, writer, [
             { uri: pathToFileURL(process.cwd()).href, name: "Workspace" },
           ]);
+          registerClientSamplingHandlers(mcpClientInstance, writer);
 
           const tools = await mcpClientInstance.listTools();
 
