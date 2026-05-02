@@ -10,9 +10,8 @@
     "noEmit": true,
     "esModuleInterop": true,
     "isolatedModules": true,
-    "baseUrl": "../..",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["../../*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
