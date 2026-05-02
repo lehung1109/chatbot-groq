@@ -45,21 +45,19 @@ const ChatbotConversationMessage = memo(function ChatbotConversationMessage({
                     <ChatbotReasoning reasoning={part} />
                   )}
 
-                  {part.type === "data-elicitation" &&
-                    partIndex === parts.length - 1 && (
-                      <ChatbotElicitation
-                        {...(part.data as DataTypes["elicitation"])}
-                      />
-                    )}
+                  {part.type === "data-elicitation" && (
+                    <ChatbotElicitation
+                      {...(part.data as DataTypes["elicitation"])}
+                    />
+                  )}
 
-                  {part.type === "data-conversation-id" &&
-                    partIndex === parts.length - 1 && (
-                      <ChatbotConversationId
-                        conversationId={
-                          (part.data as DataTypes["conversationId"]).content
-                        }
-                      />
-                    )}
+                  {part.type === "data-conversation-id" && (
+                    <ChatbotConversationId
+                      conversationId={
+                        (part.data as DataTypes["conversationId"]).content
+                      }
+                    />
+                  )}
 
                   {part.type === "text" && (
                     <ChatbotText text={part} status={part.state ?? "done"} />

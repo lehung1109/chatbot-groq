@@ -26,6 +26,10 @@ const ChatbotElicitation = ({
     });
   };
 
+  if (submitted) {
+    return <></>;
+  }
+
   return (
     <div>
       {requestParams?.message && (

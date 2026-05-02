@@ -65,7 +65,7 @@ class MCPHost {
       .insert({
         conversation_id: conversationId,
         role: "user",
-        content: messages[messages.length - 1],
+        content: messages.at(-1),
       })
       .select()
       .single();
