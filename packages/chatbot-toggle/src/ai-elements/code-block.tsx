@@ -1,13 +1,13 @@
-"use client";
+﻿"use client";
 
-import { Button } from "@/packages/shacnui/src/ui/button";
+import { Button } from "@heroitvn/shacnui/ui/button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/packages/shacnui/src/ui/select";
+} from "@heroitvn/shacnui/ui/select";
 import { cn } from "@/lib/utils";
 import { CheckIcon, CopyIcon } from "lucide-react";
 import type { ComponentProps, CSSProperties, HTMLAttributes } from "react";
@@ -384,7 +384,7 @@ export const CodeBlockContent = ({
   // Memoized raw tokens for immediate display
   const rawTokens = useMemo(() => createRawTokens(code), [code]);
 
-  // Synchronous cache lookup — avoids setState in effect for cached results
+  // Synchronous cache lookup â€” avoids setState in effect for cached results
   const syncTokens = useMemo(
     () => highlightCode(code, language) ?? rawTokens,
     [code, language, rawTokens],
@@ -561,3 +561,4 @@ export type CodeBlockLanguageSelectorItemProps = ComponentProps<
 export const CodeBlockLanguageSelectorItem = (
   props: CodeBlockLanguageSelectorItemProps,
 ) => <SelectItem {...props} />;
+

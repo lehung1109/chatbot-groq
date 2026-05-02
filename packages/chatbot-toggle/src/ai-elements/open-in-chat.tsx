@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import { Button } from "@/packages/shacnui/src/ui/button";
+import { Button } from "@heroitvn/shacnui/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,7 +8,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/packages/shacnui/src/ui/dropdown-menu";
+} from "@heroitvn/shacnui/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import {
   ChevronDownIcon,
@@ -368,3 +368,4 @@ export const OpenInCursor = (props: OpenInCursorProps) => {
     </DropdownMenuItem>
   );
 };
+

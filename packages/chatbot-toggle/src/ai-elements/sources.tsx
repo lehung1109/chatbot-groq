@@ -1,10 +1,10 @@
-"use client";
+﻿"use client";
 
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/packages/shacnui/src/ui/collapsible";
+} from "@heroitvn/shacnui/ui/collapsible";
 import { cn } from "@/lib/utils";
 import { BookIcon, ChevronDownIcon } from "lucide-react";
 import type { ComponentProps } from "react";
@@ -75,3 +75,4 @@ export const Source = ({ href, title, children, ...props }: SourceProps) => (
     )}
   </a>
 );
+

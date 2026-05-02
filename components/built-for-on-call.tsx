@@ -1,14 +1,14 @@
-import Link from "next/link";
-import { Badge } from "@/packages/shacnui/src/ui/badge";
-import { Button } from "@/packages/shacnui/src/ui/button";
+﻿import Link from "next/link";
+import { Badge } from "@heroitvn/shacnui/ui/badge";
+import { Button } from "@heroitvn/shacnui/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/packages/shacnui/src/ui/card";
-import { Separator } from "@/packages/shacnui/src/ui/separator";
+} from "@heroitvn/shacnui/ui/card";
+import { Separator } from "@heroitvn/shacnui/ui/separator";
 import {
   ArrowRight,
   BellRing,
@@ -189,3 +189,4 @@ export function BuiltForOnCallSection() {
     </section>
   );
 }
+

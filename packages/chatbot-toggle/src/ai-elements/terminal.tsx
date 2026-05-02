@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import { Button } from "@/packages/shacnui/src/ui/button";
+import { Button } from "@heroitvn/shacnui/ui/button";
 import { cn } from "@/lib/utils";
 import Ansi from "ansi-to-react";
 import { CheckIcon, CopyIcon, TerminalIcon, Trash2Icon } from "lucide-react";
@@ -271,3 +271,4 @@ export const Terminal = ({
     </TerminalContext.Provider>
   );
 };
+

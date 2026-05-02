@@ -1,4 +1,4 @@
-import {
+﻿import {
   Activity,
   AlertTriangle,
   BookOpenText,
@@ -8,9 +8,9 @@ import {
   ShieldAlert,
   Clock,
 } from "lucide-react";
-import { Badge } from "@/packages/shacnui/src/ui/badge";
-import { Button } from "@/packages/shacnui/src/ui/button";
-import { Card } from "@/packages/shacnui/src/ui/card";
+import { Badge } from "@heroitvn/shacnui/ui/badge";
+import { Button } from "@heroitvn/shacnui/ui/button";
+import { Card } from "@heroitvn/shacnui/ui/card";
 
 const navItems = [
   { label: "Overview", icon: Activity, active: true },
@@ -52,7 +52,7 @@ export function Sidebar() {
             <div>
               <p className="text-sm font-medium">Hung Le</p>
               <p className="text-xs text-muted-foreground">
-                Primary responder · UTC+7
+                Primary responder Â· UTC+7
               </p>
             </div>
           </div>
@@ -81,3 +81,4 @@ export function Sidebar() {
     </aside>
   );
 }
+

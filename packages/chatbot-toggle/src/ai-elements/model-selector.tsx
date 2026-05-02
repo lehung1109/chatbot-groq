@@ -1,4 +1,4 @@
-import {
+﻿import {
   Command,
   CommandDialog,
   CommandEmpty,
@@ -8,13 +8,13 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from "@/packages/shacnui/src/ui/command";
+} from "@heroitvn/shacnui/ui/command";
 import {
   Dialog,
   DialogContent,
   DialogTitle,
   DialogTrigger,
-} from "@/packages/shacnui/src/ui/dialog";
+} from "@heroitvn/shacnui/ui/dialog";
 import { cn } from "@/lib/utils";
 import type { ComponentProps, ReactNode } from "react";
 
@@ -211,3 +211,4 @@ export const ModelSelectorName = ({
 }: ModelSelectorNameProps) => (
   <span className={cn("flex-1 truncate text-left", className)} {...props} />
 );
+

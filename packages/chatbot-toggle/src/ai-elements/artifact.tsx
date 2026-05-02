@@ -1,12 +1,12 @@
-"use client";
+﻿"use client";
 
-import { Button } from "@/packages/shacnui/src/ui/button";
+import { Button } from "@heroitvn/shacnui/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/packages/shacnui/src/ui/tooltip";
+} from "@heroitvn/shacnui/ui/tooltip";
 import { cn } from "@/lib/utils";
 import type { LucideIcon } from "lucide-react";
 import { XIcon } from "lucide-react";
@@ -146,3 +146,4 @@ export const ArtifactContent = ({
 }: ArtifactContentProps) => (
   <div className={cn("flex-1 overflow-auto p-4", className)} {...props} />
 );
+

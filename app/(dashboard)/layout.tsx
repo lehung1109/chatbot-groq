@@ -1,7 +1,7 @@
-import SignOut from "@/components/auth/sign-out-button";
+﻿import SignOut from "@/components/auth/sign-out-button";
 import { ChatbotToggle } from "@heroitvn/chatbot-toggle";
 import { Sidebar } from "@/components/dashboard/sidebar";
-import { Button } from "@/packages/shacnui/src/ui/button";
+import { Button } from "@heroitvn/shacnui/ui/button";
 import { Bell, Search } from "lucide-react";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
@@ -46,3 +46,4 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 };
 
 export default DashboardLayout;
+

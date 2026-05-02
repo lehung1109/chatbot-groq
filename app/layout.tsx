@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import "./globals.css";
-import { TooltipProvider } from "@/packages/shacnui/src/ui/tooltip";
+import { TooltipProvider } from "@heroitvn/shacnui/ui/tooltip";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { ChatbotStoreProvider } from "@heroitvn/chatbot-toggle";
 import { Geist } from "next/font/google";
-import { Toaster } from "@/packages/shacnui/src/ui/sonner";
+import { Toaster } from "@heroitvn/shacnui/ui/sonner";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -40,3 +40,4 @@ export default function RootLayout({
     </html>
   );
 }
+

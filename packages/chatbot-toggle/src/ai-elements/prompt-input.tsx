@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import {
   Command,
@@ -8,37 +8,37 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from "@/packages/shacnui/src/ui/command";
+} from "@heroitvn/shacnui/ui/command";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/packages/shacnui/src/ui/dropdown-menu";
+} from "@heroitvn/shacnui/ui/dropdown-menu";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "@/packages/shacnui/src/ui/hover-card";
+} from "@heroitvn/shacnui/ui/hover-card";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupTextarea,
-} from "@/packages/shacnui/src/ui/input-group";
+} from "@heroitvn/shacnui/ui/input-group";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/packages/shacnui/src/ui/select";
-import { Spinner } from "@/packages/shacnui/src/ui/spinner";
+} from "@heroitvn/shacnui/ui/select";
+import { Spinner } from "@heroitvn/shacnui/ui/spinner";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/packages/shacnui/src/ui/tooltip";
+} from "@heroitvn/shacnui/ui/tooltip";
 import { cn } from "@/lib/utils";
 import type { ChatStatus, FileUIPart, SourceDocumentUIPart } from "ai";
 import {
@@ -1461,3 +1461,4 @@ export const PromptInputCommandSeparator = ({
 }: PromptInputCommandSeparatorProps) => (
   <CommandSeparator className={cn(className)} {...props} />
 );
+

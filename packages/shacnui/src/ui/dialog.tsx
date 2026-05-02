@@ -1,10 +1,10 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { Dialog as DialogPrimitive } from "radix-ui";
 
 import { cn } from "@/lib/utils";
-import { Button } from "@/packages/shacnui/src/ui/button";
+import { Button } from "@heroitvn/shacnui/ui/button";
 import { XIcon } from "lucide-react";
 
 function Dialog({
@@ -165,3 +165,4 @@ export {
   DialogTitle,
   DialogTrigger,
 };
+

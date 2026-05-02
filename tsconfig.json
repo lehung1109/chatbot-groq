@@ -20,6 +20,7 @@
     ],
     "paths": {
       "@/*": ["./*"],
+      "@heroitvn/shacnui/*": ["./packages/shacnui/src/*"],
       "@heroitvn/*": ["./packages/*"]
     }
   },

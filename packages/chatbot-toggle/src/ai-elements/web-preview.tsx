@@ -1,18 +1,18 @@
-"use client";
+﻿"use client";
 
-import { Button } from "@/packages/shacnui/src/ui/button";
+import { Button } from "@heroitvn/shacnui/ui/button";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/packages/shacnui/src/ui/collapsible";
-import { Input } from "@/packages/shacnui/src/ui/input";
+} from "@heroitvn/shacnui/ui/collapsible";
+import { Input } from "@heroitvn/shacnui/ui/input";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/packages/shacnui/src/ui/tooltip";
+} from "@heroitvn/shacnui/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { ChevronDownIcon } from "lucide-react";
 import type { ComponentProps, ReactNode } from "react";
@@ -279,3 +279,4 @@ export const WebPreviewConsole = ({
     </Collapsible>
   );
 };
+

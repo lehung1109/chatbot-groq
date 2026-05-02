@@ -4,7 +4,7 @@ import {
   Alert,
   AlertDescription,
   AlertTitle,
-} from "../../../shacnui/src/ui/alert";
+} from "@heroitvn/shacnui/ui/alert";
 import { AlertTriangleIcon } from "lucide-react";
 import ChatbotConversationMessage from "./chatbot-conversation-message";
 import { getErrorMessage } from "../../../../lib/utils";

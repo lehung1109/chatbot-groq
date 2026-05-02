@@ -1,7 +1,7 @@
-"use client";
+﻿"use client";
 
-import { Alert, AlertDescription } from "@/packages/shacnui/src/ui/alert";
-import { Button } from "@/packages/shacnui/src/ui/button";
+import { Alert, AlertDescription } from "@heroitvn/shacnui/ui/alert";
+import { Button } from "@heroitvn/shacnui/ui/button";
 import { cn } from "@/lib/utils";
 import type { ToolUIPart } from "ai";
 import type { ComponentProps, ReactNode } from "react";
@@ -172,3 +172,4 @@ export type ConfirmationActionProps = ComponentProps<typeof Button>;
 export const ConfirmationAction = (props: ConfirmationActionProps) => (
   <Button className="h-8 px-3 text-sm" type="button" {...props} />
 );
+

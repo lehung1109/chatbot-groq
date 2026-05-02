@@ -1,5 +1,5 @@
-import { Badge } from "@/packages/shacnui/src/ui/badge";
-import { Card, CardContent } from "@/packages/shacnui/src/ui/card";
+﻿import { Badge } from "@heroitvn/shacnui/ui/badge";
+import { Card, CardContent } from "@heroitvn/shacnui/ui/card";
 import { summaryCards } from "@/data/dashboard";
 
 const toneMap = {
@@ -36,3 +36,4 @@ export function IncidentSummary() {
     </section>
   );
 }
+

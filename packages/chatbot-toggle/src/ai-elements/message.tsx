@@ -1,16 +1,16 @@
-"use client";
+﻿"use client";
 
-import { Button } from "@/packages/shacnui/src/ui/button";
+import { Button } from "@heroitvn/shacnui/ui/button";
 import {
   ButtonGroup,
   ButtonGroupText,
-} from "@/packages/shacnui/src/ui/button-group";
+} from "@heroitvn/shacnui/ui/button-group";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/packages/shacnui/src/ui/tooltip";
+} from "@heroitvn/shacnui/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { cjk } from "@streamdown/cjk";
 import { code } from "@streamdown/code";
@@ -358,3 +358,4 @@ export const MessageToolbar = ({
     {children}
   </div>
 );
+

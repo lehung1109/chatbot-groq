@@ -1,11 +1,11 @@
-import { Button } from "@/packages/shacnui/src/ui/button";
+﻿import { Button } from "@heroitvn/shacnui/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/packages/shacnui/src/ui/card";
+} from "@heroitvn/shacnui/ui/card";
 import { timelineItems } from "@/data/dashboard";
 
 export function Timeline() {
@@ -26,7 +26,7 @@ export function Timeline() {
             <div className={`mt-1 h-2.5 w-2.5 rounded-full ${item.color}`} />
             <div>
               <p className="text-sm font-medium">
-                {item.time} · {item.title}
+                {item.time} Â· {item.title}
               </p>
               <p className="text-sm text-muted-foreground">
                 {item.description}
@@ -38,3 +38,4 @@ export function Timeline() {
     </Card>
   );
 }
+

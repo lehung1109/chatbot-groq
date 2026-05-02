@@ -1,12 +1,12 @@
-"use client";
+﻿"use client";
 
 import { useControllableState } from "@radix-ui/react-use-controllable-state";
-import { Badge } from "@/packages/shacnui/src/ui/badge";
+import { Badge } from "@heroitvn/shacnui/ui/badge";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/packages/shacnui/src/ui/collapsible";
+} from "@heroitvn/shacnui/ui/collapsible";
 import { cn } from "@/lib/utils";
 import type { LucideIcon } from "lucide-react";
 import { BrainIcon, ChevronDownIcon, DotIcon } from "lucide-react";
@@ -220,3 +220,4 @@ ChainOfThoughtSearchResults.displayName = "ChainOfThoughtSearchResults";
 ChainOfThoughtSearchResult.displayName = "ChainOfThoughtSearchResult";
 ChainOfThoughtContent.displayName = "ChainOfThoughtContent";
 ChainOfThoughtImage.displayName = "ChainOfThoughtImage";
+

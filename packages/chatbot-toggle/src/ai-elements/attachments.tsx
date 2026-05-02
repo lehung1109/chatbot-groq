@@ -1,11 +1,11 @@
-"use client";
+﻿"use client";
 
-import { Button } from "@/packages/shacnui/src/ui/button";
+import { Button } from "@heroitvn/shacnui/ui/button";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "@/packages/shacnui/src/ui/hover-card";
+} from "@heroitvn/shacnui/ui/hover-card";
 import { cn } from "@/lib/utils";
 import type { FileUIPart, SourceDocumentUIPart } from "ai";
 import {
@@ -424,3 +424,4 @@ export const AttachmentEmpty = ({
     {children ?? "No attachments"}
   </div>
 );
+

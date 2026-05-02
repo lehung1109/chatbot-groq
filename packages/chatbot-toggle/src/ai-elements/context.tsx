@@ -1,12 +1,12 @@
-"use client";
+﻿"use client";
 
-import { Button } from "@/packages/shacnui/src/ui/button";
+import { Button } from "@heroitvn/shacnui/ui/button";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "@/packages/shacnui/src/ui/hover-card";
-import { Progress } from "@/packages/shacnui/src/ui/progress";
+} from "@heroitvn/shacnui/ui/hover-card";
+import { Progress } from "@heroitvn/shacnui/ui/progress";
 import { cn } from "@/lib/utils";
 import type { LanguageModelUsage } from "ai";
 import type { ComponentProps } from "react";
@@ -238,12 +238,12 @@ const TokensWithCost = ({
 }) => (
   <span>
     {tokens === undefined
-      ? "—"
+      ? "â€”"
       : new Intl.NumberFormat("en-US", {
           notation: "compact",
         }).format(tokens)}
     {costText ? (
-      <span className="ml-2 text-muted-foreground">• {costText}</span>
+      <span className="ml-2 text-muted-foreground">â€¢ {costText}</span>
     ) : null}
   </span>
 );
@@ -407,3 +407,4 @@ export const ContextCacheUsage = ({
     </div>
   );
 };
+

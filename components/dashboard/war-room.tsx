@@ -1,11 +1,11 @@
-import { Badge } from "@/packages/shacnui/src/ui/badge";
+﻿import { Badge } from "@heroitvn/shacnui/ui/badge";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/packages/shacnui/src/ui/card";
+} from "@heroitvn/shacnui/ui/card";
 import { warRoomMembers } from "@/data/dashboard";
 
 export function WarRoom() {
@@ -37,3 +37,4 @@ export function WarRoom() {
     </Card>
   );
 }
+

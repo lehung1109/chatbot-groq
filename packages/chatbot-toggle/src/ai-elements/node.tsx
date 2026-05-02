@@ -1,4 +1,4 @@
-import {
+﻿import {
   Card,
   CardAction,
   CardContent,
@@ -6,7 +6,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/packages/shacnui/src/ui/card";
+} from "@heroitvn/shacnui/ui/card";
 import { cn } from "@/lib/utils";
 import { Handle, Position } from "@xyflow/react";
 import type { ComponentProps } from "react";
@@ -69,3 +69,4 @@ export const NodeFooter = ({ className, ...props }: NodeFooterProps) => (
     {...props}
   />
 );
+

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import {
   Area,
@@ -11,14 +11,14 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { Badge } from "@/packages/shacnui/src/ui/badge";
+import { Badge } from "@heroitvn/shacnui/ui/badge";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/packages/shacnui/src/ui/card";
+} from "@heroitvn/shacnui/ui/card";
 import { healthData } from "@/data/dashboard";
 
 export function HealthChart() {
@@ -120,3 +120,4 @@ export function HealthChart() {
     </Card>
   );
 }
+

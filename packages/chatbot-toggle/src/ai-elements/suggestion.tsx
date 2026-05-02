@@ -1,7 +1,7 @@
-"use client";
+﻿"use client";
 
-import { Button } from "@/packages/shacnui/src/ui/button";
-import { ScrollArea, ScrollBar } from "@/packages/shacnui/src/ui/scroll-area";
+import { Button } from "@heroitvn/shacnui/ui/button";
+import { ScrollArea, ScrollBar } from "@heroitvn/shacnui/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import type { ComponentProps } from "react";
 import { useCallback } from "react";
@@ -52,3 +52,4 @@ export const Suggestion = ({
     </Button>
   );
 };
+

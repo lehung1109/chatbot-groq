@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import {
   InputGroup,
@@ -6,7 +6,7 @@ import {
   InputGroupButton,
   InputGroupInput,
   InputGroupText,
-} from "@/packages/shacnui/src/ui/input-group";
+} from "@heroitvn/shacnui/ui/input-group";
 import { cn } from "@/lib/utils";
 import { CheckIcon, CopyIcon } from "lucide-react";
 import type { ComponentProps } from "react";
@@ -143,3 +143,4 @@ export const SnippetCopyButton = ({
     </InputGroupButton>
   );
 };
+

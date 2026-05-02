@@ -1,14 +1,14 @@
-import Link from "next/link";
-import { Badge } from "@/packages/shacnui/src/ui/badge";
-import { Button } from "@/packages/shacnui/src/ui/button";
+﻿import Link from "next/link";
+import { Badge } from "@heroitvn/shacnui/ui/badge";
+import { Button } from "@heroitvn/shacnui/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/packages/shacnui/src/ui/card";
-import { Separator } from "@/packages/shacnui/src/ui/separator";
+} from "@heroitvn/shacnui/ui/card";
+import { Separator } from "@heroitvn/shacnui/ui/separator";
 import {
   AlertTriangle,
   ArrowRight,
@@ -121,8 +121,8 @@ export default function Hero() {
                       Checkout latency spike after deploy
                     </CardTitle>
                     <CardDescription className="mt-2 max-w-2xl text-slate-400">
-                      Started at 10:22 UTC · Affected services: checkout,
-                      payments, gateway · Customer impact detected in the active
+                      Started at 10:22 UTC Â· Affected services: checkout,
+                      payments, gateway Â· Customer impact detected in the active
                       incident window
                     </CardDescription>
                   </div>
@@ -298,3 +298,4 @@ export default function Hero() {
     </section>
   );
 }
+

@@ -1,12 +1,12 @@
-"use client";
+﻿"use client";
 
-import { Button } from "@/packages/shacnui/src/ui/button";
-import { Separator } from "@/packages/shacnui/src/ui/separator";
+import { Button } from "@heroitvn/shacnui/ui/button";
+import { Separator } from "@heroitvn/shacnui/ui/separator";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/packages/shacnui/src/ui/tooltip";
+} from "@heroitvn/shacnui/ui/tooltip";
 import { cn } from "@/lib/utils";
 import type { LucideProps } from "lucide-react";
 import { BookmarkIcon } from "lucide-react";
@@ -69,3 +69,4 @@ export const CheckpointTrigger = ({
       {children}
     </Button>
   );
+

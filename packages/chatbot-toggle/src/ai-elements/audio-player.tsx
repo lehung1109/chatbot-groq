@@ -1,10 +1,10 @@
-"use client";
+﻿"use client";
 
-import { Button } from "@/packages/shacnui/src/ui/button";
+import { Button } from "@heroitvn/shacnui/ui/button";
 import {
   ButtonGroup,
   ButtonGroupText,
-} from "@/packages/shacnui/src/ui/button-group";
+} from "@heroitvn/shacnui/ui/button-group";
 import { cn } from "@/lib/utils";
 import type { Experimental_SpeechResult as SpeechResult } from "ai";
 import {
@@ -229,3 +229,4 @@ export const AudioPlayerVolumeRange = ({
     />
   </ButtonGroupText>
 );
+

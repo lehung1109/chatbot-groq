@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { Command as CommandPrimitive } from "cmdk";
@@ -10,11 +10,11 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@/packages/shacnui/src/ui/dialog";
+} from "@heroitvn/shacnui/ui/dialog";
 import {
   InputGroup,
   InputGroupAddon,
-} from "@/packages/shacnui/src/ui/input-group";
+} from "@heroitvn/shacnui/ui/input-group";
 import { SearchIcon, CheckIcon } from "lucide-react";
 
 function Command({
@@ -193,3 +193,4 @@ export {
   CommandShortcut,
   CommandSeparator,
 };
+

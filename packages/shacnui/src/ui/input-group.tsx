@@ -1,12 +1,12 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
-import { Button } from "@/packages/shacnui/src/ui/button";
-import { Input } from "@/packages/shacnui/src/ui/input";
-import { Textarea } from "@/packages/shacnui/src/ui/textarea";
+import { Button } from "@heroitvn/shacnui/ui/button";
+import { Input } from "@heroitvn/shacnui/ui/input";
+import { Textarea } from "@heroitvn/shacnui/ui/textarea";
 
 function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
@@ -154,3 +154,4 @@ export {
   InputGroupInput,
   InputGroupTextarea,
 };
+

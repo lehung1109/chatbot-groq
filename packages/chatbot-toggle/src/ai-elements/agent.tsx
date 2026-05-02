@@ -1,12 +1,12 @@
-"use client";
+﻿"use client";
 
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/packages/shacnui/src/ui/accordion";
-import { Badge } from "@/packages/shacnui/src/ui/badge";
+} from "@heroitvn/shacnui/ui/accordion";
+import { Badge } from "@heroitvn/shacnui/ui/badge";
 import { cn } from "@/lib/utils";
 import type { Tool } from "ai";
 import { BotIcon } from "lucide-react";
@@ -139,3 +139,4 @@ AgentInstructions.displayName = "AgentInstructions";
 AgentTools.displayName = "AgentTools";
 AgentTool.displayName = "AgentTool";
 AgentOutput.displayName = "AgentOutput";
+

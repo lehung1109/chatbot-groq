@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import type { ComponentProps } from "react";
@@ -8,7 +8,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   navigationMenuTriggerStyle,
-} from "@/packages/shacnui/src/ui/navigation-menu";
+} from "@heroitvn/shacnui/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 
 const links = [
@@ -62,3 +62,4 @@ export const NavMenu = ({
     </NavigationMenu>
   );
 };
+

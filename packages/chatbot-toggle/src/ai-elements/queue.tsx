@@ -1,12 +1,12 @@
-"use client";
+﻿"use client";
 
-import { Button } from "@/packages/shacnui/src/ui/button";
+import { Button } from "@heroitvn/shacnui/ui/button";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/packages/shacnui/src/ui/collapsible";
-import { ScrollArea } from "@/packages/shacnui/src/ui/scroll-area";
+} from "@heroitvn/shacnui/ui/collapsible";
+import { ScrollArea } from "@heroitvn/shacnui/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { ChevronDownIcon, PaperclipIcon } from "lucide-react";
 import type { ComponentProps } from "react";
@@ -272,3 +272,4 @@ export const Queue = ({ className, ...props }: QueueProps) => (
     {...props}
   />
 );
+

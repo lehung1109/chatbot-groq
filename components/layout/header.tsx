@@ -1,15 +1,15 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useState } from "react";
-import { Badge } from "@/packages/shacnui/src/ui/badge";
-import { Button } from "@/packages/shacnui/src/ui/button";
-import { Separator } from "@/packages/shacnui/src/ui/separator";
+import { Badge } from "@heroitvn/shacnui/ui/badge";
+import { Button } from "@heroitvn/shacnui/ui/button";
+import { Separator } from "@heroitvn/shacnui/ui/separator";
 import {
   Sheet,
   SheetContent,
   SheetTrigger,
-} from "@/packages/shacnui/src/ui/sheet";
+} from "@heroitvn/shacnui/ui/sheet";
 import { ArrowRight, Menu, Wheat } from "lucide-react";
 import { Github } from "@/components/github-icon";
 import SignInButton from "@/components/auth/sign-in-button";
@@ -172,3 +172,4 @@ export default function Header() {
     </header>
   );
 }
+

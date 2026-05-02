@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import { Button } from "@/packages/shacnui/src/ui/button";
+import { Button } from "@heroitvn/shacnui/ui/button";
 import {
   Card,
   CardAction,
@@ -9,12 +9,12 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/packages/shacnui/src/ui/card";
+} from "@heroitvn/shacnui/ui/card";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/packages/shacnui/src/ui/collapsible";
+} from "@heroitvn/shacnui/ui/collapsible";
 import { cn } from "@/lib/utils";
 import { ChevronsUpDownIcon } from "lucide-react";
 import type { ComponentProps } from "react";
@@ -145,3 +145,4 @@ export const PlanTrigger = ({ className, ...props }: PlanTriggerProps) => (
     </Button>
   </CollapsibleTrigger>
 );
+

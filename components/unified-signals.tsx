@@ -1,12 +1,12 @@
-import { Badge } from "@/packages/shacnui/src/ui/badge";
+﻿import { Badge } from "@heroitvn/shacnui/ui/badge";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/packages/shacnui/src/ui/card";
-import { Separator } from "@/packages/shacnui/src/ui/separator";
+} from "@heroitvn/shacnui/ui/card";
+import { Separator } from "@heroitvn/shacnui/ui/separator";
 import {
   Activity,
   AlertTriangle,
@@ -54,17 +54,17 @@ const kpis = [
 const logGroups = [
   {
     label: "DB timeout exceeded",
-    meta: "842 events · checkout-service",
+    meta: "842 events Â· checkout-service",
     level: "error",
   },
   {
     label: "Retry storm detected",
-    meta: "417 events · payments-api",
+    meta: "417 events Â· payments-api",
     level: "warn",
   },
   {
     label: "Connection pool exhausted",
-    meta: "133 events · postgres-primary",
+    meta: "133 events Â· postgres-primary",
     level: "critical",
   },
 ];
@@ -435,7 +435,7 @@ export function UnifiedSignalsSection() {
                   Recent changes
                 </CardTitle>
                 <CardDescription className="text-slate-400">
-                  The strongest “why now?” signals around incident start time.
+                  The strongest â€œwhy now?â€ signals around incident start time.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">
@@ -506,3 +506,4 @@ export function UnifiedSignalsSection() {
     </section>
   );
 }
+

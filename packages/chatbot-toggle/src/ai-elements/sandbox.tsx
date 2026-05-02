@@ -1,16 +1,16 @@
-"use client";
+﻿"use client";
 
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/packages/shacnui/src/ui/collapsible";
+} from "@heroitvn/shacnui/ui/collapsible";
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@/packages/shacnui/src/ui/tabs";
+} from "@heroitvn/shacnui/ui/tabs";
 import { cn } from "@/lib/utils";
 import type { ToolUIPart } from "ai";
 import { ChevronDownIcon, Code } from "lucide-react";
@@ -130,3 +130,4 @@ export const SandboxTabContent = ({
 }: SandboxTabContentProps) => (
   <TabsContent className={cn("mt-0 text-sm", className)} {...props} />
 );
+

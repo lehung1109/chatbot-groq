@@ -1,10 +1,10 @@
-"use client";
+﻿"use client";
 
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/packages/shacnui/src/ui/collapsible";
+} from "@heroitvn/shacnui/ui/collapsible";
 import { cn } from "@/lib/utils";
 import {
   ChevronRightIcon,
@@ -302,3 +302,4 @@ export const FileTreeActions = ({
     {children}
   </div>
 );
+

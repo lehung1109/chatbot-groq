@@ -1,11 +1,11 @@
-"use client";
+﻿"use client";
 
-import { Badge } from "@/packages/shacnui/src/ui/badge";
+import { Badge } from "@heroitvn/shacnui/ui/badge";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/packages/shacnui/src/ui/collapsible";
+} from "@heroitvn/shacnui/ui/collapsible";
 import { cn } from "@/lib/utils";
 import {
   CheckCircle2Icon,
@@ -494,3 +494,4 @@ export const TestErrorStack = ({
     {children}
   </pre>
 );
+

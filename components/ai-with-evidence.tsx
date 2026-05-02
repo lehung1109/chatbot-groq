@@ -1,13 +1,13 @@
-import { Badge } from "@/packages/shacnui/src/ui/badge";
-import { Button } from "@/packages/shacnui/src/ui/button";
+﻿import { Badge } from "@heroitvn/shacnui/ui/badge";
+import { Button } from "@heroitvn/shacnui/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/packages/shacnui/src/ui/card";
-import { Separator } from "@/packages/shacnui/src/ui/separator";
+} from "@heroitvn/shacnui/ui/card";
+import { Separator } from "@heroitvn/shacnui/ui/separator";
 import {
   ArrowRight,
   Bot,
@@ -30,23 +30,23 @@ const prompts = [
 
 const toolEvents = [
   {
-    label: "Comparing deploy 1.41.9 → 1.42.0",
-    meta: "config diff · retry policy · pool settings",
+    label: "Comparing deploy 1.41.9 â†’ 1.42.0",
+    meta: "config diff Â· retry policy Â· pool settings",
     tone: "cyan",
   },
   {
     label: "Searching correlated error groups",
-    meta: "checkout-service · 12 min window",
+    meta: "checkout-service Â· 12 min window",
     tone: "rose",
   },
   {
     label: "Inspecting slow trace exemplars",
-    meta: "db.query · payment.authorize spans",
+    meta: "db.query Â· payment.authorize spans",
     tone: "emerald",
   },
   {
     label: "Retrieving related runbook and prior incident",
-    meta: "checkout latency regression · SEV-1",
+    meta: "checkout latency regression Â· SEV-1",
     tone: "amber",
   },
 ];
@@ -142,7 +142,7 @@ export function AiWithEvidenceSection() {
               <ShieldCheck className="mt-0.5 h-5 w-5 text-emerald-300" />
               <p className="text-sm leading-6 text-slate-200">
                 Use the assistant to accelerate investigation, summarize
-                context, and test hypotheses — not to replace engineering
+                context, and test hypotheses â€” not to replace engineering
                 judgment.
               </p>
             </div>
@@ -408,3 +408,4 @@ export function AiWithEvidenceSection() {
     </section>
   );
 }
+

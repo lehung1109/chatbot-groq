@@ -1,12 +1,12 @@
-"use client";
+﻿"use client";
 
 import { useControllableState } from "@radix-ui/react-use-controllable-state";
-import { Button } from "@/packages/shacnui/src/ui/button";
+import { Button } from "@heroitvn/shacnui/ui/button";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/packages/shacnui/src/ui/collapsible";
+} from "@heroitvn/shacnui/ui/collapsible";
 import { cn } from "@/lib/utils";
 import {
   AlertTriangleIcon,
@@ -526,3 +526,4 @@ StackTraceCopyButton.displayName = "StackTraceCopyButton";
 StackTraceExpandButton.displayName = "StackTraceExpandButton";
 StackTraceContent.displayName = "StackTraceContent";
 StackTraceFrames.displayName = "StackTraceFrames";
+

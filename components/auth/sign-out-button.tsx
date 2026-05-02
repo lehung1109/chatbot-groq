@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import { Button } from "@/packages/shacnui/src/ui/button";
+import { Button } from "@heroitvn/shacnui/ui/button";
 
 import { createClient } from "@/lib/supabase/client";
 
@@ -21,3 +21,4 @@ const SignOut = () => {
 };
 
 export default SignOut;
+

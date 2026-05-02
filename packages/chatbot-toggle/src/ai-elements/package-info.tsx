@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import { Badge } from "@/packages/shacnui/src/ui/badge";
+import { Badge } from "@heroitvn/shacnui/ui/badge";
 import { cn } from "@/lib/utils";
 import { ArrowRightIcon, MinusIcon, PackageIcon, PlusIcon } from "lucide-react";
 import type { HTMLAttributes } from "react";
@@ -237,3 +237,4 @@ export const PackageInfoDependency = ({
     )}
   </div>
 );
+

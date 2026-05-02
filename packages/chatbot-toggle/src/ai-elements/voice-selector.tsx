@@ -1,7 +1,7 @@
-"use client";
+﻿"use client";
 
 import { useControllableState } from "@radix-ui/react-use-controllable-state";
-import { Button } from "@/packages/shacnui/src/ui/button";
+import { Button } from "@heroitvn/shacnui/ui/button";
 import {
   Command,
   CommandDialog,
@@ -12,14 +12,14 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from "@/packages/shacnui/src/ui/command";
+} from "@heroitvn/shacnui/ui/command";
 import {
   Dialog,
   DialogContent,
   DialogTitle,
   DialogTrigger,
-} from "@/packages/shacnui/src/ui/dialog";
-import { Spinner } from "@/packages/shacnui/src/ui/spinner";
+} from "@heroitvn/shacnui/ui/dialog";
+import { Spinner } from "@heroitvn/shacnui/ui/spinner";
 import { cn } from "@/lib/utils";
 import {
   CircleSmallIcon,
@@ -282,123 +282,123 @@ export const VoiceSelectorAccent = ({
 
   switch (value) {
     case "american": {
-      emoji = "🇺🇸";
+      emoji = "ðŸ‡ºðŸ‡¸";
       break;
     }
     case "british": {
-      emoji = "🇬🇧";
+      emoji = "ðŸ‡¬ðŸ‡§";
       break;
     }
     case "australian": {
-      emoji = "🇦🇺";
+      emoji = "ðŸ‡¦ðŸ‡º";
       break;
     }
     case "canadian": {
-      emoji = "🇨🇦";
+      emoji = "ðŸ‡¨ðŸ‡¦";
       break;
     }
     case "irish": {
-      emoji = "🇮🇪";
+      emoji = "ðŸ‡®ðŸ‡ª";
       break;
     }
     case "scottish": {
-      emoji = "🏴󠁧󠁢󠁳󠁣󠁴󠁿";
+      emoji = "ðŸ´ó §ó ¢ó ³ó £ó ´ó ¿";
       break;
     }
     case "indian": {
-      emoji = "🇮🇳";
+      emoji = "ðŸ‡®ðŸ‡³";
       break;
     }
     case "south-african": {
-      emoji = "🇿🇦";
+      emoji = "ðŸ‡¿ðŸ‡¦";
       break;
     }
     case "new-zealand": {
-      emoji = "🇳🇿";
+      emoji = "ðŸ‡³ðŸ‡¿";
       break;
     }
     case "spanish": {
-      emoji = "🇪🇸";
+      emoji = "ðŸ‡ªðŸ‡¸";
       break;
     }
     case "french": {
-      emoji = "🇫🇷";
+      emoji = "ðŸ‡«ðŸ‡·";
       break;
     }
     case "german": {
-      emoji = "🇩🇪";
+      emoji = "ðŸ‡©ðŸ‡ª";
       break;
     }
     case "italian": {
-      emoji = "🇮🇹";
+      emoji = "ðŸ‡®ðŸ‡¹";
       break;
     }
     case "portuguese": {
-      emoji = "🇵🇹";
+      emoji = "ðŸ‡µðŸ‡¹";
       break;
     }
     case "brazilian": {
-      emoji = "🇧🇷";
+      emoji = "ðŸ‡§ðŸ‡·";
       break;
     }
     case "mexican": {
-      emoji = "🇲🇽";
+      emoji = "ðŸ‡²ðŸ‡½";
       break;
     }
     case "argentinian": {
-      emoji = "🇦🇷";
+      emoji = "ðŸ‡¦ðŸ‡·";
       break;
     }
     case "japanese": {
-      emoji = "🇯🇵";
+      emoji = "ðŸ‡¯ðŸ‡µ";
       break;
     }
     case "chinese": {
-      emoji = "🇨🇳";
+      emoji = "ðŸ‡¨ðŸ‡³";
       break;
     }
     case "korean": {
-      emoji = "🇰🇷";
+      emoji = "ðŸ‡°ðŸ‡·";
       break;
     }
     case "russian": {
-      emoji = "🇷🇺";
+      emoji = "ðŸ‡·ðŸ‡º";
       break;
     }
     case "arabic": {
-      emoji = "🇸🇦";
+      emoji = "ðŸ‡¸ðŸ‡¦";
       break;
     }
     case "dutch": {
-      emoji = "🇳🇱";
+      emoji = "ðŸ‡³ðŸ‡±";
       break;
     }
     case "swedish": {
-      emoji = "🇸🇪";
+      emoji = "ðŸ‡¸ðŸ‡ª";
       break;
     }
     case "norwegian": {
-      emoji = "🇳🇴";
+      emoji = "ðŸ‡³ðŸ‡´";
       break;
     }
     case "danish": {
-      emoji = "🇩🇰";
+      emoji = "ðŸ‡©ðŸ‡°";
       break;
     }
     case "finnish": {
-      emoji = "🇫🇮";
+      emoji = "ðŸ‡«ðŸ‡®";
       break;
     }
     case "polish": {
-      emoji = "🇵🇱";
+      emoji = "ðŸ‡µðŸ‡±";
       break;
     }
     case "turkish": {
-      emoji = "🇹🇷";
+      emoji = "ðŸ‡¹ðŸ‡·";
       break;
     }
     case "greek": {
-      emoji = "🇬🇷";
+      emoji = "ðŸ‡¬ðŸ‡·";
       break;
     }
     default: {
@@ -522,3 +522,4 @@ export const VoiceSelectorPreview = ({
     </Button>
   );
 };
+

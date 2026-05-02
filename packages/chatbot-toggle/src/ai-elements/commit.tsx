@@ -1,12 +1,12 @@
-"use client";
+﻿"use client";
 
-import { Avatar, AvatarFallback } from "@/packages/shacnui/src/ui/avatar";
-import { Button } from "@/packages/shacnui/src/ui/button";
+import { Avatar, AvatarFallback } from "@heroitvn/shacnui/ui/avatar";
+import { Button } from "@heroitvn/shacnui/ui/button";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/packages/shacnui/src/ui/collapsible";
+} from "@heroitvn/shacnui/ui/collapsible";
 import { cn } from "@/lib/utils";
 import {
   CheckIcon,
@@ -100,7 +100,7 @@ export const CommitSeparator = ({
   ...props
 }: CommitSeparatorProps) => (
   <span className={className} {...props}>
-    {children ?? "•"}
+    {children ?? "â€¢"}
   </span>
 );
 
@@ -456,3 +456,4 @@ export const CommitFileDeletions = ({
     </span>
   );
 };
+

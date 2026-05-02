@@ -1,17 +1,17 @@
-"use client";
+﻿"use client";
 
-import { Badge } from "@/packages/shacnui/src/ui/badge";
-import type { CarouselApi } from "@/packages/shacnui/src/ui/carousel";
+import { Badge } from "@heroitvn/shacnui/ui/badge";
+import type { CarouselApi } from "@heroitvn/shacnui/ui/carousel";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from "@/packages/shacnui/src/ui/carousel";
+} from "@heroitvn/shacnui/ui/carousel";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "@/packages/shacnui/src/ui/hover-card";
+} from "@heroitvn/shacnui/ui/hover-card";
 import { cn } from "@/lib/utils";
 import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 import type { ComponentProps } from "react";
@@ -294,3 +294,4 @@ export const InlineCitationQuote = ({
     {children}
   </blockquote>
 );
+

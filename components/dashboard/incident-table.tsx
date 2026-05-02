@@ -1,12 +1,12 @@
-import { Badge } from "@/packages/shacnui/src/ui/badge";
-import { Button } from "@/packages/shacnui/src/ui/button";
+﻿import { Badge } from "@heroitvn/shacnui/ui/badge";
+import { Button } from "@heroitvn/shacnui/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/packages/shacnui/src/ui/card";
+} from "@heroitvn/shacnui/ui/card";
 import { incidents } from "@/data/dashboard";
 
 const statusVariant = {
@@ -44,7 +44,7 @@ export function IncidentTable() {
                   <td className="px-4 py-3">
                     <div className="font-medium">{incident.name}</div>
                     <div className="text-xs text-muted-foreground">
-                      {incident.service} · {incident.impact}
+                      {incident.service} Â· {incident.impact}
                     </div>
                   </td>
                   <td className="px-4 py-3 text-muted-foreground">
@@ -67,3 +67,4 @@ export function IncidentTable() {
     </Card>
   );
 }
+

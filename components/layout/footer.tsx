@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { Badge } from "@/packages/shacnui/src/ui/badge";
-import { Button } from "@/packages/shacnui/src/ui/button";
-import { Separator } from "@/packages/shacnui/src/ui/separator";
+﻿import Link from "next/link";
+import { Badge } from "@heroitvn/shacnui/ui/badge";
+import { Button } from "@heroitvn/shacnui/ui/button";
+import { Separator } from "@heroitvn/shacnui/ui/separator";
 import { Globe, HeartHandshake, TerminalSquare, Wheat } from "lucide-react";
 import { Github } from "../github-icon";
 
@@ -126,7 +126,7 @@ export function SiteFooter() {
 
         <div className="flex flex-col gap-4 text-sm text-slate-500 md:flex-row md:items-center md:justify-between">
           <div className="flex flex-wrap items-center gap-3">
-            <span>© 2026 Incident Copilot</span>
+            <span>Â© 2026 Incident Copilot</span>
             <span className="hidden h-1 w-1 rounded-full bg-slate-700 md:inline-block" />
             <span>Built with Next.js, shadcn/ui, and Tailwind CSS</span>
           </div>
@@ -158,3 +158,4 @@ export function SiteFooter() {
     </footer>
   );
 }
+

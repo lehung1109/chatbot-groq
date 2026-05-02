@@ -1,13 +1,13 @@
-import Link from "next/link";
-import { Badge } from "@/packages/shacnui/src/ui/badge";
-import { Button } from "@/packages/shacnui/src/ui/button";
-import { Card, CardContent } from "@/packages/shacnui/src/ui/card";
+﻿import Link from "next/link";
+import { Badge } from "@heroitvn/shacnui/ui/badge";
+import { Button } from "@heroitvn/shacnui/ui/button";
+import { Card, CardContent } from "@heroitvn/shacnui/ui/card";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/packages/shacnui/src/ui/accordion";
+} from "@heroitvn/shacnui/ui/accordion";
 import { ArrowRight, CircleHelp, ShieldCheck } from "lucide-react";
 import { Github } from "./github-icon";
 
@@ -159,3 +159,4 @@ export function FaqSection() {
     </section>
   );
 }
+

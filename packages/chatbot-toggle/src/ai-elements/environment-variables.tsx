@@ -1,8 +1,8 @@
-"use client";
+﻿"use client";
 
-import { Badge } from "@/packages/shacnui/src/ui/badge";
-import { Button } from "@/packages/shacnui/src/ui/button";
-import { Switch } from "@/packages/shacnui/src/ui/switch";
+import { Badge } from "@heroitvn/shacnui/ui/badge";
+import { Button } from "@heroitvn/shacnui/ui/button";
+import { Switch } from "@heroitvn/shacnui/ui/switch";
 import { cn } from "@/lib/utils";
 import { CheckIcon, CopyIcon, EyeIcon, EyeOffIcon } from "lucide-react";
 import type { ComponentProps, HTMLAttributes } from "react";
@@ -190,7 +190,7 @@ export const EnvironmentVariableValue = ({
 
   const displayValue = showValues
     ? value
-    : "•".repeat(Math.min(value.length, 20));
+    : "â€¢".repeat(Math.min(value.length, 20));
 
   return (
     <span
@@ -322,3 +322,4 @@ export const EnvironmentVariableRequired = ({
     {children ?? "Required"}
   </Badge>
 );
+

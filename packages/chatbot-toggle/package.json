@@ -22,6 +22,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@heroitvn/shacnui": "file:../shacnui",
     "@ai-sdk/react": "^3.0.170",
     "@modelcontextprotocol/client": "^2.0.0-alpha.2",
     "ai": "^6.0.168",

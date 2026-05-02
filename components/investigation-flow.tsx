@@ -1,13 +1,13 @@
-import { Badge } from "@/packages/shacnui/src/ui/badge";
-import { Button } from "@/packages/shacnui/src/ui/button";
+﻿import { Badge } from "@heroitvn/shacnui/ui/badge";
+import { Button } from "@heroitvn/shacnui/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/packages/shacnui/src/ui/card";
-import { Separator } from "@/packages/shacnui/src/ui/separator";
+} from "@heroitvn/shacnui/ui/card";
+import { Separator } from "@heroitvn/shacnui/ui/separator";
 import {
   AlertTriangle,
   ArrowRight,
@@ -57,7 +57,7 @@ const steps = [
 const proofItems = [
   {
     label: "Incident summary",
-    detail: "SEV-1 · Checkout latency spike · Blast radius detected",
+    detail: "SEV-1 Â· Checkout latency spike Â· Blast radius detected",
   },
   {
     label: "Recent changes",
@@ -260,3 +260,4 @@ export default function InvestigationFlow() {
     </section>
   );
 }
+
