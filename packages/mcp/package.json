@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@ai-sdk/groq": "^3.0.35",
-    "@heroitvn/chatbot-toggle": "^0.1.0",
+    "@heroitvn/chatbot-toggle": "workspace:*",
     "@modelcontextprotocol/client": "^2.0.0-alpha.2",
     "@modelcontextprotocol/server": "^2.0.0-alpha.2",
     "ai": "^6.0.168",
