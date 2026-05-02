@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import {
   InputGroup,
@@ -7,7 +7,7 @@ import {
   InputGroupInput,
   InputGroupText,
 } from "@heroitvn/shacnui/ui/input-group";
-import { cn } from "@/lib/utils";
+import { cn } from "@heroitvn/utils";
 import { CheckIcon, CopyIcon } from "lucide-react";
 import type { ComponentProps } from "react";
 import {

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import {
   Accordion,
@@ -7,7 +7,7 @@ import {
   AccordionTrigger,
 } from "@heroitvn/shacnui/ui/accordion";
 import { Badge } from "@heroitvn/shacnui/ui/badge";
-import { cn } from "@/lib/utils";
+import { cn } from "@heroitvn/utils";
 import type { Tool } from "ai";
 import { BotIcon } from "lucide-react";
 import type { ComponentProps } from "react";

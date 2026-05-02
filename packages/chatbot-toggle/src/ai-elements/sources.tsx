@@ -1,11 +1,11 @@
-﻿"use client";
+"use client";
 
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@heroitvn/shacnui/ui/collapsible";
-import { cn } from "@/lib/utils";
+import { cn } from "@heroitvn/utils";
 import { BookIcon, ChevronDownIcon } from "lucide-react";
 import type { ComponentProps } from "react";
 

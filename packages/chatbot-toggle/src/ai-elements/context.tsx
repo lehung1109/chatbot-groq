@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Button } from "@heroitvn/shacnui/ui/button";
 import {
@@ -7,7 +7,7 @@ import {
   HoverCardTrigger,
 } from "@heroitvn/shacnui/ui/hover-card";
 import { Progress } from "@heroitvn/shacnui/ui/progress";
-import { cn } from "@/lib/utils";
+import { cn } from "@heroitvn/utils";
 import type { LanguageModelUsage } from "ai";
 import type { ComponentProps } from "react";
 import { createContext, useContext, useMemo } from "react";

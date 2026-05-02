@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Button } from "@heroitvn/shacnui/ui/button";
 import {
@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@heroitvn/shacnui/ui/select";
-import { cn } from "@/lib/utils";
+import { cn } from "@heroitvn/utils";
 import { CheckIcon, CopyIcon } from "lucide-react";
 import type { ComponentProps, CSSProperties, HTMLAttributes } from "react";
 import {

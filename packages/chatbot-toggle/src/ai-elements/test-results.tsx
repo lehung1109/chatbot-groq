@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Badge } from "@heroitvn/shacnui/ui/badge";
 import {
@@ -6,7 +6,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@heroitvn/shacnui/ui/collapsible";
-import { cn } from "@/lib/utils";
+import { cn } from "@heroitvn/utils";
 import {
   CheckCircle2Icon,
   ChevronRightIcon,

@@ -27,7 +27,7 @@ const Example = () => {
           <FileTreeFile name="use-theme.ts" path="src/hooks/use-theme.ts" />
         </FileTreeFolder>
         <FileTreeFolder name="lib" path="src/lib">
-          <FileTreeFile name="utils.ts" path="src/lib/utils.ts" />
+          <FileTreeFile name="utils.ts" path="packages/utils/src/utils.ts" />
         </FileTreeFolder>
         <FileTreeFile name="app.tsx" path="src/app.tsx" />
         <FileTreeFile name="main.tsx" path="src/main.tsx" />

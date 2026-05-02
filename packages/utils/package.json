@@ -1,0 +1,33 @@
+{
+  "name": "@heroitvn/utils",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Shared utilities (cn, zod helpers, errors)",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./src/utils.ts",
+      "import": "./src/utils.ts",
+      "default": "./src/utils.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@heroitvn/google": "^0.1.0",
+    "ai": "^6.0.168",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.5.0",
+    "zod": "^4.3.6"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

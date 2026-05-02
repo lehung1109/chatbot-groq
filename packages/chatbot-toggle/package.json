@@ -22,6 +22,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@heroitvn/utils": "^0.1.0",
     "@heroitvn/shacnui": "^0.1.0",
     "@ai-sdk/react": "^3.0.170",
     "@modelcontextprotocol/client": "^2.0.0-alpha.2",

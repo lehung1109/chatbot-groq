@@ -12,7 +12,8 @@
     "isolatedModules": true,
     "paths": {
       "@/*": ["../../*"],
-      "@heroitvn/shacnui/*": ["../shacnui/src/*"]
+      "@heroitvn/shacnui/*": ["../shacnui/src/*"],
+      "@heroitvn/utils": ["../utils/src/utils.ts"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],

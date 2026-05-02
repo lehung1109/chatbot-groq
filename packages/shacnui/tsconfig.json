@@ -4,7 +4,8 @@
     "noEmit": true,
     "paths": {
       "@/*": ["../../*"],
-      "@heroitvn/shacnui/*": ["./src/*"]
+      "@heroitvn/shacnui/*": ["./src/*"],
+      "@heroitvn/utils": ["../utils/src/utils.ts"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"]

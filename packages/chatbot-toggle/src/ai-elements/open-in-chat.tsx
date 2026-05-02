@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Button } from "@heroitvn/shacnui/ui/button";
 import {
@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@heroitvn/shacnui/ui/dropdown-menu";
-import { cn } from "@/lib/utils";
+import { cn } from "@heroitvn/utils";
 import {
   ChevronDownIcon,
   ExternalLinkIcon,

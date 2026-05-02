@@ -1,4 +1,4 @@
-﻿import {
+import {
   Card,
   CardAction,
   CardContent,
@@ -7,7 +7,7 @@
   CardHeader,
   CardTitle,
 } from "@heroitvn/shacnui/ui/card";
-import { cn } from "@/lib/utils";
+import { cn } from "@heroitvn/utils";
 import { Handle, Position } from "@xyflow/react";
 import type { ComponentProps } from "react";
 

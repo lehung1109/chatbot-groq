@@ -1,7 +1,7 @@
-﻿import { cva, type VariantProps } from "class-variance-authority";
+import { cva, type VariantProps } from "class-variance-authority";
 import { Slot } from "radix-ui";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@heroitvn/utils";
 import { Separator } from "@heroitvn/shacnui/ui/separator";
 
 const buttonGroupVariants = cva(

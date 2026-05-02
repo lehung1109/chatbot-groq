@@ -1,4 +1,4 @@
-﻿import {
+import {
   Command,
   CommandDialog,
   CommandEmpty,
@@ -15,7 +15,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@heroitvn/shacnui/ui/dialog";
-import { cn } from "@/lib/utils";
+import { cn } from "@heroitvn/utils";
 import type { ComponentProps, ReactNode } from "react";
 
 export type ModelSelectorProps = ComponentProps<typeof Dialog>;

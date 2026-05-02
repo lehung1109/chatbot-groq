@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Button } from "@heroitvn/shacnui/ui/button";
 import {
@@ -11,7 +11,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@heroitvn/shacnui/ui/tooltip";
-import { cn } from "@/lib/utils";
+import { cn } from "@heroitvn/utils";
 import { cjk } from "@streamdown/cjk";
 import { code } from "@streamdown/code";
 import { math } from "@streamdown/math";

@@ -1,8 +1,8 @@
-﻿"use client";
+"use client";
 
 import { Button } from "@heroitvn/shacnui/ui/button";
 import { ScrollArea, ScrollBar } from "@heroitvn/shacnui/ui/scroll-area";
-import { cn } from "@/lib/utils";
+import { cn } from "@heroitvn/utils";
 import type { ComponentProps } from "react";
 import { useCallback } from "react";
 

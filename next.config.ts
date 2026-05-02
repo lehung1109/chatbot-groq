@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
     "@heroitvn/google",
     "@heroitvn/shacnui",
     "@heroitvn/supabase",
+    "@heroitvn/utils",
   ],
 };
 

@@ -1,8 +1,8 @@
-﻿"use client";
+"use client";
 
 import { Alert, AlertDescription } from "@heroitvn/shacnui/ui/alert";
 import { Button } from "@heroitvn/shacnui/ui/button";
-import { cn } from "@/lib/utils";
+import { cn } from "@heroitvn/utils";
 import type { ToolUIPart } from "ai";
 import type { ComponentProps, ReactNode } from "react";
 import { createContext, useContext, useMemo } from "react";

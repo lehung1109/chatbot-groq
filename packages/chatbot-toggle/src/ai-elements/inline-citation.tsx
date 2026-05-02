@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Badge } from "@heroitvn/shacnui/ui/badge";
 import type { CarouselApi } from "@heroitvn/shacnui/ui/carousel";
@@ -12,7 +12,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@heroitvn/shacnui/ui/hover-card";
-import { cn } from "@/lib/utils";
+import { cn } from "@heroitvn/utils";
 import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 import type { ComponentProps } from "react";
 import {

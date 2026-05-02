@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Button } from "@heroitvn/shacnui/ui/button";
 import {
@@ -7,7 +7,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@heroitvn/shacnui/ui/tooltip";
-import { cn } from "@/lib/utils";
+import { cn } from "@heroitvn/utils";
 import type { LucideIcon } from "lucide-react";
 import { XIcon } from "lucide-react";
 import type { ComponentProps, HTMLAttributes } from "react";

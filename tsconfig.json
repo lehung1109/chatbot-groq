@@ -23,6 +23,7 @@
       "@heroitvn/google/*": ["./packages/google/src/*"],
       "@heroitvn/shacnui/*": ["./packages/shacnui/src/*"],
       "@heroitvn/supabase/*": ["./packages/supabase/src/*"],
+      "@heroitvn/utils": ["./packages/utils/src/utils.ts"],
       "@heroitvn/*": ["./packages/*"]
     }
   },

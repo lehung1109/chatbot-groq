@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useControllableState } from "@radix-ui/react-use-controllable-state";
 import {
@@ -6,7 +6,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@heroitvn/shacnui/ui/collapsible";
-import { cn } from "@/lib/utils";
+import { cn } from "@heroitvn/utils";
 import { cjk } from "@streamdown/cjk";
 import { code } from "@streamdown/code";
 import { math } from "@streamdown/math";

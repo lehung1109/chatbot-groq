@@ -1,7 +1,7 @@
-﻿"use client";
+"use client";
 
 import { Badge } from "@heroitvn/shacnui/ui/badge";
-import { cn } from "@/lib/utils";
+import { cn } from "@heroitvn/utils";
 import { ArrowRightIcon, MinusIcon, PackageIcon, PlusIcon } from "lucide-react";
 import type { HTMLAttributes } from "react";
 import { createContext, useContext, useMemo } from "react";

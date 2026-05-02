@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import {
   Command,
@@ -39,7 +39,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@heroitvn/shacnui/ui/tooltip";
-import { cn } from "@/lib/utils";
+import { cn } from "@heroitvn/utils";
 import type { ChatStatus, FileUIPart, SourceDocumentUIPart } from "ai";
 import {
   CornerDownLeftIcon,

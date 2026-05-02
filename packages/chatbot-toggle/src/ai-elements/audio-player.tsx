@@ -1,11 +1,11 @@
-﻿"use client";
+"use client";
 
 import { Button } from "@heroitvn/shacnui/ui/button";
 import {
   ButtonGroup,
   ButtonGroupText,
 } from "@heroitvn/shacnui/ui/button-group";
-import { cn } from "@/lib/utils";
+import { cn } from "@heroitvn/utils";
 import type { Experimental_SpeechResult as SpeechResult } from "ai";
 import {
   MediaControlBar,

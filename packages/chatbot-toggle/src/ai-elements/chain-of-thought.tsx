@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useControllableState } from "@radix-ui/react-use-controllable-state";
 import { Badge } from "@heroitvn/shacnui/ui/badge";
@@ -7,7 +7,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@heroitvn/shacnui/ui/collapsible";
-import { cn } from "@/lib/utils";
+import { cn } from "@heroitvn/utils";
 import type { LucideIcon } from "lucide-react";
 import { BrainIcon, ChevronDownIcon, DotIcon } from "lucide-react";
 import type { ComponentProps, ReactNode } from "react";

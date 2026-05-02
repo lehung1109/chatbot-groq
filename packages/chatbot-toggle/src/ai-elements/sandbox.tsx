@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import {
   Collapsible,
@@ -11,7 +11,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@heroitvn/shacnui/ui/tabs";
-import { cn } from "@/lib/utils";
+import { cn } from "@heroitvn/utils";
 import type { ToolUIPart } from "ai";
 import { ChevronDownIcon, Code } from "lucide-react";
 import type { ComponentProps } from "react";

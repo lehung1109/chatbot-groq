@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Button } from "@heroitvn/shacnui/ui/button";
 import {
@@ -6,7 +6,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@heroitvn/shacnui/ui/hover-card";
-import { cn } from "@/lib/utils";
+import { cn } from "@heroitvn/utils";
 import type { FileUIPart, SourceDocumentUIPart } from "ai";
 import {
   FileTextIcon,

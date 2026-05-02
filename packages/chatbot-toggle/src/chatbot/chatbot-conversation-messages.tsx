@@ -7,7 +7,7 @@ import {
 } from "@heroitvn/shacnui/ui/alert";
 import { AlertTriangleIcon } from "lucide-react";
 import ChatbotConversationMessage from "./chatbot-conversation-message";
-import { getErrorMessage } from "../../../../lib/utils";
+import { getErrorMessage } from "@heroitvn/utils";
 import {
   useChatMessagesContext,
   useChatStatusContext,

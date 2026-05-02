@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Button } from "@heroitvn/shacnui/ui/button";
 import { Separator } from "@heroitvn/shacnui/ui/separator";
@@ -7,7 +7,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@heroitvn/shacnui/ui/tooltip";
-import { cn } from "@/lib/utils";
+import { cn } from "@heroitvn/utils";
 import type { LucideProps } from "lucide-react";
 import { BookmarkIcon } from "lucide-react";
 import type { ComponentProps, HTMLAttributes } from "react";

@@ -1,9 +1,9 @@
-﻿"use client";
+"use client";
 
 import { Badge } from "@heroitvn/shacnui/ui/badge";
 import { Button } from "@heroitvn/shacnui/ui/button";
 import { Switch } from "@heroitvn/shacnui/ui/switch";
-import { cn } from "@/lib/utils";
+import { cn } from "@heroitvn/utils";
 import { CheckIcon, CopyIcon, EyeIcon, EyeOffIcon } from "lucide-react";
 import type { ComponentProps, HTMLAttributes } from "react";
 import {

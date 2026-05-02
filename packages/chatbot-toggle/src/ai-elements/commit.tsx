@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Avatar, AvatarFallback } from "@heroitvn/shacnui/ui/avatar";
 import { Button } from "@heroitvn/shacnui/ui/button";
@@ -7,7 +7,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@heroitvn/shacnui/ui/collapsible";
-import { cn } from "@/lib/utils";
+import { cn } from "@heroitvn/utils";
 import {
   CheckIcon,
   CopyIcon,
