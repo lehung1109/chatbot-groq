@@ -1,3 +1,5 @@
+import SignInForm from "@/components/auth/sign-in-form";
+import { Separator } from "@/packages/shacnui/src/ui/separator";
 import GoogleSignInButton from "@heroitvn/google/google-sign-in-button";
 import { Metadata } from "next";
 
@@ -27,6 +29,8 @@ export default function LoginPage() {
 
       <section className="flex items-center justify-center px-6 py-30 lg:p-6">
         <div className="w-full max-w-md">
+          <SignInForm />
+          <Separator className="my-4" />
           <GoogleSignInButton />
         </div>
       </section>

@@ -23,7 +23,7 @@ const SignInButton = () => {
   }, [supabase.auth]);
 
   return (
-    claims && (
+    !claims && (
       <Button asChild className="bg-cyan-500 text-slate-950 hover:bg-cyan-400">
         <a href="/sign-in">
           Sign in

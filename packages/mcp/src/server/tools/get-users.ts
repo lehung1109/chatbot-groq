@@ -15,7 +15,7 @@ export const registerGetUsersTool = (server: McpServer) => {
 
       const elicitationId = crypto.randomUUID();
 
-      await ctx.mcpReq.elicitInput({
+      const elicitationResult = await ctx.mcpReq.elicitInput({
         mode: "form",
         message: "MCP Server need connect to database to get users information",
         requestedSchema: {
@@ -28,6 +28,8 @@ export const registerGetUsersTool = (server: McpServer) => {
           elicitationId,
         },
       });
+
+      console.log(elicitationResult);
 
       return { content: [{ type: "text", text: "OK" }] };
     },

@@ -5,6 +5,7 @@ import { FinalCtaSection } from "@/components/final-cta";
 import Hero from "@/components/hero";
 import InvestigationFlow from "@/components/investigation-flow";
 import { UnifiedSignalsSection } from "@/components/unified-signals";
+import { ChatbotToggle } from "@/packages/chatbot-toggle/src";
 import { Metadata } from "next";
 
 // metadata
@@ -24,6 +25,7 @@ export default function Home() {
       <BuiltForOnCallSection />
       <FaqSection />
       <FinalCtaSection />
+      <ChatbotToggle isFloat={true} />
     </>
   );
 }
