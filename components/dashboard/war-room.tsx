@@ -1,11 +1,11 @@
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/packages/shacnui/src/ui/badge";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/packages/shacnui/src/ui/card";
 import { warRoomMembers } from "@/data/dashboard";
 
 export function WarRoom() {

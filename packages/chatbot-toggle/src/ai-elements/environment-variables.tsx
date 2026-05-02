@@ -1,8 +1,8 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
+import { Badge } from "@/packages/shacnui/src/ui/badge";
+import { Button } from "@/packages/shacnui/src/ui/button";
+import { Switch } from "@/packages/shacnui/src/ui/switch";
 import { cn } from "@/lib/utils";
 import { CheckIcon, CopyIcon, EyeIcon, EyeOffIcon } from "lucide-react";
 import type { ComponentProps, HTMLAttributes } from "react";
@@ -54,12 +54,12 @@ export const EnvironmentVariables = ({
       setInternalShowValues(show);
       onShowValuesChange?.(show);
     },
-    [onShowValuesChange]
+    [onShowValuesChange],
   );
 
   const contextValue = useMemo(
     () => ({ setShowValues, showValues }),
-    [setShowValues, showValues]
+    [setShowValues, showValues],
   );
 
   return (
@@ -84,7 +84,7 @@ export const EnvironmentVariablesHeader = ({
   <div
     className={cn(
       "flex items-center justify-between border-b px-4 py-3",
-      className
+      className,
     )}
     {...props}
   >
@@ -197,7 +197,7 @@ export const EnvironmentVariableValue = ({
       className={cn(
         "font-mono text-muted-foreground text-sm",
         !showValues && "select-none",
-        className
+        className,
       )}
       {...props}
     >
@@ -225,7 +225,7 @@ export const EnvironmentVariable = ({
       <div
         className={cn(
           "flex items-center justify-between gap-4 px-4 py-3",
-          className
+          className,
         )}
         {...props}
       >
@@ -293,7 +293,7 @@ export const EnvironmentVariableCopyButton = ({
     () => () => {
       window.clearTimeout(timeoutRef.current);
     },
-    []
+    [],
   );
 
   const Icon = isCopied ? CheckIcon : CopyIcon;

@@ -1,8 +1,8 @@
 "use client";
 
 import AIProvider from "../providers/ai-provider";
-import { Switch } from "../../../../components/ui/switch";
-import { Label } from "../../../../components/ui/label";
+import { Switch } from "../../../shacnui/src/ui/switch";
+import { Label } from "../../../shacnui/src/ui/label";
 import { useState } from "react";
 import FloatingChatbot from "./floating-chatbot";
 import Chatbot from "./chatbot";

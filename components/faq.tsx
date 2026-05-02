@@ -1,13 +1,13 @@
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/packages/shacnui/src/ui/badge";
+import { Button } from "@/packages/shacnui/src/ui/button";
+import { Card, CardContent } from "@/packages/shacnui/src/ui/card";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
+} from "@/packages/shacnui/src/ui/accordion";
 import { ArrowRight, CircleHelp, ShieldCheck } from "lucide-react";
 import { Github } from "./github-icon";
 

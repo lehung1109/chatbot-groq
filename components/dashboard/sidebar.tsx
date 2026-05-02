@@ -8,9 +8,9 @@ import {
   ShieldAlert,
   Clock,
 } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Badge } from "@/packages/shacnui/src/ui/badge";
+import { Button } from "@/packages/shacnui/src/ui/button";
+import { Card } from "@/packages/shacnui/src/ui/card";
 
 const navItems = [
   { label: "Overview", icon: Activity, active: true },

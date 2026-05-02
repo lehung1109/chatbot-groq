@@ -1,14 +1,14 @@
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Badge } from "@/packages/shacnui/src/ui/badge";
+import { Button } from "@/packages/shacnui/src/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+} from "@/packages/shacnui/src/ui/card";
+import { Separator } from "@/packages/shacnui/src/ui/separator";
 import {
   AlertTriangle,
   ArrowRight,

@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/packages/shacnui/src/ui/badge";
+import { Button } from "@/packages/shacnui/src/ui/button";
+import { Card, CardContent } from "@/packages/shacnui/src/ui/card";
 import { ArrowRight, PlayCircle, Sparkles } from "lucide-react";
 import { Github } from "./github-icon";
 

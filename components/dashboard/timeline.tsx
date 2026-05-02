@@ -1,11 +1,11 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/packages/shacnui/src/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/packages/shacnui/src/ui/card";
 import { timelineItems } from "@/data/dashboard";
 
 export function Timeline() {

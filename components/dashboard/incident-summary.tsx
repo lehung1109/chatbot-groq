@@ -1,5 +1,5 @@
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/packages/shacnui/src/ui/badge";
+import { Card, CardContent } from "@/packages/shacnui/src/ui/card";
 import { summaryCards } from "@/data/dashboard";
 
 const toneMap = {

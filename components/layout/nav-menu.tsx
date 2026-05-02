@@ -8,7 +8,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
+} from "@/packages/shacnui/src/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 
 const links = [

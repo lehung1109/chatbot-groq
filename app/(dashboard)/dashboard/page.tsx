@@ -1,6 +1,6 @@
 import { HealthChart } from "@/components/chart/health-chart";
 import { IncidentSummary } from "@/components/dashboard/incident-summary";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/packages/shacnui/src/ui/button";
 import { Metadata } from "next";
 import {
   Card,
@@ -8,8 +8,8 @@ import {
   CardTitle,
   CardDescription,
   CardContent,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+} from "@/packages/shacnui/src/ui/card";
+import { Badge } from "@/packages/shacnui/src/ui/badge";
 import { IncidentTable } from "@/components/dashboard/incident-table";
 import { Timeline } from "@/components/dashboard/timeline";
 import { WarRoom } from "@/components/dashboard/war-room";

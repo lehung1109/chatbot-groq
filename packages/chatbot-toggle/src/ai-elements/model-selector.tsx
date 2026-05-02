@@ -8,13 +8,13 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from "@/components/ui/command";
+} from "@/packages/shacnui/src/ui/command";
 import {
   Dialog,
   DialogContent,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "@/packages/shacnui/src/ui/dialog";
 import { cn } from "@/lib/utils";
 import type { ComponentProps, ReactNode } from "react";
 
@@ -44,7 +44,7 @@ export const ModelSelectorContent = ({
     aria-describedby={undefined}
     className={cn(
       "outline! border-none! p-0 outline-border! outline-solid!",
-      className
+      className,
     )}
     {...props}
   >
@@ -197,7 +197,7 @@ export const ModelSelectorLogoGroup = ({
   <div
     className={cn(
       "flex shrink-0 items-center -space-x-1 [&>img]:rounded-full [&>img]:bg-background [&>img]:p-px [&>img]:ring-1 dark:[&>img]:bg-foreground",
-      className
+      className,
     )}
     {...props}
   />

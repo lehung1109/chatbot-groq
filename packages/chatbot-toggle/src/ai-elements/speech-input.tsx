@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Spinner } from "@/components/ui/spinner";
+import { Button } from "@/packages/shacnui/src/ui/button";
+import { Spinner } from "@/packages/shacnui/src/ui/spinner";
 import { cn } from "@/lib/utils";
 import { MicIcon, SquareIcon } from "lucide-react";
 import type { ComponentProps } from "react";
@@ -189,7 +189,7 @@ export const SpeechInput = ({
         }
       }
     },
-    []
+    [],
   );
 
   // Start MediaRecorder recording
@@ -308,7 +308,7 @@ export const SpeechInput = ({
           isListening
             ? "bg-destructive text-white hover:bg-destructive/80 hover:text-white"
             : "bg-primary text-primary-foreground hover:bg-primary/80 hover:text-primary-foreground",
-          className
+          className,
         )}
         disabled={isDisabled}
         onClick={toggleListening}

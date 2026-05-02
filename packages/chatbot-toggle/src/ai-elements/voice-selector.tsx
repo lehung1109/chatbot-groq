@@ -1,7 +1,7 @@
 "use client";
 
 import { useControllableState } from "@radix-ui/react-use-controllable-state";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/packages/shacnui/src/ui/button";
 import {
   Command,
   CommandDialog,
@@ -12,14 +12,14 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from "@/components/ui/command";
+} from "@/packages/shacnui/src/ui/command";
 import {
   Dialog,
   DialogContent,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Spinner } from "@/components/ui/spinner";
+} from "@/packages/shacnui/src/ui/dialog";
+import { Spinner } from "@/packages/shacnui/src/ui/spinner";
 import { cn } from "@/lib/utils";
 import {
   CircleSmallIcon,
@@ -43,14 +43,14 @@ interface VoiceSelectorContextValue {
 }
 
 const VoiceSelectorContext = createContext<VoiceSelectorContextValue | null>(
-  null
+  null,
 );
 
 export const useVoiceSelector = () => {
   const context = useContext(VoiceSelectorContext);
   if (!context) {
     throw new Error(
-      "VoiceSelector components must be used within VoiceSelector"
+      "VoiceSelector components must be used within VoiceSelector",
     );
   }
   return context;
@@ -86,7 +86,7 @@ export const VoiceSelector = ({
 
   const voiceSelectorContext = useMemo(
     () => ({ open, setOpen, setValue, value }),
-    [value, setValue, open, setOpen]
+    [value, setValue, open, setOpen],
   );
 
   return (
@@ -496,7 +496,7 @@ export const VoiceSelectorPreview = ({
       onClick?.(event);
       onPlay?.();
     },
-    [onClick, onPlay]
+    [onClick, onPlay],
   );
 
   let icon = <PlayIcon className="size-3" />;

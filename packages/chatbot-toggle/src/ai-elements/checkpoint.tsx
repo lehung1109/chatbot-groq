@@ -1,12 +1,12 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
+import { Button } from "@/packages/shacnui/src/ui/button";
+import { Separator } from "@/packages/shacnui/src/ui/separator";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from "@/packages/shacnui/src/ui/tooltip";
 import { cn } from "@/lib/utils";
 import type { LucideProps } from "lucide-react";
 import { BookmarkIcon } from "lucide-react";
@@ -22,7 +22,7 @@ export const Checkpoint = ({
   <div
     className={cn(
       "flex items-center gap-0.5 overflow-hidden text-muted-foreground",
-      className
+      className,
     )}
     {...props}
   >

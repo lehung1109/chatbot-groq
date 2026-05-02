@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/packages/shacnui/src/ui/badge";
+import { Button } from "@/packages/shacnui/src/ui/button";
+import { Separator } from "@/packages/shacnui/src/ui/separator";
 import { Globe, HeartHandshake, TerminalSquare, Wheat } from "lucide-react";
 import { Github } from "../github-icon";
 
