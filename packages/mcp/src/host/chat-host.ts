@@ -1,12 +1,16 @@
 import { groq } from "@ai-sdk/groq";
 import {
+  type AssistantContent,
   convertToModelMessages,
   createUIMessageStream,
   createUIMessageStreamResponse,
+  type FilePart,
+  type ImagePart,
   ModelMessage,
   smoothStream,
   stepCountIs,
   streamText,
+  type TextPart,
   type UIMessage,
 } from "ai";
 import { pathToFileURL } from "node:url";
@@ -19,8 +23,128 @@ import {
 import type { GroqChatModelId } from "@heroitvn/chatbot-toggle";
 import { registerAppElicitationHandlers } from "./register-app-elicitation";
 import { SupabaseClient } from "@supabase/supabase-js";
+import type { ContentBlock, PromptMessage } from "@modelcontextprotocol/client";
 
 const systemPrompt = `You are a helpful assistant that can answer questions and help with tasks, call tools when you need to get information from the user`;
+
+type AssistantContentArrayElement = Exclude<AssistantContent, string>[number];
+type AssistantPromptPart = Extract<
+  AssistantContentArrayElement,
+  TextPart | FilePart
+>;
+type UserPromptPart = TextPart | ImagePart | FilePart;
+
+/** FilePart / ảnh dạng file cho vai trò assistant (AssistantContent không có ImagePart). */
+function mcpContentBlockToAssistantPart(
+  block: Exclude<ContentBlock, { type: "text" }>,
+): AssistantPromptPart {
+  switch (block.type) {
+    case "image":
+    case "audio":
+      return {
+        type: "file" as const,
+        data: block.data,
+        mediaType: block.mimeType,
+      };
+    case "resource_link": {
+      const label = [block.name, block.title].filter(Boolean).join(" — ");
+      return {
+        type: "text" as const,
+        text: `[Resource: ${label}]\n${block.uri}`,
+      };
+    }
+    case "resource": {
+      const { resource } = block;
+      if ("text" in resource && resource.text != null) {
+        return { type: "text" as const, text: resource.text };
+      }
+      const data = "blob" in resource ? resource.blob : "";
+      return {
+        type: "file" as const,
+        data,
+        mediaType: resource.mimeType ?? "application/octet-stream",
+      };
+    }
+    default: {
+      const _exhaustive: never = block;
+      return { type: "text" as const, text: JSON.stringify(_exhaustive) };
+    }
+  }
+}
+
+function mcpContentBlockToUserPart(
+  block: Exclude<ContentBlock, { type: "text" }>,
+): UserPromptPart {
+  switch (block.type) {
+    case "image":
+      return {
+        type: "image" as const,
+        image: block.data,
+        mediaType: block.mimeType,
+      };
+    case "audio":
+      return {
+        type: "file" as const,
+        data: block.data,
+        mediaType: block.mimeType,
+      };
+    case "resource_link": {
+      const label = [block.name, block.title].filter(Boolean).join(" — ");
+      return {
+        type: "text" as const,
+        text: `[Resource: ${label}]\n${block.uri}`,
+      };
+    }
+    case "resource": {
+      const { resource } = block;
+      if ("text" in resource && resource.text != null) {
+        return { type: "text" as const, text: resource.text };
+      }
+      const data = "blob" in resource ? resource.blob : "";
+      return {
+        type: "file" as const,
+        data,
+        mediaType: resource.mimeType ?? "application/octet-stream",
+      };
+    }
+    default: {
+      const _exhaustive: never = block;
+      return { type: "text" as const, text: JSON.stringify(_exhaustive) };
+    }
+  }
+}
+
+/**
+ * Chuyển danh sách {@link PromptMessage} từ `prompts/get` sang {@link ModelMessage} cho `streamText` / `generateText`.
+ */
+export function mcpPromptMessagesToModelMessages(
+  messages: PromptMessage[] | undefined,
+): ModelMessage[] {
+  if (!messages?.length) {
+    return [];
+  }
+
+  return messages.map((m) => {
+    const content = m.content;
+    if (m.role === "user") {
+      if (content.type === "text") {
+        return { role: "user" as const, content: content.text };
+      }
+      return {
+        role: "user" as const,
+        content: [mcpContentBlockToUserPart(content)],
+      };
+    }
+
+    if (content.type === "text") {
+      return { role: "assistant" as const, content: content.text };
+    }
+    return {
+      role: "assistant" as const,
+      content: [mcpContentBlockToAssistantPart(content)],
+    };
+  });
+}
 
 class MCPHost {
   async handleRequest(req: Request, supabase: SupabaseClient) {
@@ -144,10 +268,15 @@ class MCPHost {
 
           const segmenter = new Intl.Segmenter("vi", { granularity: "word" });
 
+          const promptModelMessages =
+            mcpPromptMessagesToModelMessages(promptMessages);
+
           const result = streamText({
             model: groq(model),
             messages:
-              promptMessages || (await convertToModelMessages(messages)),
+              promptModelMessages.length > 0
+                ? promptModelMessages
+                : await convertToModelMessages(messages),
             stopWhen: stepCountIs(5),
             tools: Object.fromEntries(
               tools.tools.map((tool) => {
