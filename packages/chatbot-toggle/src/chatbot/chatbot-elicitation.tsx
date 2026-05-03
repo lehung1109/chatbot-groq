@@ -1,20 +1,45 @@
+"use client";
+
 import type { ElicitRequestFormParams } from "@modelcontextprotocol/client";
-import { Button } from "@heroitvn/shacnui/ui/button";
+import type { ToolUIPart } from "ai";
+import { CheckIcon, XIcon } from "lucide-react";
 import { useState } from "react";
+import {
+  Confirmation,
+  ConfirmationAccepted,
+  ConfirmationAction,
+  ConfirmationActions,
+  ConfirmationRejected,
+  ConfirmationRequest,
+  ConfirmationTitle,
+} from "../ai-elements/confirmation";
 
 export interface ChatbotElicitationProps {
   elicitationId: string;
   requestParams?: ElicitRequestFormParams;
 }
 
+type ElicitationApproval =
+  | { id: string; approved?: never }
+  | { id: string; approved: boolean };
+
 const ChatbotElicitation = ({
   elicitationId,
   requestParams,
 }: ChatbotElicitationProps) => {
-  const [submitted, setSubmitted] = useState(false);
+  const [approval, setApproval] = useState<ElicitationApproval>({
+    id: elicitationId,
+  });
+  const [state, setState] = useState<
+    Extract<ToolUIPart["state"], "approval-requested" | "approval-responded">
+  >("approval-requested");
 
   const handleSubmit = (action: "accept" | "decline") => {
-    setSubmitted(true);
+    setApproval({
+      id: elicitationId,
+      approved: action === "accept",
+    });
+    setState("approval-responded");
 
     fetch(`/api/elicitation`, {
       method: "POST",
@@ -25,36 +50,38 @@ const ChatbotElicitation = ({
     });
   };
 
-  if (submitted) {
-    return <></>;
-  }
-
   return (
-    <div>
-      {requestParams?.message && (
-        <p className="text-sm text-gray-500 mb-2">{requestParams?.message}</p>
-      )}
-
-      <div className="flex gap-2">
-        <Button
-          onClick={() => {
-            handleSubmit("accept");
-          }}
-        >
-          Approve
-        </Button>
-
-        <Button
-          variant="destructive"
-          disabled={submitted}
-          onClick={() => {
-            handleSubmit("decline");
-          }}
+    <Confirmation approval={approval} state={state}>
+      <ConfirmationTitle>
+        <ConfirmationRequest>
+          {requestParams?.message?.trim()
+            ? requestParams.message
+            : "Do you approve this request?"}
+        </ConfirmationRequest>
+        <ConfirmationAccepted>
+          <CheckIcon className="size-4 shrink-0" />
+          <span>You approved this request</span>
+        </ConfirmationAccepted>
+        <ConfirmationRejected>
+          <XIcon className="size-4 shrink-0" />
+          <span>You rejected this request</span>
+        </ConfirmationRejected>
+      </ConfirmationTitle>
+      <ConfirmationActions>
+        <ConfirmationAction
+          variant="outline"
+          onClick={() => handleSubmit("decline")}
         >
           Reject
-        </Button>
-      </div>
-    </div>
+        </ConfirmationAction>
+        <ConfirmationAction
+          variant="default"
+          onClick={() => handleSubmit("accept")}
+        >
+          Approve
+        </ConfirmationAction>
+      </ConfirmationActions>
+    </Confirmation>
   );
 };
 
