@@ -4,15 +4,35 @@ import { MessageCircle, X } from "lucide-react";
 import { useState } from "react";
 import Chatbot from "./chatbot";
 
-const FloatingChatbot = () => {
-  const [open, setOpen] = useState(false);
+export interface FloatingChatbotProps {
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  defaultOpen?: boolean;
+}
+
+const FloatingChatbot = ({
+  open: openProp,
+  onOpenChange,
+  defaultOpen = false,
+}: FloatingChatbotProps) => {
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen);
+  const isControlled = openProp !== undefined;
+  const open = isControlled ? openProp : uncontrolledOpen;
+
+  const setOpen = (next: boolean) => {
+    if (isControlled) {
+      onOpenChange?.(next);
+    } else {
+      setUncontrolledOpen(next);
+    }
+  };
 
   return (
     <div className="fixed bottom-15 right-5 z-50">
       <button
         type="button"
-        onClick={() => setOpen((v) => !v)}
-        className="flex h-14 w-14 items-center justify-center rounded-full bg-black text-white shadow-lg transition hover:scale-105 active:scale-95 dark:bg-white dark:text-black cursor-pointer"
+        onClick={() => setOpen(!open)}
+        className="flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition hover:scale-105 active:scale-95"
         aria-label={open ? "Close chatbot" : "Open chatbot"}
       >
         {open ? (
@@ -22,11 +42,11 @@ const FloatingChatbot = () => {
         )}
       </button>
 
-      {open && (
-        <div className="absolute bottom-15 right-0 border-2 border-gray-600 rounded-lg bg-background shadow-lg dark:border-gray-400 dark:bg-card">
+      {open ? (
+        <div className="absolute bottom-15 right-0 w-[min(100vw-1.5rem,24rem)] overflow-hidden rounded-xl border border-border bg-card shadow-lg sm:max-w-lg sm:w-md">
           <Chatbot />
         </div>
-      )}
+      ) : null}
     </div>
   );
 };

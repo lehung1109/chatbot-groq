@@ -40,7 +40,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         <div className="space-y-4 p-4 sm:p-6 xl:p-8">{children}</div>
       </main>
 
-      <ChatbotToggle isFloat={true} />
+      <ChatbotToggle isFloat={true} showDevToggle={false} />
     </div>
   );
 };

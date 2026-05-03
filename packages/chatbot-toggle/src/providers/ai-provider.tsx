@@ -23,6 +23,7 @@ type ChatActionsContextValue = Pick<
   | "resumeStream"
   | "addToolOutput"
   | "addToolApprovalResponse"
+  | "setMessages"
 >;
 
 const ChatStatusContext = createContext<ChatStatusContextValue | undefined>(
@@ -39,6 +40,9 @@ const ChatActionsContext = createContext<ChatActionsContextValue | undefined>(
 
 export interface AIProviderProps {
   children: ReactNode;
+  /** Passed to useChat as `id` (chat session identity) */
+  chatId?: string;
+  initialMessages?: UIMessage[];
 }
 
 export const useChatStatusContext = () => {
@@ -71,8 +75,15 @@ export const useChatActionsContext = () => {
   return context;
 };
 
-export const AIProvider = ({ children }: AIProviderProps) => {
-  const chat = useChat();
+export const AIProvider = ({
+  children,
+  chatId,
+  initialMessages = [],
+}: AIProviderProps) => {
+  const chat = useChat({
+    id: chatId,
+    messages: initialMessages,
+  });
 
   const actions = useMemo(
     () => ({
@@ -82,6 +93,7 @@ export const AIProvider = ({ children }: AIProviderProps) => {
       resumeStream: chat.resumeStream,
       addToolOutput: chat.addToolOutput,
       addToolApprovalResponse: chat.addToolApprovalResponse,
+      setMessages: chat.setMessages,
     }),
     [
       chat.sendMessage,
@@ -90,6 +102,7 @@ export const AIProvider = ({ children }: AIProviderProps) => {
       chat.resumeStream,
       chat.addToolOutput,
       chat.addToolApprovalResponse,
+      chat.setMessages,
     ],
   );
 

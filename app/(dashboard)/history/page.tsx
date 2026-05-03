@@ -1,77 +1,21 @@
 import { createClient } from "@heroitvn/supabase/server";
-import { Badge } from "@heroitvn/shacnui/ui/badge";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@heroitvn/shacnui/ui/card";
 import type { Metadata } from "next";
-
-type ConversationRow = {
-  id: string;
-  title: string | null;
-  model: string | null;
-  created_at: string;
-  updated_at: string;
-};
-
-type MessageRow = {
-  id: string;
-  conversation_id: string;
-  role: string;
-  content: unknown;
-  created_at: string;
-};
+import {
+  HistoryConversations,
+  type HistoryConversationRow,
+  type HistoryMessageRow,
+} from "./history-conversations";
 
 export const metadata: Metadata = {
   title: "Chat History - Incident Copilot",
   description: "History chatbot conversations",
 };
-
-const dateTimeFormatter = new Intl.DateTimeFormat("vi-VN", {
-  dateStyle: "medium",
-  timeStyle: "short",
-});
-
-function formatMessageContent(content: unknown): string {
-  if (typeof content === "string") {
-    return content;
-  }
-
-  if (content && typeof content === "object") {
-    const maybeRecord = content as Record<string, unknown>;
-    const text = maybeRecord.content;
-    if (typeof text === "string") {
-      return text;
-    }
-
-    const parts = maybeRecord.parts;
-    if (Array.isArray(parts)) {
-      const joinedText = parts
-        .map((part) =>
-          typeof part === "object" &&
-          part != null &&
-          "text" in part &&
-          typeof part.text === "string"
-            ? part.text
-            : "",
-        )
-        .filter(Boolean)
-        .join(" ");
-      if (joinedText) {
-        return joinedText;
-      }
-    }
-  }
-
-  try {
-    return JSON.stringify(content);
-  } catch {
-    return "";
-  }
-}
 
 const HistoryPage = async () => {
   const supabase = await createClient();
@@ -109,12 +53,12 @@ const HistoryPage = async () => {
     );
   }
 
-  const conversationRows = (conversations ?? []) as ConversationRow[];
+  const conversationRows = (conversations ?? []) as HistoryConversationRow[];
   const conversationIds = conversationRows.map(
     (conversation) => conversation.id,
   );
 
-  const messagesByConversation = new Map<string, MessageRow[]>();
+  const messagesByConversationId: Record<string, HistoryMessageRow[]> = {};
 
   if (conversationIds.length > 0) {
     const { data: messages, error: messagesError } = await supabase
@@ -134,24 +78,24 @@ const HistoryPage = async () => {
       );
     }
 
-    for (const message of (messages ?? []) as MessageRow[]) {
-      const currentMessages =
-        messagesByConversation.get(message.conversation_id) ?? [];
-      currentMessages.push(message);
-      messagesByConversation.set(message.conversation_id, currentMessages);
+    for (const message of (messages ?? []) as HistoryMessageRow[]) {
+      const list = messagesByConversationId[message.conversation_id] ?? [];
+      list.push(message);
+      messagesByConversationId[message.conversation_id] = list;
     }
   }
 
   return (
     <section className="space-y-4">
-      <Card className="border-border/70 bg-card/90 shadow-sm">
-        <CardHeader>
-          <CardTitle>History Chatbot</CardTitle>
-          <CardDescription>
-            List of recent chat conversations ({conversationRows.length})
-          </CardDescription>
-        </CardHeader>
-      </Card>
+      <div>
+        <h2 className="text-lg font-semibold tracking-tight">
+          History Chatbot
+        </h2>
+        <p className="text-sm text-muted-foreground">
+          {conversationRows.length} recent conversation
+          {conversationRows.length === 1 ? "" : "s"}
+        </p>
+      </div>
 
       {conversationRows.length === 0 ? (
         <Card className="border-border/70 bg-card/90 shadow-sm">
@@ -161,70 +105,10 @@ const HistoryPage = async () => {
           </CardHeader>
         </Card>
       ) : (
-        <div className="space-y-3">
-          {conversationRows.map((conversation) => {
-            const messages = messagesByConversation.get(conversation.id) ?? [];
-            const firstUserMessage = messages.find(
-              (message) => message.role === "user",
-            );
-            const latestMessage = messages.at(-1);
-
-            return (
-              <Card
-                key={conversation.id}
-                className="border-border/70 bg-card/90 shadow-sm"
-              >
-                <CardHeader className="space-y-2">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <CardTitle className="text-base">
-                      {conversation.title?.trim() ||
-                        "Chat conversation without title"}
-                    </CardTitle>
-                    {conversation.model ? (
-                      <Badge>{conversation.model}</Badge>
-                    ) : null}
-                  </div>
-
-                  <CardDescription>
-                    Updated at{" "}
-                    {dateTimeFormatter.format(
-                      new Date(conversation.updated_at),
-                    )}
-                  </CardDescription>
-                </CardHeader>
-
-                <CardContent className="space-y-2 text-sm">
-                  <p className="text-muted-foreground">
-                    <span className="font-medium text-foreground">
-                      First message:{" "}
-                    </span>
-                    {formatMessageContent(firstUserMessage?.content).slice(
-                      0,
-                      180,
-                    ) || "No content."}
-                  </p>
-
-                  <p className="text-muted-foreground">
-                    <span className="font-medium text-foreground">
-                      Last message:{" "}
-                    </span>
-                    {formatMessageContent(latestMessage?.content).slice(
-                      0,
-                      180,
-                    ) || "No content."}
-                  </p>
-
-                  <p className="text-xs text-muted-foreground">
-                    {messages.length} messages · Created at{" "}
-                    {dateTimeFormatter.format(
-                      new Date(conversation.created_at),
-                    )}
-                  </p>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
+        <HistoryConversations
+          conversations={conversationRows}
+          messagesByConversationId={messagesByConversationId}
+        />
       )}
     </section>
   );

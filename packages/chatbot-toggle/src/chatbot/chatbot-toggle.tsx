@@ -6,27 +6,54 @@ import { Label } from "@heroitvn/shacnui/ui/label";
 import { useState } from "react";
 import FloatingChatbot from "./floating-chatbot";
 import Chatbot from "./chatbot";
+import { useChatbotStore } from "../providers/chatbot-provider";
 
 export interface ChatbotToggleProps {
   isFloat?: boolean;
+  /** When false, hides the floating vs embedded dev switch (e.g. dashboard). */
+  showDevToggle?: boolean;
 }
 
-const ChatbotToggle = ({ isFloat = false }: ChatbotToggleProps) => {
+const ChatbotToggle = ({
+  isFloat = false,
+  showDevToggle = true,
+}: ChatbotToggleProps) => {
   const [showFloatingChatbot, setShowFloatingChatbot] = useState(isFloat);
 
-  return (
-    <AIProvider>
-      <>
-        <div className="flex items-center gap-2 mb-8">
-          <Switch
-            id="chatbot-toggle"
-            checked={showFloatingChatbot}
-            onCheckedChange={setShowFloatingChatbot}
-          />
-          <Label htmlFor="chatbot-toggle">Toggle Floating Chatbot</Label>
-        </div>
+  const chatSessionKey = useChatbotStore((s) => s.chatSessionKey);
+  const resumeMessages = useChatbotStore((s) => s.resumeMessages);
+  const conversationId = useChatbotStore((s) => s.conversationId);
+  const floatingOpen = useChatbotStore((s) => s.floatingOpen);
+  const setFloatingOpen = useChatbotStore((s) => s.setFloatingOpen);
 
-        {showFloatingChatbot ? <FloatingChatbot /> : <Chatbot />}
+  const useChatId = conversationId ?? undefined;
+
+  return (
+    <AIProvider
+      key={chatSessionKey}
+      chatId={useChatId}
+      initialMessages={resumeMessages}
+    >
+      <>
+        {showDevToggle ? (
+          <div className="mb-8 flex items-center gap-2">
+            <Switch
+              id="chatbot-toggle"
+              checked={showFloatingChatbot}
+              onCheckedChange={setShowFloatingChatbot}
+            />
+            <Label htmlFor="chatbot-toggle">Toggle Floating Chatbot</Label>
+          </div>
+        ) : null}
+
+        {showFloatingChatbot ? (
+          <FloatingChatbot
+            open={isFloat ? floatingOpen : undefined}
+            onOpenChange={isFloat ? setFloatingOpen : undefined}
+          />
+        ) : (
+          <Chatbot />
+        )}
       </>
     </AIProvider>
   );
