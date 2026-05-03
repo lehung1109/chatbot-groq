@@ -1,16 +1,24 @@
 ﻿"use client";
 
 import SignOut from "@/components/auth/sign-out-button";
-import { ChatbotToggle } from "@heroitvn/chatbot-toggle";
+import { ChatbotToggle, useChatbotStore } from "@heroitvn/chatbot-toggle";
 import { Sidebar } from "@/components/dashboard/sidebar";
 import { Button } from "@heroitvn/shacnui/ui/button";
 import { Bell, Search } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
   const isHistoryPage =
     pathname === "/history" || pathname.startsWith("/history/");
+  const setFloatingOpen = useChatbotStore((s) => s.setFloatingOpen);
+
+  useEffect(() => {
+    if (isHistoryPage) {
+      setFloatingOpen(false);
+    }
+  }, [isHistoryPage, setFloatingOpen]);
 
   return (
     <div className="grid min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.14),transparent_28%),radial-gradient(circle_at_top_right,rgba(99,102,241,0.08),transparent_24%)] xl:grid-cols-[280px_minmax(0,1fr)]">

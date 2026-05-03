@@ -23,6 +23,8 @@ export type ChatbotActions = {
   openConversationFromHistory: (payload: {
     conversationId: string;
     messages: UIMessage[];
+    /** When false, only updates session/messages (e.g. embedded history panel). Default true. */
+    openFloating?: boolean;
   }) => void;
 };
 
@@ -56,12 +58,16 @@ export const createChatbotStore = (
         conversationId: undefined,
         floatingOpen: options?.openFloating ?? true,
       }),
-    openConversationFromHistory: ({ conversationId, messages }) =>
+    openConversationFromHistory: ({
+      conversationId,
+      messages,
+      openFloating = true,
+    }) =>
       set({
         chatSessionKey: conversationId,
         resumeMessages: messages,
         conversationId,
-        floatingOpen: true,
+        floatingOpen: openFloating,
       }),
   }));
 };

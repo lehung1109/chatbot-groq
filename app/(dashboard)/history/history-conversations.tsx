@@ -54,14 +54,17 @@ function previewText(messages: HistoryMessageRow[]): string {
 
 function HistoryEmbeddedChatPanel({
   onClose,
-}: Readonly<{ onClose: () => void }>) {
+  title,
+}: Readonly<{ onClose: () => void; title: string }>) {
   const chatSessionKey = useChatbotStore((s) => s.chatSessionKey);
   const resumeMessages = useChatbotStore((s) => s.resumeMessages);
 
   return (
     <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden border-l border-border bg-background">
       <div className="flex shrink-0 items-center justify-between gap-2 border-b border-border px-3 py-2">
-        <p className="text-sm font-medium text-foreground">New chat</p>
+        <p className="min-w-0 truncate text-sm font-medium text-foreground">
+          {title}
+        </p>
         <Button
           type="button"
           variant="ghost"
@@ -124,14 +127,26 @@ export function HistoryConversations({
       const messages = mapMessageRowsToUiMessages(rows);
       setActiveId(conversationId);
       setEmbeddedNewChatOpen(false);
-      openConversationFromHistory({ conversationId, messages });
+      openConversationFromHistory({
+        conversationId,
+        messages,
+        openFloating: false,
+      });
     },
     [messagesByConversationId, openConversationFromHistory],
   );
 
   const handleCloseEmbeddedChat = useCallback(() => {
     setEmbeddedNewChatOpen(false);
+    setActiveId(null);
   }, []);
+
+  const embeddedPanelTitle = embeddedNewChatOpen
+    ? "New chat"
+    : sorted.find((c) => c.id === activeId)?.title?.trim() ||
+      "Untitled conversation";
+
+  const showEmbeddedChat = embeddedNewChatOpen || activeId !== null;
 
   return (
     <div
@@ -195,8 +210,11 @@ export function HistoryConversations({
         </nav>
       </aside>
 
-      {embeddedNewChatOpen ? (
-        <HistoryEmbeddedChatPanel onClose={handleCloseEmbeddedChat} />
+      {showEmbeddedChat ? (
+        <HistoryEmbeddedChatPanel
+          title={embeddedPanelTitle}
+          onClose={handleCloseEmbeddedChat}
+        />
       ) : (
         <div className="flex min-w-0 flex-1 flex-col items-center justify-center gap-3 p-8 text-center">
           <MessageSquare className="h-10 w-10 text-muted-foreground" />
