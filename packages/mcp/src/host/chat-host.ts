@@ -3,6 +3,7 @@ import {
   convertToModelMessages,
   createUIMessageStream,
   createUIMessageStreamResponse,
+  ModelMessage,
   smoothStream,
   stepCountIs,
   streamText,
@@ -107,13 +108,46 @@ class MCPHost {
 
           const tools = await mcpClientInstance.listTools();
 
-          console.dir("tools");
+          // get prompts
+          const prompts = await mcpClientInstance.listPrompts();
+
+          // get last user messages in messages array
+          const lastUserMessage = messages.findLast((m) => m.role === "user");
+          const lastPathUserMessage = lastUserMessage?.parts.at(-1);
+
+          // check last user message is similar to any prompt
+          const promptNameUser = prompts.prompts.filter((p) => {
+            if (lastPathUserMessage?.type === "text") {
+              return lastPathUserMessage.text.includes(`/${p.name}`);
+            }
+
+            return false;
+          });
+
+          console.dir("promptNameUser");
+          console.dir(promptNameUser);
+
+          // get prompt messages
+          const { messages: promptMessages } = promptNameUser.length
+            ? await mcpClientInstance.getPrompt({
+                name: promptNameUser[0].name,
+                arguments: {
+                  name:
+                    lastPathUserMessage?.type === "text"
+                      ? lastPathUserMessage.text.slice(
+                          promptNameUser[0].name.length + 1,
+                        )
+                      : "",
+                },
+              })
+            : {};
 
           const segmenter = new Intl.Segmenter("vi", { granularity: "word" });
 
           const result = streamText({
             model: groq(model),
-            messages: await convertToModelMessages(messages),
+            messages:
+              promptMessages || (await convertToModelMessages(messages)),
             stopWhen: stepCountIs(5),
             tools: Object.fromEntries(
               tools.tools.map((tool) => {

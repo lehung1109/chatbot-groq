@@ -3,7 +3,7 @@ import { z } from "zod";
 
 export const registerExamplePrompt = (server: McpServer) => {
   server.registerPrompt(
-    "great-prompt",
+    "great",
     {
       title: "Great Prompt",
       description: "Great prompt for ResourceLink demonstration",
