@@ -175,7 +175,7 @@ sequenceDiagram
         Application->>User:Forward LLM response
         Note right of Application:Disconnect MCP Server
     end
-    Note over User,DB: Request - Response circle for /api/chat/elicitation
+    Note over User,DB: Request - Response circle for /api/elicitation
 ```
 
 ## Deployment
