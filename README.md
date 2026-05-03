@@ -58,29 +58,29 @@ Next.js application that combines [Groq](https://groq.com/) (via the [Vercel AI 
 
 ## Scripts
 
-| Command                 | Description                                      |
-| ----------------------- | ------------------------------------------------ |
-| `npm run dev`           | Start Next.js dev server                         |
-| `npm run build`         | Build workspace packages, then production build  |
-| `npm run build:packages`| Build/typecheck all workspaces that define build |
-| `npm run start`         | Run production server                            |
-| `npm run lint`          | Run ESLint                                       |
+| Command                  | Description                                      |
+| ------------------------ | ------------------------------------------------ |
+| `npm run dev`            | Start Next.js dev server                         |
+| `npm run build`          | Build workspace packages, then production build  |
+| `npm run build:packages` | Build/typecheck all workspaces that define build |
+| `npm run start`          | Run production server                            |
+| `npm run lint`           | Run ESLint                                       |
 
 ## Project layout
 
-| Path | Role |
-| ---- | ---- |
-| `app/api/chat/route.ts` | Chat endpoint — `MCPHost.handleRequest` + Supabase |
-| `app/api/mcp/route.ts` | MCP Streamable HTTP — `postHandler`, `getHandler`, `deleteHandler` |
-| `app/api/elicitation/route.ts` | Elicitation continuation — `updateElicitation` |
-| `app/(dashboard)/` | Authenticated dashboard and history |
-| `app/(auth)/` | Sign-in and auth callbacks |
-| `packages/chatbot-toggle/` | Chat UI, store, Groq model types |
-| `packages/mcp/` | MCP server/client helpers, `MCPHost` |
-| `packages/supabase/` | Browser, server, and proxy Supabase clients |
-| `packages/google/` | Google Sign-In and One Tap components |
-| `packages/shacnui/` | Shared UI primitives (`ui/*`) |
-| `packages/utils/` | `cn`, Zod helpers, shared constants |
+| Path                           | Role                                                               |
+| ------------------------------ | ------------------------------------------------------------------ |
+| `app/api/chat/route.ts`        | Chat endpoint — `MCPHost.handleRequest` + Supabase                 |
+| `app/api/mcp/route.ts`         | MCP Streamable HTTP — `postHandler`, `getHandler`, `deleteHandler` |
+| `app/api/elicitation/route.ts` | Elicitation continuation — `updateElicitation`                     |
+| `app/(dashboard)/`             | Authenticated dashboard and history                                |
+| `app/(auth)/`                  | Sign-in and auth callbacks                                         |
+| `packages/chatbot-toggle/`     | Chat UI, store, Groq model types                                   |
+| `packages/mcp/`                | MCP server/client helpers, `MCPHost`                               |
+| `packages/supabase/`           | Browser, server, and proxy Supabase clients                        |
+| `packages/google/`             | Google Sign-In and One Tap components                              |
+| `packages/shacnui/`            | Shared UI primitives (`ui/*`)                                      |
+| `packages/utils/`              | `cn`, Zod helpers, shared constants                                |
 
 ## Packages
 
@@ -111,6 +111,63 @@ sequenceDiagram
         MCPSrv-->>MCP: tool results
     end
     Groq-->>Browser: streamed UI messages
+```
+
+## Details Flow
+
+## Mermaid: end-to-end flow
+
+```mermaid
+sequenceDiagram
+    participant User as User UI(Browser)
+    participant Application as AI Application(Nextjs)
+
+    User->>Application:/api/chat/send
+    Application->>LLM:Forward message
+    alt LLM doesn't call tools
+        LLM->>Application:Response message
+        Application->>User:Forward message
+    else LLM call tools
+        LLM->>Application:Need call tools
+        Application->>MCP Client:call tools
+        MCP Client->>MCP Server: call tools
+        alt MCP Server doesn't need User Action
+            MCP Server->>MCP Client:MCP Server tools response
+            MCP Client->>Application:Forward tools response
+            Application->>LLM:Forward tools response
+            LLM->>Application:LLM response
+            Application->>User:Forward LLM response
+        else MCP Server needs User Action
+            MCP Server->>DB:Save step
+            MCP Server->>DB:Listen DB change and create promise pending
+            MCP Server->>MCP Client:Needs User Action
+            MCP Client->>Application:Forward request Action
+            Application->>User:Display UI for User
+        end
+    end
+    Note over User,DB: Request - Response Waiting User Action
+    alt user action timeout 1h or 1day
+        Application->>LLM:sent timeout to LLM
+        Application->>DB:resolve promise pending
+        LLM->>Application:LLM response
+        Application->>User:Forward LLM response
+        Note right of Application:Disconnect MCP Server
+    else user reject
+        User->>Application:Reject
+        Application->>DB:Update db
+        Application->>DB:run callback when db change and resole promise
+        LLM->>Application:LLM response
+        Application->>User:Forward LLM response
+        Note right of Application:Disconnect MCP Server
+    else user action is valid
+        User->>Application:Accepted
+        Application->>DB:Update db
+        Application->>DB:run callback when db change and resole promise
+        LLM->>Application:LLM response
+        Application->>User:Forward LLM response
+        Note right of Application:Disconnect MCP Server
+    end
+    Note over User,DB: Request - Response circle for /api/chat/elicitation
 ```
 
 ## Deployment
