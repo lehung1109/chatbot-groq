@@ -40,7 +40,11 @@ const ChatActionsContext = createContext<ChatActionsContextValue | undefined>(
 
 export interface AIProviderProps {
   children: ReactNode;
-  /** Passed to useChat as `id` (chat session identity) */
+  /**
+   * Passed to `useChat` as `id`. Must stay stable for the whole UI session (e.g. store
+   * `chatSessionKey`). Do not pass the server `conversationId` — it is applied mid-stream
+   * when a conversation row is created and would recreate the chat and drop messages.
+   */
   chatId?: string;
   initialMessages?: UIMessage[];
 }
@@ -80,8 +84,11 @@ export const AIProvider = ({
   chatId,
   initialMessages = [],
 }: AIProviderProps) => {
+  // Never pass `id: undefined` to useChat: `"id" in options` is then true and the hook
+  // recreates Chat on every render (generated id !== undefined), wiping messages — notably
+  // for embedded "new chat" where conversationId is unset (history page).
   const chat = useChat({
-    id: chatId,
+    ...(chatId != null && chatId !== "" ? { id: chatId } : {}),
     messages: initialMessages,
   });
 

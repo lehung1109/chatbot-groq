@@ -57,8 +57,6 @@ function HistoryEmbeddedChatPanel({
 }: Readonly<{ onClose: () => void }>) {
   const chatSessionKey = useChatbotStore((s) => s.chatSessionKey);
   const resumeMessages = useChatbotStore((s) => s.resumeMessages);
-  const conversationId = useChatbotStore((s) => s.conversationId);
-  const useChatId = conversationId ?? undefined;
 
   return (
     <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden border-l border-border bg-background">
@@ -78,7 +76,7 @@ function HistoryEmbeddedChatPanel({
       <div className="flex min-h-0 flex-1 flex-col">
         <AIProvider
           key={chatSessionKey}
-          chatId={useChatId}
+          chatId={chatSessionKey}
           initialMessages={resumeMessages}
         >
           <Chatbot embedded />

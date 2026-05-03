@@ -22,16 +22,13 @@ const ChatbotToggle = ({
 
   const chatSessionKey = useChatbotStore((s) => s.chatSessionKey);
   const resumeMessages = useChatbotStore((s) => s.resumeMessages);
-  const conversationId = useChatbotStore((s) => s.conversationId);
   const floatingOpen = useChatbotStore((s) => s.floatingOpen);
   const setFloatingOpen = useChatbotStore((s) => s.setFloatingOpen);
-
-  const useChatId = conversationId ?? undefined;
 
   return (
     <AIProvider
       key={chatSessionKey}
-      chatId={useChatId}
+      chatId={chatSessionKey}
       initialMessages={resumeMessages}
     >
       <>
