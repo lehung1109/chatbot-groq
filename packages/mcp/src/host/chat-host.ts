@@ -100,7 +100,14 @@ class MCPHost {
           ]);
           registerClientSamplingHandlers(mcpClientInstance, writer);
 
+          const resources = await mcpClientInstance.listResources();
+
+          console.dir("resources");
+          console.dir(resources);
+
           const tools = await mcpClientInstance.listTools();
+
+          console.dir("tools");
 
           const segmenter = new Intl.Segmenter("vi", { granularity: "word" });
 

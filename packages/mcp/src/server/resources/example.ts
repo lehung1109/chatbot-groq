@@ -11,28 +11,25 @@ export const registerExampleResource = (server: McpServer) => {
     RESOURCE_NAME,
     RESOURCE_URI,
     {
-      title: "Example 1",
-      description: "First example file for ResourceLink demonstration",
-      mimeType: "application/json",
+      title: "AGENTS.md",
+      description: "AGENTS.md file for ResourceLink demonstration",
+      mimeType: "text/plain",
     },
     async (uri) => {
-      const file = await fs.readFile("db/users.json", "utf8");
-      const users = JSON.parse(file) as JsonRecord[];
-
-      const user = users.find((u) => u.id === RESOURCE_NAME);
+      const fileContent = await fs.readFile("AGENTS.md", "utf8");
 
       // send logging message
       await server.sendLoggingMessage({
         level: "info",
-        data: `Example resource called with name: ${RESOURCE_NAME}`,
+        data: `Example resource called with name: AGENTS.md`,
       });
 
       return {
         contents: [
           {
             uri: uri.href,
-            mimeType: "application/json",
-            text: JSON.stringify(user),
+            mimeType: "text/plain",
+            text: fileContent,
           },
         ],
       };
