@@ -39,7 +39,7 @@ Next.js application that combines [Groq](https://groq.com/) (via the [Vercel AI 
    NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_anon_or_publishable_key
 
    # Optional: server-side admin usage (e.g. MCP tools)
-   NEXT_PUBLIC_SUPABASE_ADMIN_KEY=your_service_role_key
+   SUPABASE_ADMIN_KEY=your_service_role_key
 
    # Optional: Google Sign-In / One Tap
    NEXT_PUBLIC_GOOGLE_CLIENT_ID=your_google_oauth_client_id.apps.googleusercontent.com

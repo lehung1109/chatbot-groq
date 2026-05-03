@@ -41,7 +41,7 @@ export const registerGetUsersTool = (server: McpServer) => {
       // connect to database
       const supabase = createClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ADMIN_KEY!,
+        process.env.SUPABASE_ADMIN_KEY!,
       );
 
       // get users from database
