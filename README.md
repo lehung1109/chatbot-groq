@@ -1,35 +1,54 @@
-# chatbot-groq
+# Incident Copilot
 
-A Next.js chat application that talks to [Groq](https://groq.com/) through the [Vercel AI SDK](https://sdk.vercel.ai/). The UI uses streaming responses, model selection, and custom chat components (ai-elements–style patterns).
+Next.js application that combines [Groq](https://groq.com/) (via the [Vercel AI SDK](https://sdk.vercel.ai/)), the [Model Context Protocol](https://modelcontextprotocol.io/) (Streamable HTTP), and [Supabase](https://supabase.com/) for auth and data. The UI uses streaming responses, model selection, and shared workspace packages under `packages/*`.
+
+> **Note:** The npm workspace root name in `package.json` is `chatbot-groq`; the repository folder is `incident-copilot`.
 
 ## Features
 
-- **Streaming replies** via `POST /api/chat` using `streamText` and `toUIMessageStreamResponse` (sources and reasoning channels enabled where supported).
-- **Multiple Groq models** selectable in the UI (Llama, Mixtral, Qwen, DeepSeek, Kimi, and others defined in `types/groq.ts`).
-- **Modern stack**: Next.js 16, React 19, TypeScript, Tailwind CSS 4, Radix UI, and Streamdown for rich message rendering.
+- **Streaming chat** — `POST /api/chat` handled by `MCPHost` from `@heroitvn/mcp`, integrating tools, elicitation, and Supabase-backed flows.
+- **MCP over HTTP** — `GET` / `POST` / `DELETE` on `/api/mcp` using Streamable HTTP handlers (`mcp-session-id` header for sessions).
+- **Elicitation updates** — `POST /api/elicitation` forwards to `updateElicitation` for in-flight MCP form elicitation.
+- **Multiple Groq models** — selectable in the UI; model IDs live in `packages/chatbot-toggle/src/types/groq.ts`.
+- **Auth & dashboard** — Supabase SSR, Google Sign-In / One Tap (`@heroitvn/google`), dashboard and conversation history routes.
+- **Monorepo packages** — `@heroitvn/chatbot-toggle`, `@heroitvn/mcp`, `@heroitvn/supabase`, `@heroitvn/google`, `@heroitvn/shacnui`, `@heroitvn/utils` (see each package `README.md`).
 
 ## Prerequisites
 
 - Node.js 20+ (recommended)
-- A [Groq API key](https://console.groq.com/)
+- [Groq API key](https://console.groq.com/)
+- Supabase project (URL and keys) if you use auth, persistence, or server tools that call Supabase
+- Google OAuth client ID (public) if you use Google Sign-In / One Tap
 
 ## Setup
 
-1. Clone the repository and install dependencies:
+1. Install dependencies:
 
    ```bash
    npm install
    ```
 
-2. Create a `.env.local` file in the project root (or add to your environment):
+2. Create `.env.local` in the project root (example — adjust to your deployment):
 
    ```bash
-   GROQ_API_KEY=your_groq_api_key_here
+   # Required for Groq
+   GROQ_API_KEY=your_groq_api_key
+
+   # Supabase (browser + server)
+   NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_anon_or_publishable_key
+
+   # Optional: server-side admin usage (e.g. MCP tools)
+   NEXT_PUBLIC_SUPABASE_ADMIN_KEY=your_service_role_key
+
+   # Optional: Google Sign-In / One Tap
+   NEXT_PUBLIC_GOOGLE_CLIENT_ID=your_google_oauth_client_id.apps.googleusercontent.com
+
+   # Optional: MCP client bootstrap (see @heroitvn/mcp)
+   MCP_SERVER_URL=https://your-app.example/api/mcp
    ```
 
-   The `@ai-sdk/groq` provider reads `GROQ_API_KEY` automatically.
-
-3. Start the development server:
+3. Development server:
 
    ```bash
    npm run dev
@@ -39,90 +58,61 @@ A Next.js chat application that talks to [Groq](https://groq.com/) through the [
 
 ## Scripts
 
-| Command         | Description           |
-| --------------- | --------------------- |
-| `npm run dev`   | Start dev server      |
-| `npm run build` | Production build      |
-| `npm run start` | Run production server |
-| `npm run lint`  | Run ESLint            |
+| Command                 | Description                                      |
+| ----------------------- | ------------------------------------------------ |
+| `npm run dev`           | Start Next.js dev server                         |
+| `npm run build`         | Build workspace packages, then production build  |
+| `npm run build:packages`| Build/typecheck all workspaces that define build |
+| `npm run start`         | Run production server                            |
+| `npm run lint`          | Run ESLint                                       |
 
 ## Project layout
 
-- `app/api/chat/route.ts` — Groq-backed streaming chat API.
-- `packages/chatbot-toggle/src/chatbot/` — Chat UI components (conversation, input, model selector).
-- `packages/chatbot-toggle/src/types/groq.ts` — Allowed Groq model IDs used by chatbot package.
+| Path | Role |
+| ---- | ---- |
+| `app/api/chat/route.ts` | Chat endpoint — `MCPHost.handleRequest` + Supabase |
+| `app/api/mcp/route.ts` | MCP Streamable HTTP — `postHandler`, `getHandler`, `deleteHandler` |
+| `app/api/elicitation/route.ts` | Elicitation continuation — `updateElicitation` |
+| `app/(dashboard)/` | Authenticated dashboard and history |
+| `app/(auth)/` | Sign-in and auth callbacks |
+| `packages/chatbot-toggle/` | Chat UI, store, Groq model types |
+| `packages/mcp/` | MCP server/client helpers, `MCPHost` |
+| `packages/supabase/` | Browser, server, and proxy Supabase clients |
+| `packages/google/` | Google Sign-In and One Tap components |
+| `packages/shacnui/` | Shared UI primitives (`ui/*`) |
+| `packages/utils/` | `cn`, Zod helpers, shared constants |
 
-## Mermaid: end-to-end flow
+## Packages
 
-```mermaid
-sequenceDiagram
-    participant User as User UI(Browser)
-    participant Application as AI Application(Nextjs)
+Workspace packages are documented in their own README files:
 
-    User->>Application:/api/chat/send
-    Application->>LLM:Forward message
-    alt LLM doesn't call tools
-        LLM->>Application:Response message
-        Application->>User:Forward message
-    else LLM call tools
-        LLM->>Application:Need call tools
-        Application->>MCP Client:call tools
-        MCP Client->>MCP Server: call tools
-        alt MCP Server doesn't need User Action
-            MCP Server->>MCP Client:MCP Server tools response
-            MCP Client->>Application:Forward tools response
-            Application->>LLM:Forward tools response
-            LLM->>Application:LLM response
-            Application->>User:Forward LLM response
-        else MCP Server needs User Action
-            MCP Server->>DB:Save current context
-            MCP Server->>MCP Client:Needs User Action
-            MCP Client->>Application:Forward request Action
-            Application->>User:Display UI for User
-            Note right of Application:Disconnect MCP Server
-        end
-    end
-    Note over User,DB: Request - Response circle for /api/chat/send
-    alt user action timeout 1h or 1day
-        User->>Application:timeout
-        Application->>MCP Client:timeout
-        MCP Client->>MCP Server:timeout
-        MCP Server->>DB:Update context for timeout
-        Application->>User:Show message timeout
-        Note right of Application:Disconnect MCP Server
-    else user reject
-        User->>Application:Reject
-        Application->>MCP Client:reject
-        MCP Client->>MCP Server:reject
-        MCP Server->>DB:Update context for reject
-        Application->>User:Show message reject
-        Note right of Application:Disconnect MCP Server
-    else user action is valid
-        User->>Application:/api/chat/approve
-        Application->>MCP Client:User action data
-        MCP Client->>MCP Server:Forward data
-        MCP Server->>DB:Read context for the action
-        MCP Server->>MCP Server:MCP Server continue processing context
-        MCP Server->>MCP Client:MCP Server tools response
-        MCP Client->>Application:Forward tools response
-        Application->>LLM:Forward tools response
-        LLM->>Application:LLM response
-        Application->>User:Forward LLM response
-        Note right of Application:Disconnect MCP Server
-    end
-    Note over User,DB: Request - Response circle for /api/chat/approve
-```
+- [`packages/chatbot-toggle/README.md`](packages/chatbot-toggle/README.md)
+- [`packages/mcp/README.md`](packages/mcp/README.md)
+- [`packages/supabase/README.md`](packages/supabase/README.md)
+- [`packages/google/README.md`](packages/google/README.md)
+- [`packages/shacnui/README.md`](packages/shacnui/README.md)
+- [`packages/utils/README.md`](packages/utils/README.md)
 
-## Mermaid: detail flow
+## Architecture (high level)
 
 ```mermaid
 sequenceDiagram
-    participant User as User UI(Browser)
-    participant Application as AI Application(Nextjs)
+    participant Browser as Browser
+    participant Next as Next.js
+    participant MCP as MCPHost
+    participant Groq as Groq (AI SDK)
+    participant MCPSrv as MCP Server transport
 
-    User->>Application:/api/chat/send
+    Browser->>Next: POST /api/chat
+    Next->>MCP: handleRequest (tools, elicitation, …)
+    MCP->>Groq: streamText / tool loop
+    alt Tool calls MCP HTTP
+        MCP->>MCPSrv: Streamable HTTP /api/mcp
+        MCPSrv-->>MCP: tool results
+    end
+    Groq-->>Browser: streamed UI messages
 ```
 
 ## Deployment
 
-You can deploy on [Vercel](https://vercel.com/) or any host that supports Next.js. Set `GROQ_API_KEY` in the hosting provider’s environment variables; do not commit real keys to the repository.
+Deploy on [Vercel](https://vercel.com/) or any Next.js-compatible host. Set all required environment variables in the provider’s dashboard; never commit real secrets.
