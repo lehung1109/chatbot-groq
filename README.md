@@ -147,22 +147,30 @@ sequenceDiagram
     end
     Note over User,DB: Request - Response Waiting User Action
     alt user action timeout 1h or 1day
-        Application->>LLM:sent timeout to LLM
-        Application->>DB:resolve promise pending
+        MCP Server->>DB:resolve promise pending
+        MCP Server->>MCP Client:MCP Server tools response
+        MCP Client->>Application:Forward tools response
+        Application->>LLM:Forward tools response
         LLM->>Application:LLM response
         Application->>User:Forward LLM response
         Note right of Application:Disconnect MCP Server
     else user reject
         User->>Application:Reject
         Application->>DB:Update db
-        Application->>DB:run callback when db change and resole promise
+        MCP Server->>DB:run callback when db change and resole promise
+        MCP Server->>MCP Client:MCP Server tools response
+        MCP Client->>Application:Forward tools response
+        Application->>LLM:Forward tools response
         LLM->>Application:LLM response
         Application->>User:Forward LLM response
         Note right of Application:Disconnect MCP Server
     else user action is valid
         User->>Application:Accepted
         Application->>DB:Update db
-        Application->>DB:run callback when db change and resole promise
+        MCP Server->>DB:run callback when db change and resole promise
+        MCP Server->>MCP Client:MCP Server tools response
+        MCP Client->>Application:Forward tools response
+        Application->>LLM:Forward tools response
         LLM->>Application:LLM response
         Application->>User:Forward LLM response
         Note right of Application:Disconnect MCP Server
