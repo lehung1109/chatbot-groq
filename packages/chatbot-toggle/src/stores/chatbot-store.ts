@@ -19,7 +19,7 @@ export type ChatbotActions = {
   setSelectedModel: (selectedModel: GroqChatModelId) => void;
   setConversationId: (conversationId: string | undefined) => void;
   setFloatingOpen: (open: boolean) => void;
-  startNewChatSession: () => void;
+  startNewChatSession: (options?: { openFloating?: boolean }) => void;
   openConversationFromHistory: (payload: {
     conversationId: string;
     messages: UIMessage[];
@@ -49,12 +49,12 @@ export const createChatbotStore = (
     setConversationId: (conversationId: string | undefined) =>
       set({ conversationId }),
     setFloatingOpen: (floatingOpen: boolean) => set({ floatingOpen }),
-    startNewChatSession: () =>
+    startNewChatSession: (options) =>
       set({
         chatSessionKey: `new-${Date.now()}`,
         resumeMessages: [],
         conversationId: undefined,
-        floatingOpen: true,
+        floatingOpen: options?.openFloating ?? true,
       }),
     openConversationFromHistory: ({ conversationId, messages }) =>
       set({

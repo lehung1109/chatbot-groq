@@ -2,6 +2,7 @@ export { default as ChatbotToggle } from "./chatbot/chatbot-toggle";
 export type { ChatbotToggleProps } from "./chatbot/chatbot-toggle";
 
 export { default as Chatbot } from "./chatbot/chatbot";
+export type { ChatbotProps } from "./chatbot/chatbot";
 export { default as FloatingChatbot } from "./chatbot/floating-chatbot";
 export type { FloatingChatbotProps } from "./chatbot/floating-chatbot";
 

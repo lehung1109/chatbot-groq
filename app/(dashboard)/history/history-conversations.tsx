@@ -1,9 +1,13 @@
 "use client";
 
-import { useChatbotStore } from "@heroitvn/chatbot-toggle";
+import {
+  AIProvider,
+  Chatbot,
+  useChatbotStore,
+} from "@heroitvn/chatbot-toggle";
 import { Button } from "@heroitvn/shacnui/ui/button";
 import { cn } from "@heroitvn/utils";
-import { MessageSquare, Plus } from "lucide-react";
+import { MessageSquare, Plus, X } from "lucide-react";
 import { useCallback, useMemo, useState } from "react";
 import { mapMessageRowsToUiMessages } from "@/lib/history/map-db-messages";
 
@@ -57,6 +61,42 @@ function previewText(messages: HistoryMessageRow[]): string {
   return "No preview";
 }
 
+function HistoryEmbeddedChatPanel({
+  onClose,
+}: Readonly<{ onClose: () => void }>) {
+  const chatSessionKey = useChatbotStore((s) => s.chatSessionKey);
+  const resumeMessages = useChatbotStore((s) => s.resumeMessages);
+  const conversationId = useChatbotStore((s) => s.conversationId);
+  const useChatId = conversationId ?? undefined;
+
+  return (
+    <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden border-l border-border bg-background">
+      <div className="flex shrink-0 items-center justify-between gap-2 border-b border-border px-3 py-2">
+        <p className="text-sm font-medium text-foreground">New chat</p>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon"
+          className="h-8 w-8 shrink-0"
+          onClick={onClose}
+          aria-label="Close chat panel"
+        >
+          <X className="h-4 w-4" />
+        </Button>
+      </div>
+      <div className="flex min-h-0 flex-1 flex-col">
+        <AIProvider
+          key={chatSessionKey}
+          chatId={useChatId}
+          initialMessages={resumeMessages}
+        >
+          <Chatbot embedded />
+        </AIProvider>
+      </div>
+    </div>
+  );
+}
+
 export interface HistoryConversationsProps {
   conversations: HistoryConversationRow[];
   messagesByConversationId: Record<string, HistoryMessageRow[]>;
@@ -67,6 +107,7 @@ export function HistoryConversations({
   messagesByConversationId,
 }: Readonly<HistoryConversationsProps>) {
   const [activeId, setActiveId] = useState<string | null>(null);
+  const [embeddedNewChatOpen, setEmbeddedNewChatOpen] = useState(false);
 
   const startNewChatSession = useChatbotStore((s) => s.startNewChatSession);
   const openConversationFromHistory = useChatbotStore(
@@ -84,7 +125,8 @@ export function HistoryConversations({
 
   const handleNewChat = useCallback(() => {
     setActiveId(null);
-    startNewChatSession();
+    setEmbeddedNewChatOpen(true);
+    startNewChatSession({ openFloating: false });
   }, [startNewChatSession]);
 
   const handleSelect = useCallback(
@@ -92,14 +134,31 @@ export function HistoryConversations({
       const rows = messagesByConversationId[conversationId] ?? [];
       const messages = mapMessageRowsToUiMessages(rows);
       setActiveId(conversationId);
+      setEmbeddedNewChatOpen(false);
       openConversationFromHistory({ conversationId, messages });
     },
     [messagesByConversationId, openConversationFromHistory],
   );
 
+  const handleCloseEmbeddedChat = useCallback(() => {
+    setEmbeddedNewChatOpen(false);
+  }, []);
+
   return (
-    <div className="flex min-h-[calc(100dvh-8rem)] gap-0 overflow-hidden rounded-xl border border-border bg-card/40 shadow-sm">
-      <aside className="flex w-[260px] shrink-0 flex-col border-r border-border bg-muted/30">
+    <div
+      className={cn(
+        "flex gap-0 overflow-hidden rounded-xl border border-border bg-card/40 shadow-sm",
+        embeddedNewChatOpen
+          ? "h-[calc(100dvh-8rem)] min-h-0"
+          : "min-h-[calc(100dvh-8rem)]",
+      )}
+    >
+      <aside
+        className={cn(
+          "flex w-[260px] shrink-0 flex-col border-r border-border bg-muted/30",
+          embeddedNewChatOpen && "min-h-0",
+        )}
+      >
         <div className="border-b border-border p-3">
           <p className="px-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
             Chats
@@ -151,21 +210,30 @@ export function HistoryConversations({
         </nav>
       </aside>
 
-      <div className="flex min-w-0 flex-1 flex-col items-center justify-center gap-3 p-8 text-center">
-        <MessageSquare className="h-10 w-10 text-muted-foreground" />
-        <div className="max-w-sm space-y-1">
-          <p className="text-sm font-medium text-foreground">
-            Incident Copilot chat history
-          </p>
-          <p className="text-sm text-muted-foreground">
-            Select a conversation on the left to open it in the floating
-            assistant, or start a new chat.
-          </p>
+      {embeddedNewChatOpen ? (
+        <HistoryEmbeddedChatPanel onClose={handleCloseEmbeddedChat} />
+      ) : (
+        <div className="flex min-w-0 flex-1 flex-col items-center justify-center gap-3 p-8 text-center">
+          <MessageSquare className="h-10 w-10 text-muted-foreground" />
+          <div className="max-w-sm space-y-1">
+            <p className="text-sm font-medium text-foreground">
+              Incident Copilot chat history
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Select a conversation on the left to review it, or start a new
+              chat beside the list.
+            </p>
+          </div>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={handleNewChat}
+          >
+            New chat
+          </Button>
         </div>
-        <Button type="button" variant="outline" size="sm" onClick={handleNewChat}>
-          New chat
-        </Button>
-      </div>
+      )}
     </div>
   );
 }
