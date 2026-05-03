@@ -6,6 +6,7 @@ import { cn } from "@heroitvn/utils";
 import { MessageSquare, Plus, X } from "lucide-react";
 import { useCallback, useMemo, useState } from "react";
 import { mapMessageRowsToUiMessages } from "@/lib/history/map-db-messages";
+import { UIMessage } from "ai";
 
 export type HistoryConversationRow = {
   id: string;
@@ -18,8 +19,8 @@ export type HistoryConversationRow = {
 export type HistoryMessageRow = {
   id: string;
   conversation_id: string;
-  role: string;
-  content: unknown;
+  role: UIMessage["role"];
+  content: string;
   created_at: string;
 };
 
@@ -29,32 +30,26 @@ const dateTimeFormatter = new Intl.DateTimeFormat("vi-VN", {
 });
 
 function previewText(messages: HistoryMessageRow[]): string {
-  const firstUser = messages.find((m) => m.role === "user");
+  const firstUser = messages.find((m) => m.role === "assistant");
   if (!firstUser) {
     return "No preview";
   }
-  const content = firstUser.content;
-  if (typeof content === "string") {
-    return content.slice(0, 80) || "No preview";
-  }
-  if (content && typeof content === "object" && "parts" in content) {
-    const parts = (content as { parts?: unknown }).parts;
-    if (Array.isArray(parts)) {
-      const text = parts
-        .map((p) =>
-          typeof p === "object" &&
-          p != null &&
-          "text" in p &&
-          typeof (p as { text?: unknown }).text === "string"
-            ? (p as { text: string }).text
-            : "",
-        )
-        .join(" ")
-        .trim();
-      return text.slice(0, 80) || "No preview";
-    }
-  }
-  return "No preview";
+  const content = JSON.parse(firstUser.content) as UIMessage;
+
+  const parts = content.parts;
+
+  const text = parts
+    .map((p) =>
+      typeof p === "object" &&
+      p != null &&
+      "text" in p &&
+      typeof (p as { text?: unknown }).text === "string"
+        ? (p as { text: string }).text
+        : "",
+    )
+    .join(" ")
+    .trim();
+  return text.slice(0, 80) || "No preview";
 }
 
 function HistoryEmbeddedChatPanel({
