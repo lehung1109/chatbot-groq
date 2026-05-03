@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  AIProvider,
-  Chatbot,
-  useChatbotStore,
-} from "@heroitvn/chatbot-toggle";
+import { AIProvider, Chatbot, useChatbotStore } from "@heroitvn/chatbot-toggle";
 import { Button } from "@heroitvn/shacnui/ui/button";
 import { cn } from "@heroitvn/utils";
 import { MessageSquare, Plus, X } from "lucide-react";
@@ -147,10 +143,7 @@ export function HistoryConversations({
   return (
     <div
       className={cn(
-        "flex gap-0 overflow-hidden rounded-xl border border-border bg-card/40 shadow-sm",
-        embeddedNewChatOpen
-          ? "h-[calc(100dvh-8rem)] min-h-0"
-          : "min-h-[calc(100dvh-8rem)]",
+        "flex gap-0 overflow-auto rounded-xl border border-border bg-card/40 shadow-sm h-[calc(100dvh-12rem)] min-h-0",
       )}
     >
       <aside
@@ -179,8 +172,7 @@ export function HistoryConversations({
           <ul className="space-y-0.5">
             {sorted.map((c) => {
               const messages = messagesByConversationId[c.id] ?? [];
-              const title =
-                c.title?.trim() || "Untitled conversation";
+              const title = c.title?.trim() || "Untitled conversation";
               const isActive = activeId === c.id;
 
               return (
