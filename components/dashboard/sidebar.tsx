@@ -36,7 +36,7 @@ export function Sidebar() {
           <AlertTriangle className="h-5 w-5" />
         </div>
         <div>
-          <p className="text-sm font-semibold">PulseOps</p>
+          <p className="text-sm font-semibold">Incident Copilot</p>
           <p className="text-xs text-muted-foreground">
             Incident command center
           </p>
