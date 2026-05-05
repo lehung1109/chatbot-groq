@@ -1,6 +1,6 @@
 {
   "name": "@heroitvn/mcp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Model Context Protocol server and client helpers for Next.js and Node",
   "license": "MIT",
   "repository": {

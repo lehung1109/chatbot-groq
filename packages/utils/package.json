@@ -1,6 +1,6 @@
 {
   "name": "@heroitvn/utils",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Shared utilities (cn, zod helpers, errors)",
   "license": "MIT",
   "repository": {
