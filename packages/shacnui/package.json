@@ -3,6 +3,15 @@
   "version": "0.1.0",
   "description": "Shared shadcn/ui-style components for the monorepo",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lehung1109/incident-copilot.git",
+    "directory": "packages/shacnui"
+  },
+  "bugs": {
+    "url": "https://github.com/lehung1109/incident-copilot/issues"
+  },
+  "homepage": "https://github.com/lehung1109/incident-copilot/tree/main/packages/shacnui",
   "type": "module",
   "sideEffects": false,
   "exports": {
