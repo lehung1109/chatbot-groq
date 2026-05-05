@@ -76,7 +76,7 @@
     },
     "packages/chatbot-toggle": {
       "name": "@heroitvn/chatbot-toggle",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "dependencies": {
         "@ai-sdk/react": "^3.0.170",
         "@heroitvn/shacnui": "^0.1.0",
@@ -94,7 +94,7 @@
     },
     "packages/google": {
       "name": "@heroitvn/google",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "dependencies": {
         "@heroitvn/supabase": "^0.1.0",
         "google-one-tap": "^1.0.6",
@@ -111,7 +111,7 @@
     },
     "packages/mcp": {
       "name": "@heroitvn/mcp",
-      "version": "0.1.0",
+      "version": "0.1.2",
       "dependencies": {
         "@ai-sdk/groq": "^3.0.35",
         "@heroitvn/chatbot-toggle": "^0.1.0",
@@ -127,9 +127,17 @@
         "typescript": "^6.0.3",
       },
     },
+    "packages/otel": {
+      "name": "@heroitvn/otel",
+      "version": "0.1.0",
+      "dependencies": {
+        "@opentelemetry/resources": "^2.7.1",
+        "@opentelemetry/semantic-conventions": "^1.40.0",
+      },
+    },
     "packages/shacnui": {
       "name": "@heroitvn/shacnui",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "dependencies": {
         "@heroitvn/utils": "^0.1.0",
       },
@@ -140,7 +148,7 @@
     },
     "packages/supabase": {
       "name": "@heroitvn/supabase",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "dependencies": {
         "@supabase/ssr": "^0.10.2",
       },
@@ -150,7 +158,7 @@
     },
     "packages/utils": {
       "name": "@heroitvn/utils",
-      "version": "0.1.0",
+      "version": "0.1.2",
       "dependencies": {
         "@heroitvn/google": "^0.1.0",
         "ai": "^6.0.168",
@@ -334,6 +342,8 @@
     "@heroitvn/google": ["@heroitvn/google@workspace:packages/google"],
 
     "@heroitvn/mcp": ["@heroitvn/mcp@workspace:packages/mcp"],
+
+    "@heroitvn/otel": ["@heroitvn/otel@workspace:packages/otel"],
 
     "@heroitvn/shacnui": ["@heroitvn/shacnui@workspace:packages/shacnui"],
 

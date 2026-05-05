@@ -1,8 +1,12 @@
-export type OTelAttributes = Record<string, string | number | boolean>;
+import { resourceFromAttributes } from "@opentelemetry/resources";
+import {
+  ATTR_SERVICE_NAME,
+  ATTR_SERVICE_VERSION,
+} from "@opentelemetry/semantic-conventions";
 
-export interface OTelEvent {
-  name: string;
-  attributes?: OTelAttributes;
-}
+const resources = resourceFromAttributes({
+  [ATTR_SERVICE_NAME]: "yourServiceName",
+  [ATTR_SERVICE_VERSION]: "1.0",
+});
 
-export const createOtelEvent = (event: OTelEvent): OTelEvent => event;
+console.dir(resources);
