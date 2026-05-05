@@ -1,7 +1,6 @@
 {
   "name": "@heroitvn/google",
   "version": "0.1.0",
-  "private": true,
   "description": "Google Sign-In and One Tap UI for Next.js + Supabase",
   "license": "MIT",
   "type": "module",

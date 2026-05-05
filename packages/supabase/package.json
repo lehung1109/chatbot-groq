@@ -1,7 +1,6 @@
 {
   "name": "@heroitvn/supabase",
   "version": "0.1.0",
-  "private": true,
   "description": "Supabase browser, server, and proxy clients for Next.js",
   "license": "MIT",
   "type": "module",

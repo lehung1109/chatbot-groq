@@ -2,8 +2,6 @@
 
 Google Sign-In and [Google One Tap](https://developers.google.com/identity/gsi/web) UI for Next.js, integrated with Supabase session flows via `@heroitvn/supabase`.
 
-This package is **`private: true`** in the monorepo.
-
 ## Environment variables
 
 - `NEXT_PUBLIC_GOOGLE_CLIENT_ID` — OAuth 2.0 Web client ID (used by One Tap and button flows).
@@ -35,8 +33,8 @@ Nonce helpers for secure OAuth / CSP integration (`generateNonce` is also re-exp
 
 ## Scripts
 
-| Command | Description |
-| ------- | ----------- |
+| Command             | Description    |
+| ------------------- | -------------- |
 | `npm run typecheck` | `tsc --noEmit` |
 
 ## License

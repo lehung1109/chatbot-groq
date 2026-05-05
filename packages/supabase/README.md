@@ -2,8 +2,6 @@
 
 Thin wrappers around [`@supabase/ssr`](https://supabase.com/docs/guides/auth/server-side/nextjs) for Next.js: browser client, server client (cookies), and a proxy-oriented helper.
 
-This package is **`private: true`** in the monorepo; it is consumed via workspace references rather than published standalone.
-
 ## Environment variables
 
 All clients expect:
@@ -45,8 +43,8 @@ const supabase = await createClient();
 
 ## Scripts
 
-| Command | Description |
-| ------- | ----------- |
+| Command             | Description    |
+| ------------------- | -------------- |
 | `npm run typecheck` | `tsc --noEmit` |
 
 ## License
